@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="MCB.Domain.DomainModels.Person">
+    <Position X="4.25" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAQAAAAAAAAAgAAAAAABAAA=</HashCode>
+      <FileName>DomainModels\Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MCB.Domain.DomainModels.NaturalPerson">
+    <Position X="1.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>DomainModels\NaturalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Domain.DomainModels.JuridicalPerson">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>DomainModels\JuridicalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Domain.DomainModels.Doctor">
+    <Position X="1.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Doctor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Domain.DomainModels.Patient">
+    <Position X="4" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Patient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="MCB.Domain.DomainModels.Enums.PersonTypeEnum">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>DomainModels\Enums\PersonTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MCB.Domain.DomainModels.Enums.NaturalPersonTypeEnum">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAACAA=</HashCode>
+      <FileName>DomainModels\Enums\NaturalPersonTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MCB.Domain.DomainModels.Enums.JuridicalPersonTypeEnum">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Enums\JuridicalPersonTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

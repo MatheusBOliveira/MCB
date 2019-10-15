@@ -1,0 +1,30 @@
+[
+  {
+    "description": "descrição rota A",
+    "relativePath": "/api/v1.0/login",
+    "acceptedVerbs": [
+      "GET",
+      "POST"
+    ],
+    "httpDestination": {
+      "uri": "http://google.com"
+    },
+    "queueDestination": {
+
+    }
+  },
+  {
+    "description": "descrição rota B",
+    "relativePath": "/api/v1.0/logout",
+    "acceptedVerbs": [
+      "GET",
+      "POST"
+    ],
+    "httpDestination": {
+      "uri": "http://google.com"
+    },
+    "queueDestination": {
+
+    }
+  }
+]
