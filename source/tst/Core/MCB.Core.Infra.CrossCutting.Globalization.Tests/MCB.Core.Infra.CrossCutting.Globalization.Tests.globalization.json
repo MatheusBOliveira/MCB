@@ -1,0 +1,16 @@
+[
+  {
+    "Code": "DOUTOVILHA-CORE-INF-CROSSTEST-1",
+    "Messages": {
+      "pt-BR": "Mensagem A.",
+      "en-US": "Message A."
+    }
+  },
+  {
+    "Code": "DOUTOVILHA-CORE-INF-CROSSTEST-2",
+    "Messages": {
+      "pt-BR": "Mensagem B.",
+      "en-US": "Message B."
+    }
+  }
+]

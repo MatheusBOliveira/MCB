@@ -1,0 +1,54 @@
+using MCB.Core.Infra.CrossCutting.Tests;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using Xunit.Abstractions;
+using Xunit;
+using System.Threading.Tasks;
+
+namespace MCB.Core.Infra.CrossCutting.Gateway.Tests
+{
+    public class GatewayTest
+        : TestBase<GatewayTest>
+    {
+        public GatewayTest(ITestOutputHelper output) 
+            : base(output)
+        {
+
+        }
+
+        protected override void ConfigureServices(IServiceCollection service)
+        {
+            service.AddSingleton(q =>
+            {
+                var gatewayManager = new GatewayManager();
+                var basePath = AppDomain.CurrentDomain.BaseDirectory;
+
+                gatewayManager.LoadJsonFiles(new string[] {
+                    Path.Combine(basePath, "routes.json")
+                });
+
+                return gatewayManager;
+            });
+        }
+
+        [Fact]
+        [Trait("GatewayTest", "DefaultTest")]
+        public async Task DefaultTest()
+        {
+            var gatewayManager = ServiceProvider.GetService<GatewayManager>();
+            await gatewayManager.RouteRequest(
+                "/api/v1.0/login",
+                "?applicationId=560D54E6-F2CA-42C6-A873-DD268C883DCB&keepConnected=true",
+                null,
+                null,
+                "GET",
+                q => {
+                    var newUri = $"{q.RoutedUri} ({q.Verb})";
+                    return newUri;
+                });
+        }
+    }
+}
+
+
