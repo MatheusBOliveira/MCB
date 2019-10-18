@@ -26,7 +26,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Tests
         [Fact]
         public void Test1()
         {
-            var config = _configurationManager.Get<int>("propriedadeA");
+            var config = _configurationManager.Get("propriedadeA");
         }
     }
 }
