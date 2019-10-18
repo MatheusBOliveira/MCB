@@ -20,11 +20,28 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests
             : base(output)
         {
             _configration = ServiceProvider.GetService<IConfiguration>();
+
+            ClearDatabase();
         }
 
         protected override void ConfigureServices(IServiceCollection service)
         {
             IoC.Bootstrapper.RegisterServices(service, null);
+        }
+
+        private void ClearDatabase()
+        {
+            using (var context = new TestContext(_configration))
+            {
+                context.Set<AppointmentDataModel>().RemoveRange(
+                    context.Set<AppointmentDataModel>());
+
+
+                context.Set<CustomerDataModel>().RemoveRange(
+                    context.Set<CustomerDataModel>());
+
+                context.SaveChanges();
+            }
         }
 
         private CustomerDataModel CreateNewCustomer()

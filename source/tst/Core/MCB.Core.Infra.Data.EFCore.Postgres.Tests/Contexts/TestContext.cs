@@ -13,9 +13,6 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests.Contexts
     {
         private readonly IConfiguration _configuration;
 
-        public DbSet<CustomerDataModel> CustomerDbSet { get; set; }
-        public DbSet<AppointmentDataModel> AppointmentDbSet { get; set; }
-
         public TestContext(IConfiguration configuration)
         {
             _configuration = configuration;

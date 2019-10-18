@@ -199,7 +199,7 @@ namespace MCB.Core.Infra.CrossCutting.Queue.RabbitMQ.Tests
         public void PublishMessageWithConsumerPoolStressTest()
         {
             var totalOfConsumers = 50;
-            var totalOfMessages = 1_000;
+            var totalOfMessages = 100;
             var messages = new string[totalOfMessages];
             var received = new bool[totalOfMessages];
 
