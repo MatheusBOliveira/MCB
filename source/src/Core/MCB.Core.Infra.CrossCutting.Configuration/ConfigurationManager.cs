@@ -18,11 +18,36 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
         : ConfigurationManagerBase,
         IConfigurationManager
     {
-        private readonly IConfiguration _configuration;
+        private IConfiguration _configuration;
 
-        public ConfigurationManager()
+        private void ConfigurationManager_GettingValueEvent(string key, object value)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            try
+            {
+                var configValue = _configuration[key];
+
+                // Update KeyStore based on IConfiguration
+                if (!string.IsNullOrWhiteSpace(configValue))
+                {
+                    if (!KeyStoreDictionary.ContainsKey(key))
+                        KeyStoreDictionary.Add(key, configValue);
+                    else
+                        KeyStoreDictionary[key] = configValue;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void ConfigurationManager_SettingValueEvent(string key, object value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadConfigurations()
+        {
+            var environmentName = "development";
 
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", true, true)
@@ -35,24 +60,6 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
 
             GettingValueEvent += ConfigurationManager_GettingValueEvent;
             SettingValueEvent += ConfigurationManager_SettingValueEvent;
-        }
-
-        private void ConfigurationManager_GettingValueEvent(string key, object value)
-        {
-            var configValue = _configuration[key];
-
-            // Update KeyStore based on IConfiguration
-            if (!string.IsNullOrWhiteSpace(configValue))
-            {
-                if (!KeyStoreDictionary.ContainsKey(key))
-                    KeyStoreDictionary.Add(key, configValue);
-                else
-                    KeyStoreDictionary[key] = configValue;
-            }
-        }
-        private void ConfigurationManager_SettingValueEvent(string key, object value)
-        {
-            throw new NotImplementedException();
         }
 
         private static string GetAppSettingsFile()

@@ -11,5 +11,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Interfaces
         T Get<T>(string key);
 
         void Set(string key, object value);
+
+        void LoadConfigurations();
     }
 }

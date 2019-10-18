@@ -58,7 +58,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
             GettingValueEvent?.Invoke(key, value);
 
             if (KeyStoreDictionary.TryGetValue(key, out object keyStoreValue))
-                value = (T)keyStoreValue;
+                value = (T)Convert.ChangeType(keyStoreValue, typeof(T));
 
             ValueGetedEvent?.Invoke(key, value);
 
@@ -75,6 +75,8 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
 
             ValueSetedEvent?.Invoke(key, value);
         }
+
+        public abstract void LoadConfigurations();
 
         public void Dispose()
         {
