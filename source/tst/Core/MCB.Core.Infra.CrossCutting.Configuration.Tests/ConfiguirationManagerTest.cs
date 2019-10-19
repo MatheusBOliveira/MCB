@@ -26,12 +26,12 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Tests
         [Fact]
         public void GetPropertyFromDevelopment()
         {
-            Assert.Equal("development", _configurationManager.Get("propriedadeA"));
+            Assert.Equal("development", _configurationManager.Get("propertyA"));
         }
         [Fact]
         public void GetPropertyFromDefault()
         {
-            Assert.Equal("default", _configurationManager.Get("propriedadeB"));
+            Assert.Equal("default", _configurationManager.Get("propertyB"));
         }
         [Fact]
         public void GetInexistentProperty()
@@ -41,7 +41,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Tests
         [Fact]
         public void ModifyExistingProperty()
         {
-            var propertyName = "propriedadeC";
+            var propertyName = "propertyC";
             var newValue = "modified value";
 
             _configurationManager.Set(propertyName, newValue);
