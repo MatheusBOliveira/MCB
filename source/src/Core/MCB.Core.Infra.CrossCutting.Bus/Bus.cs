@@ -20,7 +20,7 @@ namespace MCB.Core.Infra.CrossCutting.Bus
     {
         protected IServiceProvider ServiceProvider { get; }
 
-        public Bus(IServiceProvider serviceProvider)
+        protected Bus(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }

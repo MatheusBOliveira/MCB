@@ -1,4 +1,5 @@
 ﻿using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,18 +13,18 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
         : IConfigurationManager
     {
         // Attributes
-        private Dictionary<string, object> _keyStoreDictionary;
+        private JObject _jsonKeyStore;
 
         // Properties
-        protected Dictionary<string, object> KeyStoreDictionary
+        protected JObject JsonKeyStore
         {
             get
             {
-                return _keyStoreDictionary;
+                return _jsonKeyStore;
             }
             set
             {
-                _keyStoreDictionary = value;
+                _jsonKeyStore = value;
             }
         }
 
@@ -32,9 +33,9 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
         protected abstract void SettingValue(string key, object proposedValue);
         protected abstract void ValueSeted(string key, object setedValue);
 
-        public ConfigurationManagerBase()
+        protected ConfigurationManagerBase()
         {
-            KeyStoreDictionary = new Dictionary<string, object>();
+            JsonKeyStore = new JObject();
         }
 
         public string Get(string key)
@@ -43,8 +44,9 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
 
             GettingValue(key, value);
 
-            if (KeyStoreDictionary.TryGetValue(key, out object keyStoreValue))
-                value = keyStoreValue.ToString();
+            var searchValue = JsonKeyStore.SelectToken(key);
+            if (searchValue != null)
+                value = searchValue.ToString();
 
             ValueGeted(key, value);
 
@@ -52,25 +54,19 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
         }
         public T Get<T>(string key)
         {
-            var value = default(T);
+            var returnValue = default(T);
 
-            GettingValue(key, value);
+            var value = Get(key);
+            if (!string.IsNullOrWhiteSpace(value))
+                returnValue = (T)Convert.ChangeType(value, typeof(T));
 
-            if (KeyStoreDictionary.TryGetValue(key, out object keyStoreValue))
-                value = (T)Convert.ChangeType(keyStoreValue, typeof(T));
-
-            ValueGeted(key, value);
-
-            return value;
+            return returnValue;
         }
         public void Set(string key, object value)
         {
             SettingValue(key, value);
 
-            if (!KeyStoreDictionary.ContainsKey(key))
-                KeyStoreDictionary.Add(key, value);
-            else
-                KeyStoreDictionary[key] = value;
+            JsonKeyStore[key] = value.ToString();
 
             ValueSeted(key, value);
         }

@@ -37,7 +37,7 @@ namespace MCB.Core.Infra.Data.Mongo.Repositories
             }
         }
 
-        public RepositoryBase(MongoDbContext mongoDbContext)
+        protected RepositoryBase(MongoDbContext mongoDbContext)
         {
             _mongoDbContext = mongoDbContext;
             _mongoCollection = _mongoDbContext.MongoDatabase

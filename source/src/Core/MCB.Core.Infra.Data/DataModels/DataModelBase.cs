@@ -16,7 +16,7 @@ namespace MCB.Core.Infra.Data.DataModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DataModelBase()
+        protected DataModelBase()
         {
             _propertyChangedStack = new Stack<string>();
 

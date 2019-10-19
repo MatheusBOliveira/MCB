@@ -39,7 +39,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
         {
             var jsonFileContent = string.Empty;
 
-            KeyStoreDictionary.Clear();
+            JsonKeyStore = new JObject();
 
             foreach (var configFileKeyParValue in _configFilesDictionary)
             {
@@ -49,14 +49,10 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
                 using (var sr = new StreamReader(configFileKeyParValue.Value))
                     jsonFileContent = sr.ReadToEnd();
 
-                var jsonDictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonFileContent);
-                foreach (var jsonItem in jsonDictionary)
+                JsonKeyStore.Merge(JObject.Parse(jsonFileContent), new JsonMergeSettings
                 {
-                    if (KeyStoreDictionary.ContainsKey(jsonItem.Key))
-                        KeyStoreDictionary[jsonItem.Key] = jsonItem.Value;
-                    else
-                        KeyStoreDictionary.Add(jsonItem.Key, jsonItem.Value);
-                }
+                    MergeArrayHandling = MergeArrayHandling.Union
+                });
             }
         }
         private void UpdateConfigs()
@@ -112,7 +108,7 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
         public override void SaveConfigurations()
         {
             var appSettingsFullName = _configFilesDictionary[GetAppSettingsFile()];
-            var configJson = JsonConvert.SerializeObject(KeyStoreDictionary);
+            var configJson = JsonConvert.SerializeObject(JsonKeyStore);
 
             using (var sw = new StreamWriter(appSettingsFullName, false, Encoding.UTF8))
                 sw.WriteLine(configJson);

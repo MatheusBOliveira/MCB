@@ -9,7 +9,7 @@ namespace MCB.Core.Infra.CrossCutting.Tests
         protected IServiceProvider ServiceProvider { get; }
         public ITestOutputHelper Output { get; }
 
-        public TestBase(ITestOutputHelper output)
+        protected TestBase(ITestOutputHelper output)
         {
             Output = output;
             var service = new ServiceCollection();

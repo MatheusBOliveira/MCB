@@ -5,12 +5,12 @@ namespace MCB.Core.Infra.CrossCutting.Bus.ReturnObjects
         public bool Success { get; set; }
         public bool Continue { get; set; }
 
-        public MessageReturn()
+        protected MessageReturn()
         {
 
         }
 
-        public MessageReturn(bool success, bool @continue)
+        protected MessageReturn(bool success, bool @continue)
         {
             Success = success;
             Continue = @continue;

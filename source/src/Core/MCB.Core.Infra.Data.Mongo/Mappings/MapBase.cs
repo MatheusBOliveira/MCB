@@ -8,7 +8,7 @@ namespace MCB.Core.Infra.Data.Mongo.Mappings
     public abstract class MapBase<T>
         where T : DataModelBase
     {
-        public MapBase(BsonClassMap<T> classMap)
+        protected MapBase(BsonClassMap<T> classMap)
         {
             if (BsonClassMap.IsClassMapRegistered(typeof(T)))
                 return;

@@ -19,7 +19,7 @@ namespace MCB.Core.Infra.Data.Mongo.DataModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DataModelBase()
+        protected DataModelBase()
         {
             _propertyChangedStack = new Stack<string>();
 

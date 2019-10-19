@@ -30,7 +30,7 @@ namespace MCB.Core.Infra.Data.EFCore.Repositories
             }
         }
 
-        public RepositoryBase(IDbContext context)
+        protected RepositoryBase(IDbContext context)
         {
             _context = context;
             _dbSet = context.Set<TDataModel>();

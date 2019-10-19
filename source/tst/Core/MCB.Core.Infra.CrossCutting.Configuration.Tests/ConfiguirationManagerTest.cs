@@ -38,6 +38,13 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Tests
         {
             Assert.True(string.IsNullOrWhiteSpace(_configurationManager.Get(Guid.NewGuid().ToString())));
         }
+
+        [Fact]
+        public void GetNestedPropertyFromDevelopment()
+        {
+            var propertyValue = _configurationManager.Get("connectionStrings.default");
+            Assert.Equal("development", propertyValue);
+        }
         [Fact]
         public void ModifyExistingProperty()
         {
