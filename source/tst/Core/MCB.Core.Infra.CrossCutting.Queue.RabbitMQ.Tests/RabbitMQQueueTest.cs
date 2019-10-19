@@ -21,9 +21,9 @@ namespace MCB.Core.Infra.CrossCutting.Queue.RabbitMQ.Tests
 
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.Bootstrapper.RegisterServices(service);
+            IoC.Bootstrapper.RegisterServices(services);
         }
 
         private IQueueConsumer CreateNewConsumerForStressTest(

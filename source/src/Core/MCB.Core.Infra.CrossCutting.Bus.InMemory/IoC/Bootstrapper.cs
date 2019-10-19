@@ -5,9 +5,9 @@ namespace MCB.Core.Infra.CrossCutting.Bus.InMemory.IoC
 {
     public static class Bootstrapper
     {
-        public static void ConfigureServices(IServiceCollection service)
+        public static void ConfigureServices(IServiceCollection services)
         {
-            service.AddScoped<IBus, InMemoryBus>();
+            services.AddScoped<IBus, InMemoryBus>();
         }
     }
 }

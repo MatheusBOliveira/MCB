@@ -25,9 +25,9 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests
             ClearDatabase();
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.Bootstrapper.RegisterServices(service, null);
+            IoC.Bootstrapper.RegisterServices(services, null);
         }
 
         private void ClearDatabase()

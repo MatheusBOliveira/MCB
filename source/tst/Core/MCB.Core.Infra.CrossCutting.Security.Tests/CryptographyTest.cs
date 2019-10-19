@@ -14,9 +14,9 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
 
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.BootStrapper.RegisterServices(service, null);
+            IoC.BootStrapper.RegisterServices(services, null);
         }
 
         [Fact]

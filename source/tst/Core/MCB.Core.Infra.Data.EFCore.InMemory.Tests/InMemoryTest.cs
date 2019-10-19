@@ -22,9 +22,9 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests
 
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.Bootstrapper.RegisterServices(service, null);
+            IoC.Bootstrapper.RegisterServices(services);
         }
 
         private CustomerDataModel CreateNewCustomer()

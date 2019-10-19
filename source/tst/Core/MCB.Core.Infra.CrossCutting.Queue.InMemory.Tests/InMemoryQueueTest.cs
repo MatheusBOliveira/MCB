@@ -18,9 +18,9 @@ namespace MCB.Core.Infra.CrossCutting.Queue.InMemory.Tests
         {
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.BootStrapper.RegisterServices(service);
+            IoC.BootStrapper.RegisterServices(services);
         }
 
         [Fact]

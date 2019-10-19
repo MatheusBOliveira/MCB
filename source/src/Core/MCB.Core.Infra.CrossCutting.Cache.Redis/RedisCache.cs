@@ -16,7 +16,8 @@ namespace MCB.Core.Infra.CrossCutting.Cache.Redis
         private readonly IServer _redisServer;
         private readonly IDatabase _redisDatabase;
 
-        public RedisCache(ConnectionMultiplexer redis,
+        public RedisCache(
+            ConnectionMultiplexer redis,
             IConfigurationManager config)
         {
             _redis = redis;

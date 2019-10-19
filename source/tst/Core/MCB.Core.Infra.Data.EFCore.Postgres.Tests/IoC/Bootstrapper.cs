@@ -12,19 +12,13 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests.IoC
 {
     public static class Bootstrapper
     {
-        public static void RegisterServices(IServiceCollection service, string clienteIdentifier)
+        public static void RegisterServices(IServiceCollection services, string clienteIdentifier)
         {
-            service.AddScoped<IConfigurationManager>(q =>
-            {
-                var config = new ConfigurationManager();
-                config.LoadConfigurations();
+            CrossCutting.Configuration.IoC.BootStrapper.RegisterServices(services);
 
-                return config;
-            });
-
-            service.AddScoped<IDbContext, TestContext>();
-            service.AddTransient<IUnitOfWork, UoW.UnitOfWork>();
-            service.AddTransient<ICustomerDataModelRepository, CustomerDataModelRepository>();
+            services.AddScoped<IDbContext, TestContext>();
+            services.AddTransient<IUnitOfWork, UoW.UnitOfWork>();
+            services.AddTransient<ICustomerDataModelRepository, CustomerDataModelRepository>();
 
         }
     }

@@ -7,15 +7,9 @@ namespace MCB.Core.Infra.Data.Mongo.Tests.IoC
 {
     public static class Bootstrapper
     {
-        public static void RegisterServices(IServiceCollection service, string clienteIdentifier)
+        public static void RegisterServices(IServiceCollection services, string clienteIdentifier)
         {
-            service.AddScoped<IConfigurationManager>(q =>
-            {
-                var config = new ConfigurationManager();
-                config.LoadConfigurations();
-
-                return config;
-            });
+            CrossCutting.Configuration.IoC.BootStrapper.RegisterServices(services);
         }
     }
 }

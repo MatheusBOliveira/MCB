@@ -17,18 +17,10 @@ namespace MCB.Core.Infra.CrossCutting.Gateway.Tests
 
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            service.AddSingleton(q =>
-            {
-                var gatewayManager = new GatewayManager();
-                var basePath = AppDomain.CurrentDomain.BaseDirectory;
-
-                gatewayManager.LoadJsonFiles(new string[] {
-                    Path.Combine(basePath, "routes.json")
-                });
-
-                return gatewayManager;
+            IoC.BootStrapper.RegisterServices(services, new string[] {
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "routes.json")
             });
         }
 

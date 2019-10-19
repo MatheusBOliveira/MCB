@@ -39,39 +39,39 @@ namespace MCB.Core.Infra.CrossCutting.Bus.InMemory.Tests
             _inMemoryBus = new InMemoryBus(ServiceProvider);
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            service.AddScoped<IStartWithCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
-            service.AddScoped<ICommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
-            service.AddScoped<IEndWithCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
-            service.AddScoped<ISuccessCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
+            services.AddScoped<IStartWithCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
+            services.AddScoped<ICommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
+            services.AddScoped<IEndWithCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
+            services.AddScoped<ISuccessCommandHandler<SuccessCommand, SuccessEvent>, SuccessCommandHandler>();
 
-            service.AddScoped<IStartWithCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
-            service.AddScoped<ICommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
-            service.AddScoped<IEndWithCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
-            service.AddScoped<IFailCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
+            services.AddScoped<IStartWithCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
+            services.AddScoped<ICommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
+            services.AddScoped<IEndWithCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
+            services.AddScoped<IFailCommandHandler<FailCommand, SuccessEvent>, FailCommandHandler>();
 
-            service.AddScoped<IStartWithEventHandler<SuccessEvent>, SuccessEventHandler>();
-            service.AddScoped<IEventHandler<SuccessEvent>, SuccessEventHandler>();
-            service.AddScoped<IEndWithEventHandler<SuccessEvent>, SuccessEventHandler>();
-            service.AddScoped<ISuccessEventHandler<SuccessEvent>, SuccessEventHandler>();
+            services.AddScoped<IStartWithEventHandler<SuccessEvent>, SuccessEventHandler>();
+            services.AddScoped<IEventHandler<SuccessEvent>, SuccessEventHandler>();
+            services.AddScoped<IEndWithEventHandler<SuccessEvent>, SuccessEventHandler>();
+            services.AddScoped<ISuccessEventHandler<SuccessEvent>, SuccessEventHandler>();
 
-            service.AddScoped<IStartWithEventHandler<FailEvent>, FailEventHandler>();
-            service.AddScoped<IEventHandler<FailEvent>, FailEventHandler>();
-            service.AddScoped<IEndWithEventHandler<FailEvent>, FailEventHandler>();
-            service.AddScoped<IFailEventHandler<FailEvent>, FailEventHandler>();
+            services.AddScoped<IStartWithEventHandler<FailEvent>, FailEventHandler>();
+            services.AddScoped<IEventHandler<FailEvent>, FailEventHandler>();
+            services.AddScoped<IEndWithEventHandler<FailEvent>, FailEventHandler>();
+            services.AddScoped<IFailEventHandler<FailEvent>, FailEventHandler>();
 
-            service.AddScoped<IStartWithQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
-            service.AddScoped<IQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
-            service.AddScoped<IEndWithQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
-            service.AddScoped<ISuccessQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
+            services.AddScoped<IStartWithQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
+            services.AddScoped<IQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
+            services.AddScoped<IEndWithQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
+            services.AddScoped<ISuccessQueryHandler<SuccessQuery, Customer>, SuccessQueryHandler>();
 
-            service.AddScoped<IStartWithQueryHandler<FailQuery, Customer>, FailQueryHandler>();
-            service.AddScoped<IQueryHandler<FailQuery, Customer>, FailQueryHandler>();
-            service.AddScoped<IEndWithQueryHandler<FailQuery, Customer>, FailQueryHandler>();
-            service.AddScoped<IFailQueryHandler<FailQuery, Customer>, FailQueryHandler>();
+            services.AddScoped<IStartWithQueryHandler<FailQuery, Customer>, FailQueryHandler>();
+            services.AddScoped<IQueryHandler<FailQuery, Customer>, FailQueryHandler>();
+            services.AddScoped<IEndWithQueryHandler<FailQuery, Customer>, FailQueryHandler>();
+            services.AddScoped<IFailQueryHandler<FailQuery, Customer>, FailQueryHandler>();
 
-            service.AddScoped<IDomainNotificationHandler, DomainNotificationHandler>();
+            services.AddScoped<IDomainNotificationHandler, DomainNotificationHandler>();
         }
 
         [Fact]

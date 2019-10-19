@@ -20,9 +20,9 @@ namespace MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests
             _cache = ServiceProvider.GetService<IInMemoryCache>();
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            service.AddScoped<IInMemoryCache, InMemoryCache>();
+            IoC.BootStrapper.RegisterServices(services);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests
         public async Task AddOrUpdate()
         {
             var key = "AddOrUpdate";
-            var value = "DOUTOVILHA";
+            var value = "MCB";
 
             // Add
             _cache.AddOrUpdate(key, "value to be replaced");
@@ -47,7 +47,7 @@ namespace MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests
         public async Task Delete()
         {
             var key = "Delete";
-            var value = "DOUTOVILHA";
+            var value = "MCB";
 
             // Add
             _cache.AddOrUpdate(key, value);
@@ -64,7 +64,7 @@ namespace MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests
         public async Task Get()
         {
             var key = "Get";
-            var value = "DOUTOVILHA";
+            var value = "MCB";
 
             // Add
             _cache.AddOrUpdate(key, value);

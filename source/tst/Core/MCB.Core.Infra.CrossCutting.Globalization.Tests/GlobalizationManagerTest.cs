@@ -13,16 +13,9 @@ namespace MCB.Core.Infra.CrossCutting.Globalization.Tests
         {
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
-            service.AddScoped(q =>
-            {
-                var globalizationManager = new GlobalizationManager();
-
-                globalizationManager.LoadGlobalizationMessages();
-
-                return globalizationManager;
-            });
+            IoC.BootStrapper.RegisterServices(services, null);
         }
 
         [Fact]
@@ -31,11 +24,11 @@ namespace MCB.Core.Infra.CrossCutting.Globalization.Tests
         {
             var globalizationManager = ServiceProvider.GetService<GlobalizationManager>();
 
-            var msg1ptBR = globalizationManager.GetMessage("DOUTOVILHA-CORE-INF-CROSSTEST-1", "pt-BR");
-            var msg1enUS = globalizationManager.GetMessage("DOUTOVILHA-CORE-INF-CROSSTEST-1", "en-US");
+            var msg1ptBR = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-1", "pt-BR");
+            var msg1enUS = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-1", "en-US");
 
-            var msg2ptBR = globalizationManager.GetMessage("DOUTOVILHA-CORE-INF-CROSSTEST-2", "pt-BR");
-            var msg2enUS = globalizationManager.GetMessage("DOUTOVILHA-CORE-INF-CROSSTEST-2", "en-US");
+            var msg2ptBR = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-2", "pt-BR");
+            var msg2enUS = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-2", "en-US");
 
             Assert.True(
                 msg1ptBR.Equals("Mensagem A.")

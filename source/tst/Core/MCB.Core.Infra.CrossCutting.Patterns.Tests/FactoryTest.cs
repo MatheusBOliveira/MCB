@@ -15,7 +15,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
 
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
 
         }

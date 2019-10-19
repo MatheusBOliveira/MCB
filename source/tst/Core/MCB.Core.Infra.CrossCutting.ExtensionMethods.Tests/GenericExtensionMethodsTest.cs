@@ -30,7 +30,7 @@ namespace MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests
         {
         }
 
-        protected override void ConfigureServices(IServiceCollection service)
+        protected override void ConfigureServices(IServiceCollection services)
         {
 
         }
