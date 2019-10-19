@@ -76,9 +76,11 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
             ValueSetedEvent?.Invoke(key, value);
         }
 
+        public abstract string GetEnvironmentName();
         public abstract void LoadConfigurations();
+        public abstract void SaveConfigurations();
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             GC.SuppressFinalize(this);
         }
