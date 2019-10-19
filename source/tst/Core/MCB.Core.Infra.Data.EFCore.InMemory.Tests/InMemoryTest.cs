@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using MCB.Core.Infra.Data.EFCore.InMemory.Tests.Contexts;
 using MCB.Core.Infra.Data.EFCore.InMemory.Tests.DataModels;
@@ -47,7 +48,7 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests
         public async Task AddTest()
         {
             var success = false;
-            var config = ServiceProvider.GetService<IConfiguration>();
+            var config = ServiceProvider.GetService<IConfigurationManager>();
 
             using (var context = new TestContext(config))
             {
@@ -66,7 +67,7 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests
         public async Task UpdateTest()
         {
             var success = false;
-            var config = ServiceProvider.GetService<IConfiguration>();
+            var config = ServiceProvider.GetService<IConfigurationManager>();
 
             await AddTest();
 
@@ -92,7 +93,7 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests
         public async Task RemoveTest()
         {
             var success = false;
-            var config = ServiceProvider.GetService<IConfiguration>();
+            var config = ServiceProvider.GetService<IConfigurationManager>();
 
             await AddTest();
 
@@ -117,7 +118,7 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests
         {
             var success = false;
 
-            var config = ServiceProvider.GetService<IConfiguration>();
+            var config = ServiceProvider.GetService<IConfigurationManager>();
 
             using (var context = new TestContext(config))
             {

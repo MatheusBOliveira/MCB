@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using MCB.Core.Infra.Data.EFCore.Postgres.Tests.Contexts;
 using MCB.Core.Infra.Data.EFCore.Postgres.Tests.DataModels;
@@ -14,12 +15,12 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests
     public class PostgresTest
         : TestBase<PostgresTest>
     {
-        private readonly IConfiguration _configration;
+        private readonly IConfigurationManager _configration;
 
         public PostgresTest(ITestOutputHelper output)
             : base(output)
         {
-            _configration = ServiceProvider.GetService<IConfiguration>();
+            _configration = ServiceProvider.GetService<IConfigurationManager>();
 
             ClearDatabase();
         }

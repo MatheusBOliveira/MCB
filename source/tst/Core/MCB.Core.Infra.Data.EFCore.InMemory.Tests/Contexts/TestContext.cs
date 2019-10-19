@@ -1,3 +1,5 @@
+using MCB.Core.Infra.CrossCutting.Configuration;
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.Data.EFCore.InMemory.Contexts;
 using MCB.Core.Infra.Data.EFCore.InMemory.Tests.DataModels;
 using MCB.Core.Infra.Data.EFCore.InMemory.Tests.Mappings;
@@ -11,19 +13,19 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests.Contexts
     public class TestContext
         : InMemoryContext
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfigurationManager _configuration;
 
         public DbSet<CustomerDataModel> CustomerDbSet { get; set; }
         public DbSet<AppointmentDataModel> AppointmentDbSet { get; set; }
 
-        public TestContext(IConfiguration configuration)
+        public TestContext(IConfigurationManager configuration)
         {
             _configuration = configuration;
         }
 
         public override string ConfigureConnectionString()
         {
-            return _configuration.GetConnectionString("DefaultConnection");
+            return _configuration.Get("ConnectionStrings.DefaultConnection");
         }
 
         public override void ApplyMappings(ModelBuilder modelBuilder)
@@ -36,10 +38,8 @@ namespace MCB.Core.Infra.Data.EFCore.InMemory.Tests.Contexts
         {
             public TestContext CreateDbContext(string[] args)
             {
-                var config = new ConfigurationBuilder()
-                    .SetBasePath(AppContext.BaseDirectory)
-                    .AddJsonFile("appsettings.json")
-                    .Build();
+                var config = new ConfigurationManager();
+                config.LoadConfigurations();
 
 
                 return new TestContext(config);

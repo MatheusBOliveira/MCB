@@ -1,3 +1,5 @@
+using MCB.Core.Infra.CrossCutting.Configuration;
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.Data.EFCore.Postgres.Contexts;
 using MCB.Core.Infra.Data.EFCore.Postgres.Tests.DataModels;
 using MCB.Core.Infra.Data.EFCore.Postgres.Tests.Mappings;
@@ -11,16 +13,16 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests.Contexts
     public class TestContext
         : PostgresContext
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfigurationManager _configuration;
 
-        public TestContext(IConfiguration configuration)
+        public TestContext(IConfigurationManager configuration)
         {
             _configuration = configuration;
         }
 
         public override string ConfigureConnectionString()
         {
-            return _configuration.GetConnectionString("DefaultConnection");
+            return _configuration.Get("ConnectionStrings.DefaultConnection");
         }
 
         public override void ApplyMappings(ModelBuilder modelBuilder)
@@ -33,11 +35,8 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests.Contexts
         {
             public TestContext CreateDbContext(string[] args)
             {
-                var config = new ConfigurationBuilder()
-                    .SetBasePath(AppContext.BaseDirectory)
-                    .AddJsonFile("appsettings.json")
-                    .Build();
-
+                var config = new ConfigurationManager();
+                config.LoadConfigurations();
 
                 return new TestContext(config);
             }

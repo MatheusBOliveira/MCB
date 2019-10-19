@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.Configuration\MCB.Core.Infra.CrossCutting.Configuration.csproj" />
     <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.Data.Mongo\MCB.Core.Infra.Data.Mongo.csproj" />
     <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.Tests\MCB.Core.Infra.CrossCutting.Tests.csproj" />
   </ItemGroup>

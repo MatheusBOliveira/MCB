@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.Data.Mongo.Contexts;
 using MCB.Core.Infra.Data.Mongo.Tests.DataModels;
 using MCB.Core.Infra.Data.Mongo.Tests.Mappings;
@@ -9,22 +10,22 @@ namespace MCB.Core.Infra.Data.Mongo.Tests.Contexts
     public class TestContext
         : MongoDbContext
     {
-        private readonly IConfiguration _config;
+        private readonly IConfigurationManager _config;
 
-        public TestContext(IConfiguration config)
+        public TestContext(IConfigurationManager config)
         {
             _config = config;
         }
 
         protected override string GetConnectionString()
         {
-            var config = _config.GetConnectionString("MongoDBConnection");
+            var config = _config.Get("ConnectionStrings.MongoDBConnection");
 
             return config;
         }
         protected override string GetDatabaseName()
         {
-            var config = _config["Database:MongoDB:DatabaseName"];
+            var config = _config.Get("Database.MongoDB.DatabaseName");
 
             return config;
         }

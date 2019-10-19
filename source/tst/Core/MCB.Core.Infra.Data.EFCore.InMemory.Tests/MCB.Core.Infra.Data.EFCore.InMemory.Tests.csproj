@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.Configuration\MCB.Core.Infra.CrossCutting.Configuration.csproj" />
     <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.ExtensionMethods\MCB.Core.Infra.CrossCutting.ExtensionMethods.csproj" />
     <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.Data.EFCore.InMemory\MCB.Core.Infra.Data.EFCore.InMemory.csproj" />
     <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.Tests\MCB.Core.Infra.CrossCutting.Tests.csproj" />

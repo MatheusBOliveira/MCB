@@ -7,6 +7,8 @@ using MCB.Core.Infra.CrossCutting.ExtensionMethods;
 using Xunit.Abstractions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
+using MCB.Core.Infra.CrossCutting.Configuration;
 
 namespace MCB.Core.Infra.CrossCutting.Cache.Redis.Tests
 {
@@ -23,11 +25,10 @@ namespace MCB.Core.Infra.CrossCutting.Cache.Redis.Tests
 
         protected override void ConfigureServices(IServiceCollection service)
         {
-            var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
+            var config = new ConfigurationManager();
+            config.LoadConfigurations();
 
-            service.AddSingleton<IConfiguration>(config);
+            service.AddSingleton<IConfigurationManager>(config);
             IoC.BootStrapper.RegisterServices(service, null, config);
         }
 

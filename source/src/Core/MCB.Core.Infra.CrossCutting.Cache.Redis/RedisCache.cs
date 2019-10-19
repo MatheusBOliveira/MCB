@@ -1,4 +1,5 @@
 using MCB.Core.Infra.CrossCutting.Cache.Redis.Interfaces;
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.CrossCutting.ExtensionMethods;
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
@@ -16,10 +17,10 @@ namespace MCB.Core.Infra.CrossCutting.Cache.Redis
         private readonly IDatabase _redisDatabase;
 
         public RedisCache(ConnectionMultiplexer redis,
-            IConfiguration config)
+            IConfigurationManager config)
         {
             _redis = redis;
-            _redisServer = _redis.GetServer(config["redis:server"]);
+            _redisServer = _redis.GetServer(config.Get("redis.server"));
             _redisDatabase = _redis.GetDatabase();
         }
 

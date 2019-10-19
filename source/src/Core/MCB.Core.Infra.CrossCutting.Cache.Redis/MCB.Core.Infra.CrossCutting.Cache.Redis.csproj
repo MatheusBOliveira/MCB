@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.Cache\MCB.Core.Infra.CrossCutting.Cache.csproj" />
+    <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.Configuration\MCB.Core.Infra.CrossCutting.Configuration.csproj" />
     <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.ExtensionMethods\MCB.Core.Infra.CrossCutting.ExtensionMethods.csproj" />
   </ItemGroup>
 

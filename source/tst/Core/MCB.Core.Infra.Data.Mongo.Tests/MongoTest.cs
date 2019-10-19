@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using MCB.Core.Infra.Data.Mongo.Tests.Contexts;
 using MCB.Core.Infra.Data.Mongo.Tests.DataModels;
@@ -15,12 +16,12 @@ namespace MCB.Core.Infra.Data.Mongo.Tests
     public class MongoTest
         : TestBase<MongoTest>
     {
-        private readonly IConfiguration _configration;
+        private readonly IConfigurationManager _configration;
 
         public MongoTest(ITestOutputHelper output)
             : base(output)
         {
-            _configration = ServiceProvider.GetService<IConfiguration>();
+            _configration = ServiceProvider.GetService<IConfigurationManager>();
         }
 
         protected override void ConfigureServices(IServiceCollection service)
