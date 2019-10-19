@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace MCB.Core.Infra.CrossCutting.Configuration
 {
@@ -20,41 +21,10 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
         IConfigurationManager
     {
         private readonly Dictionary<string, string> _configFilesDictionary;
-        private IConfiguration _configuration;
 
         public ConfigurationManager()
         {
             _configFilesDictionary = new Dictionary<string, string>();
-        }
-
-        private void ConfigurationManager_GettingValueEvent(string key, object value)
-        {
-            try
-            {
-                var configValue = _configuration[key];
-
-                // Update KeyStore based on IConfiguration
-                if (!string.IsNullOrWhiteSpace(configValue))
-                {
-                    if (!KeyStoreDictionary.ContainsKey(key))
-                        KeyStoreDictionary.Add(key, configValue);
-                    else
-                        KeyStoreDictionary[key] = configValue;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        private void ConfigurationManager_SettingValueEvent(string key, object value)
-        {
-            
-        }
-        private void ConfigurationManager_ValueSetedEvent(string key, object value)
-        {
-            SaveConfigurations();
-            UpdateKeyStoreByJsonString();
         }
 
         private string GetAppSettingsFile()
@@ -65,6 +35,59 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
                 ? $"appsettings.{environmentName}.json"
                 : "appsettings.json";
         }
+        private void UpdateKeyStoreFromJsonFile()
+        {
+            var jsonFileContent = string.Empty;
+
+            KeyStoreDictionary.Clear();
+
+            foreach (var configFileKeyParValue in _configFilesDictionary)
+            {
+                if (!File.Exists(configFileKeyParValue.Value))
+                    continue;
+
+                using (var sr = new StreamReader(configFileKeyParValue.Value))
+                    jsonFileContent = sr.ReadToEnd();
+
+                var jsonDictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonFileContent);
+                foreach (var jsonItem in jsonDictionary)
+                {
+                    if (KeyStoreDictionary.ContainsKey(jsonItem.Key))
+                        KeyStoreDictionary[jsonItem.Key] = jsonItem.Value;
+                    else
+                        KeyStoreDictionary.Add(jsonItem.Key, jsonItem.Value);
+                }
+            }
+        }
+        private void UpdateConfigs()
+        {
+            UpdateKeyStoreFromJsonFile();
+        }
+
+        protected override void GettingValue(string key, object gettingValue)
+        {
+            try
+            {
+                UpdateConfigs();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        protected override void ValueGeted(string key, object getedValue)
+        {
+
+        }
+        
+        protected override void SettingValue(string key, object proposedValue)
+        {
+
+        }
+        protected override void ValueSeted(string key, object setedValue)
+        {
+            SaveConfigurations();
+        }
 
         public override string GetEnvironmentName()
         {
@@ -74,43 +97,17 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
         {
             var environmentName = GetEnvironmentName();
 
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile($"appsettings.json", true, true)
-                .AddEnvironmentVariables();
-
             _configFilesDictionary.Add(
                 "appsettings.json",
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json"));
 
             if (!string.IsNullOrWhiteSpace(environmentName))
-            {
-                builder.AddJsonFile($"appsettings.{environmentName}.json", true, true);
-
                 _configFilesDictionary.Add(
                     $"appsettings.{environmentName}.json",
                     Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"appsettings.{environmentName}.json"));
-            }
-            _configuration = builder.Build();
 
-            UpdateKeyStoreByJsonString();
-
-            GettingValueEvent += ConfigurationManager_GettingValueEvent;
-            SettingValueEvent += ConfigurationManager_SettingValueEvent;
-
-            ValueSetedEvent += ConfigurationManager_ValueSetedEvent;
+            UpdateKeyStoreFromJsonFile();
         }
-
-        private void UpdateKeyStoreByJsonString()
-        {
-            var jsonFileContent = string.Empty;
-
-            using (var sr = new StreamReader(_configFilesDictionary[GetAppSettingsFile()]))
-                jsonFileContent = sr.ReadToEnd();
-
-            KeyStoreDictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonFileContent);
-        }
-
 
         public override void SaveConfigurations()
         {
@@ -118,9 +115,9 @@ namespace MCB.Core.Infra.CrossCutting.Configuration
             var configJson = JsonConvert.SerializeObject(KeyStoreDictionary);
 
             using (var sw = new StreamWriter(appSettingsFullName, false, Encoding.UTF8))
-            {
                 sw.WriteLine(configJson);
-            }
+
+            Thread.Sleep(1000);
         }
     }
 }

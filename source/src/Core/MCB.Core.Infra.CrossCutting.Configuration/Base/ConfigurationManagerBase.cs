@@ -27,11 +27,10 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
             }
         }
 
-        // Events
-        protected event GetValueHandle GettingValueEvent;
-        protected event GetValueHandle ValueGetedEvent;
-        protected event SetValueHandle SettingValueEvent;
-        protected event SetValueHandle ValueSetedEvent;
+        protected abstract void GettingValue(string key, object gettingValue);
+        protected abstract void ValueGeted(string key, object getedValue);
+        protected abstract void SettingValue(string key, object proposedValue);
+        protected abstract void ValueSeted(string key, object setedValue);
 
         public ConfigurationManagerBase()
         {
@@ -42,12 +41,12 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
         {
             var value = string.Empty;
 
-            GettingValueEvent?.Invoke(key, value);
+            GettingValue(key, value);
 
             if (KeyStoreDictionary.TryGetValue(key, out object keyStoreValue))
                 value = keyStoreValue.ToString();
 
-            ValueGetedEvent?.Invoke(key, value);
+            ValueGeted(key, value);
 
             return value;
         }
@@ -55,25 +54,25 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Base
         {
             var value = default(T);
 
-            GettingValueEvent?.Invoke(key, value);
+            GettingValue(key, value);
 
             if (KeyStoreDictionary.TryGetValue(key, out object keyStoreValue))
                 value = (T)Convert.ChangeType(keyStoreValue, typeof(T));
 
-            ValueGetedEvent?.Invoke(key, value);
+            ValueGeted(key, value);
 
             return value;
         }
         public void Set(string key, object value)
         {
-            SettingValueEvent?.Invoke(key, value);
+            SettingValue(key, value);
 
             if (!KeyStoreDictionary.ContainsKey(key))
                 KeyStoreDictionary.Add(key, value);
             else
                 KeyStoreDictionary[key] = value;
 
-            ValueSetedEvent?.Invoke(key, value);
+            ValueSeted(key, value);
         }
 
         public abstract string GetEnvironmentName();

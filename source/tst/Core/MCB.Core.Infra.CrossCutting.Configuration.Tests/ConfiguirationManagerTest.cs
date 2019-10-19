@@ -33,15 +33,32 @@ namespace MCB.Core.Infra.CrossCutting.Configuration.Tests
         {
             Assert.Equal("default", _configurationManager.Get("propriedadeB"));
         }
-
+        [Fact]
+        public void GetInexistentProperty()
+        {
+            Assert.True(string.IsNullOrWhiteSpace(_configurationManager.Get(Guid.NewGuid().ToString())));
+        }
         [Fact]
         public void ModifyExistingProperty()
         {
+            var propertyName = "propriedadeC";
             var newValue = "modified value";
 
-            _configurationManager.Set("propriedadeC", newValue);
+            _configurationManager.Set(propertyName, newValue);
 
-            var getedValue = _configurationManager.Get("propriedadeC");
+            var getedValue = _configurationManager.Get(propertyName);
+
+            Assert.Equal(newValue, getedValue);
+        }
+        [Fact]
+        public void AddNewProperty()
+        {
+            var propertyName = "newProperty";
+            var newValue = "new value";
+
+            _configurationManager.Set(propertyName, newValue);
+
+            var getedValue = _configurationManager.Get(propertyName);
 
             Assert.Equal(newValue, getedValue);
         }
