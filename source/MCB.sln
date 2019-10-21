@@ -151,11 +151,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{ADDB60BB-A51E-48C9-AA49-E9D727E41CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Auth.General.Domain", "src\Auth\General\MCB.Auth.General.Domain\MCB.Auth.General.Domain.csproj", "{3A36403F-BCDA-493B-AF84-3DAD10CED74F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Auth.General.Domain", "src\Auth\General\MCB.Auth.General.Domain\MCB.Auth.General.Domain.csproj", "{3A36403F-BCDA-493B-AF84-3DAD10CED74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Auth.Authentication.Domain", "src\Auth\Authentication\MCB.Auth.Authentication.Domain\MCB.Auth.Authentication.Domain.csproj", "{0CAB4938-9B8B-4C91-AA22-961CDD9F364D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Auth.Authentication.Domain", "src\Auth\Authentication\MCB.Auth.Authentication.Domain\MCB.Auth.Authentication.Domain.csproj", "{0CAB4938-9B8B-4C91-AA22-961CDD9F364D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Auth.Authorization.Domain", "src\Auth\Authorization\MCB.Auth.Authorization.Domain\MCB.Auth.Authorization.Domain.csproj", "{CA9FA6E1-FA52-47EA-9987-8FDCC8859D18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Auth.Authorization.Domain", "src\Auth\Authorization\MCB.Auth.Authorization.Domain\MCB.Auth.Authorization.Domain.csproj", "{CA9FA6E1-FA52-47EA-9987-8FDCC8859D18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Admin", "2 - Admin", "{EAA02FEA-07FF-49E5-AD59-888306169372}"
 EndProject
@@ -163,7 +163,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - General", "1 - General"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{66C40C02-0D1F-45D6-89E3-042659600E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Admin.Domain", "src\Admin\MCB.Admin.Domain\MCB.Admin.Domain.csproj", "{2A0D7599-7413-43FE-AC49-55C97D3232DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Admin.Domain", "src\Admin\MCB.Admin.Domain\MCB.Admin.Domain.csproj", "{2A0D7599-7413-43FE-AC49-55C97D3232DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Licensing", "4 - Licensing", "{A0208651-2C47-4756-88AE-C66073C9FE2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Domain", "4 - Domain", "{A4C8E605-45A1-4C6A-B8BF-C72F40D8D776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Auth.Licensing.Domain", "src\Auth\Licensing\MCB.Auth.Licensing.Domain\MCB.Auth.Licensing.Domain.csproj", "{185D618A-09A2-465B-8605-3A4EFD7F49E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -331,6 +337,10 @@ Global
 		{2A0D7599-7413-43FE-AC49-55C97D3232DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A0D7599-7413-43FE-AC49-55C97D3232DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A0D7599-7413-43FE-AC49-55C97D3232DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185D618A-09A2-465B-8605-3A4EFD7F49E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185D618A-09A2-465B-8605-3A4EFD7F49E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185D618A-09A2-465B-8605-3A4EFD7F49E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185D618A-09A2-465B-8605-3A4EFD7F49E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -412,6 +422,9 @@ Global
 		{3261B960-B9BA-40C2-A36D-00BCA8E35C7A} = {EAA02FEA-07FF-49E5-AD59-888306169372}
 		{66C40C02-0D1F-45D6-89E3-042659600E6F} = {3261B960-B9BA-40C2-A36D-00BCA8E35C7A}
 		{2A0D7599-7413-43FE-AC49-55C97D3232DB} = {66C40C02-0D1F-45D6-89E3-042659600E6F}
+		{A0208651-2C47-4756-88AE-C66073C9FE2E} = {4F7B0655-7077-4795-BD15-033F9B7A96F1}
+		{A4C8E605-45A1-4C6A-B8BF-C72F40D8D776} = {A0208651-2C47-4756-88AE-C66073C9FE2E}
+		{185D618A-09A2-465B-8605-3A4EFD7F49E3} = {A4C8E605-45A1-4C6A-B8BF-C72F40D8D776}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A21FA390-CF0D-45A7-A735-BFB11EE84D1B}

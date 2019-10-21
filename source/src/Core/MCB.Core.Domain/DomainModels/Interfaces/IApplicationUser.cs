@@ -5,11 +5,10 @@ using System.Text;
 
 namespace MCB.Core.Domain.DomainModels.Interfaces
 {
-    public interface IApplication
-        : IAuditableDomainModel,
-        IActivableDomainModel
+    public interface IApplicationUser
+        : IAuditableDomainModel
     {
-        Guid CustomerId { get; set; }
-        string Name { get; set; }
+        Guid ApplicationId { get; set; }
+        Guid UserId { get; set; }
     }
 }

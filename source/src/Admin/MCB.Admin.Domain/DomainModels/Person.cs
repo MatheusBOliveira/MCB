@@ -15,6 +15,7 @@ namespace MCB.Admin.Domain.DomainModels
         IActivableDomainModel
     {
         public PersonTypeEnum PersonType { get; set; }
+        public string Name { get; set; }
         public string GovernamentalDocumentNumber { get; set; }
 
         public ActivableInfoValueObject ActivableInfo { get; set; }

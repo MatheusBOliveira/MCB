@@ -1,28 +1,26 @@
-﻿using MCB.Core.Domain.DomainModels.Base;
+﻿using MCB.Admin.Domain.DomainModels;
+using MCB.Core.Domain.DomainModels.Base;
 using MCB.Core.Domain.DomainModels.Interfaces;
 using MCB.Core.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCB.Admin.Domain.DomainModels
+namespace MCB.Admin.Domain
 {
-    public class User
+    public class Application
         : DomainModelBase,
-        IUser
+        IApplication
     {
         // Properties
         public Guid CustomerId { get; set; }
-        public EmailValueObject Email { get; set; }
+        public string Name { get; set; }
         public ActivableInfoValueObject ActivableInfo { get; set; }
 
         // Navigation Properties
         public Customer Customer { get; set; }
-        public List<ApplicationUser> ApplicationUserCollection { get; set; }
+        public ICollection<ApplicationUser> ApplicationUserCollection { get; set; }
 
-        public User() : base()
-        {
-            ActivableInfo = new ActivableInfoValueObject();
-        }
+
     }
 }

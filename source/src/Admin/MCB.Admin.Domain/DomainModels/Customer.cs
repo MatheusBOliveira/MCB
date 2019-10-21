@@ -12,15 +12,19 @@ namespace MCB.Admin.Domain.DomainModels
         : Person,
         ICustomer
     {
-        public string Name { get; set; }
+        // Properties
+        public EmailValueObject Email { get; set; }
+        public PhoneNumberValueObject PhoneNumber { get; set; }
 
+        // Navigation
         public ICollection<User> UserCollection { get; set; }
+        public ICollection<Application> ApplicationCollection { get; set; }
 
         protected Customer(PersonTypeEnum personType)
             : base(personType)
         {
-            ActivableInfo = new ActivableInfoValueObject();
-            PersonType = personType;
+            UserCollection = new List<User>();
+            ApplicationCollection = new List<Application>();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
     public interface IPerson
         : IAuditableDomainModel
     {
+        string Name { get; set; }
         PersonTypeEnum PersonType { get; set; }
         string GovernamentalDocumentNumber { get; set; }
     }
