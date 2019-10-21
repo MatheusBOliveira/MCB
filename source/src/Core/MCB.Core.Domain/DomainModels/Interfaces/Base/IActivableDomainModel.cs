@@ -1,6 +1,6 @@
 using MCB.Core.Domain.ValueObjects;
 
-namespace MCB.Core.Domain.DomainModels.Interfaces
+namespace MCB.Core.Domain.DomainModels.Interfaces.Base
 {
     public interface IActivableDomainModel
         : IDomainModel

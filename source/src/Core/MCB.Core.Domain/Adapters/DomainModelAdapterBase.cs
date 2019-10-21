@@ -1,4 +1,4 @@
-using MCB.Core.Domain.DomainModels.Interfaces;
+using MCB.Core.Domain.DomainModels.Interfaces.Base;
 using MCB.Core.Infra.CrossCutting.ExtensionMethods;
 using MCB.Core.Infra.CrossCutting.Patterns.Adapter;
 
