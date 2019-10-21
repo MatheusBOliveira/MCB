@@ -22,7 +22,9 @@ namespace MCB.Admin.Domain.DomainModels
 
         public User() : base()
         {
+            Email = new EmailValueObject();
             ActivableInfo = new ActivableInfoValueObject();
+            ApplicationUserCollection = new List<ApplicationUser>();
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCB.Admin.Domain
+namespace MCB.Admin.Domain.DomainModels
 {
     public class Application
         : DomainModelBase,
@@ -21,6 +21,10 @@ namespace MCB.Admin.Domain
         public Customer Customer { get; set; }
         public ICollection<ApplicationUser> ApplicationUserCollection { get; set; }
 
-
+        public Application()
+        {
+            ActivableInfo = new ActivableInfoValueObject();
+            ApplicationUserCollection = new List<ApplicationUser>();
+        }
     }
 }
