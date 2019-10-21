@@ -8,4 +8,8 @@
     <ProjectReference Include="..\..\..\Core\MCB.Core.Domain\MCB.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DomainModels\" />
+  </ItemGroup>
+
 </Project>

@@ -1,31 +1,30 @@
-﻿using MCB.Core.Domain.DomainModels.Enums;
+﻿using MCB.Core.Domain.DomainModels.Base;
+using MCB.Core.Domain.DomainModels.Enums;
 using MCB.Core.Domain.DomainModels.Interfaces;
+using MCB.Core.Domain.DomainModels.Interfaces.Base;
 using MCB.Core.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCB.Auth.General.Domain.DomainModels
+namespace MCB.Admin.Domain.DomainModels
 {
-    public class Customer
-        : ICustomer
+    public abstract class Person
+        : DomainModelBase,
+        IPerson,
+        IActivableDomainModel
     {
-        public string Name { get; set; }
         public PersonTypeEnum PersonType { get; set; }
         public string GovernamentalDocumentNumber { get; set; }
 
-        public DomainModelValueObject DomainModel { get; set; }
         public ActivableInfoValueObject ActivableInfo { get; set; }
 
-        public Customer()
+        protected Person(PersonTypeEnum personType)
+            : base()
         {
-            DomainModel = new DomainModelValueObject();
             ActivableInfo = new ActivableInfoValueObject();
-        }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
+            PersonType = personType;
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 namespace MCB.Core.Domain.DomainModels.Interfaces
 {
     public interface IPerson
-        : IDomainModel
+        : IAuditableDomainModel
     {
         PersonTypeEnum PersonType { get; set; }
         string GovernamentalDocumentNumber { get; set; }
