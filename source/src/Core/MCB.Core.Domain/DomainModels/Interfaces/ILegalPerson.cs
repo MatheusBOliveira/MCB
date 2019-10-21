@@ -5,10 +5,9 @@ using System.Text;
 
 namespace MCB.Core.Domain.DomainModels.Interfaces
 {
-    public interface ICustomer
+    public interface ILegalPerson
         : IPerson,
         IActivableDomainModel
     {
-        string Name { get; set; }
     }
 }
