@@ -10,7 +10,6 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
         : IAuditableDomainModel,
         IActivableDomainModel
     {
-        Guid CustomerId { get; set; }
         EmailValueObject Email { get; set; }
     }
 }

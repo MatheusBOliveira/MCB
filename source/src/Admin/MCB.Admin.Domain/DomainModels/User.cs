@@ -12,7 +12,6 @@ namespace MCB.Admin.Domain.DomainModels
         IUser
     {
         // Properties
-        public Guid CustomerId { get; set; }
         public EmailValueObject Email { get; set; }
         public ActivableInfoValueObject ActivableInfo { get; set; }
 
@@ -24,6 +23,7 @@ namespace MCB.Admin.Domain.DomainModels
         {
             Email = new EmailValueObject();
             ActivableInfo = new ActivableInfoValueObject();
+
             ApplicationUserCollection = new List<ApplicationUser>();
         }
     }

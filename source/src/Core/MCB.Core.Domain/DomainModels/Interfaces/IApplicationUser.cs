@@ -8,7 +8,6 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
     public interface IApplicationUser
         : IAuditableDomainModel
     {
-        Guid ApplicationId { get; set; }
-        Guid UserId { get; set; }
+
     }
 }

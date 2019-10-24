@@ -9,7 +9,6 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
         : IAuditableDomainModel,
         IActivableDomainModel
     {
-        Guid CustomerId { get; set; }
         string Name { get; set; }
     }
 }

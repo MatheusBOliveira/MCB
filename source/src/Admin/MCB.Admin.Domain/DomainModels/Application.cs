@@ -13,8 +13,9 @@ namespace MCB.Admin.Domain.DomainModels
         IApplication
     {
         // Properties
-        public Guid CustomerId { get; set; }
+        public Guid AppToken { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public ActivableInfoValueObject ActivableInfo { get; set; }
 
         // Navigation Properties
