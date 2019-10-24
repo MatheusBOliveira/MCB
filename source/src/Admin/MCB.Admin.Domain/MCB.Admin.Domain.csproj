@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\MCB.Core.Domain\MCB.Core.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\MCB.Core.Infra.CrossCutting.Security\MCB.Core.Infra.CrossCutting.Security.csproj" />
   </ItemGroup>
 
 </Project>

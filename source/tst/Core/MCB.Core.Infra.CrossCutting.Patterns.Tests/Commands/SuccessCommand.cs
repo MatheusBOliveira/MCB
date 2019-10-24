@@ -3,12 +3,19 @@ using System.Threading.Tasks;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Commands
 {
-    public class RegisterNewCustomerCommand
+    public class SuccessCommand
         : CommandBase
     {
         public string Name { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
+        public string EmailAddress { get; set; }
+
+        public SuccessCommand(
+            string name,
+            string emailAddress)
+        {
+            Name = name;
+            EmailAddress = emailAddress;
+        }
 
         public async override Task<bool> IsValid()
         {

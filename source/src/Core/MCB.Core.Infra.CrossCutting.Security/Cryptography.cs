@@ -1,10 +1,11 @@
+using MCB.Core.Infra.CrossCutting.Security.Interfaces;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace MCB.Core.Infra.CrossCutting.Security
 {
-    public class Cryptography
+    public class Cryptography : ICryptography
     {
         // Properties
         public string Key { get; set; }

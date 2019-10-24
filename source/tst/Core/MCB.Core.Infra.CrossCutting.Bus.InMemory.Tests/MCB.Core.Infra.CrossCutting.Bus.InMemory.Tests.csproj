@@ -20,7 +20,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.Bus.InMemory\MCB.Core.Infra.CrossCutting.Bus.InMemory.csproj" />
+    <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga\MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.csproj" />
     <ProjectReference Include="..\..\..\tst\Core\MCB.Core.Infra.CrossCutting.Tests\MCB.Core.Infra.CrossCutting.Tests.csproj" />
   </ItemGroup>
 

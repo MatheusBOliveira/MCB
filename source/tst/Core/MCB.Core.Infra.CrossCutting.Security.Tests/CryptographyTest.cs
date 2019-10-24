@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Security.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -23,7 +24,7 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
         [Trait("Cryptography", "EncryptAndDecryptTest")]
         public void EncryptAndDecryptTest()
         {
-            var crypto = ServiceProvider.GetService<Cryptography>();
+            var crypto = ServiceProvider.GetService<ICryptography>();
 
             var name = "Marcelo Castelo Branco";
             var encryptedName = crypto.Encrypt(name);
@@ -36,7 +37,7 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
         [Trait("Cryptography", "EncryptHashTest")]
         public void EncryptHashTest()
         {
-            var crypto = ServiceProvider.GetService<Cryptography>();
+            var crypto = ServiceProvider.GetService<ICryptography>();
 
             var name = "Marcelo Castelo Branco";
             var hashValue1 = crypto.EncryptWithHash(name); 

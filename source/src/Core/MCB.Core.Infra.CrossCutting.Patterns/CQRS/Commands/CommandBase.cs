@@ -3,7 +3,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.Specification;
 using System;
 using System.Threading.Tasks;
 
-namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Commands
+namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
 {
     public abstract class CommandBase
         : MessageBase
