@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCB.Admin.Domain.Queries.ApplicationUsers
+namespace MCB.Admin.Domain.Queries.Users
 {
     public class GetApplicationUsersByAppTokenQuery
         : QueryBase

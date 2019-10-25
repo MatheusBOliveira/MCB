@@ -1,5 +1,5 @@
 ﻿using MCB.Admin.Domain.DomainModels;
-using MCB.Admin.Domain.Queries.ApplicationUsers;
+using MCB.Admin.Domain.Queries.Users;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Base;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MCB.Admin.Domain.QueryHandlers.ApplicationUsers
+namespace MCB.Admin.Domain.QueryHandlers.Users
 {
     public class UserQueryHandler
         : QueryHandlerBase,
