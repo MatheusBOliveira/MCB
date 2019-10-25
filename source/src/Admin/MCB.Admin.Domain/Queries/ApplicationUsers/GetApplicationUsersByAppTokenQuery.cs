@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCB.Admin.Domain.Queries.Users
+namespace MCB.Admin.Domain.Queries.ApplicationUsers
 {
-    public class GetUserAccessesInApplicationQuery
+    public class GetApplicationUsersByAppTokenQuery
         : QueryBase
     {
-        public string CustomerEmailAddress { get; set; }
+        public string AppToken { get; set; }
 
         public override async Task<bool> IsValid()
         {

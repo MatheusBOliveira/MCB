@@ -17,7 +17,7 @@ namespace MCB.Admin.Domain.DomainModels
 
         // Navigation Properties
         public Customer Customer { get; set; }
-        public List<ApplicationUser> ApplicationUserCollection { get; set; }
+        public ICollection<ApplicationUser> ApplicationUserCollection { get; set; }
 
         public User() : base()
         {

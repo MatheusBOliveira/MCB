@@ -13,11 +13,13 @@ namespace MCB.Admin.Domain.DomainModels
         // Navigation Properties
         public Application Application { get; set; }
         public User User { get; set; }
+        public ICollection<ApplicationUserSession> ApplicationUserSession { get; set; }
 
         public ApplicationUser()
         {
             Application = new Application();
             User = new User();
+            ApplicationUserSession = new List<ApplicationUserSession>();
         }
     }
 }
