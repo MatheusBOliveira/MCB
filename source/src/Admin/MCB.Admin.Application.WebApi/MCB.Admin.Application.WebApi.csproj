@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\MCB.Core.Application.WebApi.ViewModels\MCB.Core.Application.WebApi.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Core\MCB.Core.Application.WebApi\MCB.Core.Application.WebApi.csproj" />
+    <ProjectReference Include="..\..\Core\MCB.Core.Application\MCB.Core.Application.csproj" />
+    <ProjectReference Include="..\..\Core\MCB.Core.Domain\MCB.Core.Domain.csproj" />
+    <ProjectReference Include="..\MCB.Admin.Application.WebApi.ViewModels\MCB.Admin.Application.WebApi.ViewModels.csproj" />
+    <ProjectReference Include="..\MCB.Admin.Domain\MCB.Admin.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

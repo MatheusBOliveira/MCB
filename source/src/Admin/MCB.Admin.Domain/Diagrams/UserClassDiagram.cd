@@ -3,7 +3,7 @@
   <Class Name="MCB.Admin.Domain.DomainModels.User" Collapsed="true">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAAACAAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DomainModels\User.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -12,7 +12,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MCB.Admin.Domain.DomainModels.Customer" Collapsed="true">
-    <Position X="1.5" Y="0.5" Width="1.5" />
+    <Position X="1.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAACAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DomainModels\Customer.cs</FileName>
@@ -22,7 +22,7 @@
   <Class Name="MCB.Admin.Domain.DomainModels.Application" Collapsed="true">
     <Position X="1.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAAACAAAAAAAAAAAAQAAAAAABAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAIAAACAgAAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
       <FileName>DomainModels\Application.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -33,7 +33,7 @@
   <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUser" Collapsed="true">
     <Position X="4.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAABAAAAAAAQAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QAABAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DomainModels\ApplicationUser.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
