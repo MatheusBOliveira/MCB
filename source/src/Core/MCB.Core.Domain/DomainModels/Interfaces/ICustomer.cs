@@ -9,6 +9,6 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
         : IPerson,
         IActivableDomainModel
     {
-        string Name { get; set; }
+
     }
 }

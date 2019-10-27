@@ -1,4 +1,5 @@
 using MCB.Core.Infra.CrossCutting.ExtensionMethods;
+using MCB.Core.Infra.CrossCutting.Globalization.Interfaces;
 using MCB.Core.Infra.CrossCutting.Globalization.Messages;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ using System.Text;
 
 namespace MCB.Core.Infra.CrossCutting.Globalization
 {
-    public class GlobalizationManager
+    public class GlobalizationManager 
+        : IGlobalizationManager
     {
         private readonly List<GlobalizationMessages> _globalizationMessagesCollection;
 

@@ -1,3 +1,4 @@
+using MCB.Core.Infra.CrossCutting.Globalization.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
@@ -22,7 +23,7 @@ namespace MCB.Core.Infra.CrossCutting.Globalization.Tests
         [Trait("Globalization", "GetMessageTest")]
         public void GetMessageTest()
         {
-            var globalizationManager = ServiceProvider.GetService<GlobalizationManager>();
+            var globalizationManager = ServiceProvider.GetService<IGlobalizationManager>();
 
             var msg1ptBR = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-1", "pt-BR");
             var msg1enUS = globalizationManager.GetMessage("MCB-CORE-INF-CROSSTEST-1", "en-US");

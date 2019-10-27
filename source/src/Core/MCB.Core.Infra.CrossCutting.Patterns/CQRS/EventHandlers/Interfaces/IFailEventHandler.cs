@@ -1,5 +1,4 @@
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
-using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using System.Threading;
 using System.Threading.Tasks;
 

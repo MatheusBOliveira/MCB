@@ -121,13 +121,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Admin.Application.WebApi", "src\Admin\MCB.Admin.Application.WebApi\MCB.Admin.Application.WebApi.csproj", "{738AB1A0-9817-46CC-B10C-77380451055F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Core.Application", "src\Core\MCB.Core.Application\MCB.Core.Application.csproj", "{444E1B9C-329E-4C30-81F9-7AE6031AB6D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Application", "src\Core\MCB.Core.Application\MCB.Core.Application.csproj", "{444E1B9C-329E-4C30-81F9-7AE6031AB6D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Core.Application.WebApi", "src\Core\MCB.Core.Application.WebApi\MCB.Core.Application.WebApi.csproj", "{124C6FA6-1FC7-485A-91AF-51708F03D10B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Application.WebApi", "src\Core\MCB.Core.Application.WebApi\MCB.Core.Application.WebApi.csproj", "{124C6FA6-1FC7-485A-91AF-51708F03D10B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Core.Application.WebApi.ViewModels", "src\Core\MCB.Core.Application.WebApi.ViewModels\MCB.Core.Application.WebApi.ViewModels.csproj", "{AD2BF744-8ECA-4AA5-AE6B-CB8B22713327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Application.WebApi.ViewModels", "src\Core\MCB.Core.Application.WebApi.ViewModels\MCB.Core.Application.WebApi.ViewModels.csproj", "{AD2BF744-8ECA-4AA5-AE6B-CB8B22713327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Admin.Application.WebApi.ViewModels", "src\Admin\MCB.Admin.Application.WebApi.ViewModels\MCB.Admin.Application.WebApi.ViewModels.csproj", "{B31DCC29-88D1-4E5C-8924-2147C5F361B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Admin.Application.WebApi.ViewModels", "src\Admin\MCB.Admin.Application.WebApi.ViewModels\MCB.Admin.Application.WebApi.ViewModels.csproj", "{B31DCC29-88D1-4E5C-8924-2147C5F361B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Services", "2 - Services", "{D3A7613C-9585-4B55-9E43-4BE4A374E163}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{EA4BCF12-90D5-47F0-969E-7B588E5EDE7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCB.Core.Service.WebApi", "src\Core\MCB.Core.Service.WebApi\MCB.Core.Service.WebApi.csproj", "{BA01039A-34FF-46BB-8630-09E6BE0823C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCB.Admin.Domain.Tests", "tst\Admin\MCB.Admin.Domain.Tests\MCB.Admin.Domain.Tests.csproj", "{D08028E5-C597-48E1-8469-036E4B4DB4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -291,6 +299,14 @@ Global
 		{B31DCC29-88D1-4E5C-8924-2147C5F361B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B31DCC29-88D1-4E5C-8924-2147C5F361B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B31DCC29-88D1-4E5C-8924-2147C5F361B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA01039A-34FF-46BB-8630-09E6BE0823C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA01039A-34FF-46BB-8630-09E6BE0823C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA01039A-34FF-46BB-8630-09E6BE0823C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA01039A-34FF-46BB-8630-09E6BE0823C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08028E5-C597-48E1-8469-036E4B4DB4F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08028E5-C597-48E1-8469-036E4B4DB4F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08028E5-C597-48E1-8469-036E4B4DB4F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08028E5-C597-48E1-8469-036E4B4DB4F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -355,6 +371,10 @@ Global
 		{124C6FA6-1FC7-485A-91AF-51708F03D10B} = {28B11311-26E4-40EF-8CDF-42DBF9DC4653}
 		{AD2BF744-8ECA-4AA5-AE6B-CB8B22713327} = {28B11311-26E4-40EF-8CDF-42DBF9DC4653}
 		{B31DCC29-88D1-4E5C-8924-2147C5F361B8} = {17B1A4A3-083F-44B0-A970-9FFA15BACB0B}
+		{D3A7613C-9585-4B55-9E43-4BE4A374E163} = {3261B960-B9BA-40C2-A36D-00BCA8E35C7A}
+		{EA4BCF12-90D5-47F0-969E-7B588E5EDE7E} = {3261B960-B9BA-40C2-A36D-00BCA8E35C7A}
+		{BA01039A-34FF-46BB-8630-09E6BE0823C3} = {39228BB5-7710-4CE9-9FAC-E6DD58B621ED}
+		{D08028E5-C597-48E1-8469-036E4B4DB4F6} = {66C40C02-0D1F-45D6-89E3-042659600E6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A21FA390-CF0D-45A7-A735-BFB11EE84D1B}
