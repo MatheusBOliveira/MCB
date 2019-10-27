@@ -9,6 +9,7 @@ using System.Text;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using System.Threading;
 using System.Threading.Tasks;
+using MCB.Admin.Domain.Events.Customers;
 
 namespace MCB.Admin.Domain.CommanHandlers.Customers
 {
