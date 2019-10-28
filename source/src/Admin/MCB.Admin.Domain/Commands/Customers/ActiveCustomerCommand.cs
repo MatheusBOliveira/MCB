@@ -1,4 +1,5 @@
-﻿using MCB.Core.Domain.ValueObjects;
+﻿using MCB.Core.Domain.DomainModels.Enums;
+using MCB.Core.Domain.ValueObjects;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace MCB.Admin.Domain.Commands.Customers
     public class ActiveCustomerCommand
         : CommandBase
     {
+        public PersonTypeEnum PersonType { get; set; }
         public EmailValueObject Email { get; set; }
     }
 }

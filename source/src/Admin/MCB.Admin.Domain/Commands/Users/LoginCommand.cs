@@ -10,7 +10,6 @@ namespace MCB.Admin.Domain.Commands.Users
     public class LoginCommand
         : CommandBase
     {
-        public Guid ApplicationId { get; set; }
         public EmailValueObject Email { get; set; }
         public PasswordValueObject Password { get; set; }
     }

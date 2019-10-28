@@ -43,6 +43,7 @@ namespace MCB.Admin.Domain.Tests.Commands
             {
                 var activateCustomerCommand = new ActiveCustomerCommand
                 {
+                    Username = "marcelo.castelo",
                     Email = _emailValueObjectValue.Create("marcelo.castelo@outlook.com")
                 };
 

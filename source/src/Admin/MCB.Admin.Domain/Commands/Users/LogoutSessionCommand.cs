@@ -10,7 +10,6 @@ namespace MCB.Admin.Domain.Commands.Users
     public class LogoutSessionCommand
         : CommandBase
     {
-        public Guid ApplicationId { get; set; }
         public string SessionToken { get; set; }
         public EmailValueObject Email { get; set; }
     }

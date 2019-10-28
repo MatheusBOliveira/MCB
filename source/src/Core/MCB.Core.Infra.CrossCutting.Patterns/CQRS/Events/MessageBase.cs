@@ -8,6 +8,8 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
         public Guid AggregateId { get; set; }
         public DateTime TimeStamp => DateTime.UtcNow;
         public string MessageType => GetType().FullName;
+        public Guid ApplicationId { get; set; }
+        public string Username { get; set; }
     }
 }
 

@@ -1,8 +1,14 @@
-﻿using MCB.Admin.Domain.Commands.Customers;
+﻿using MCB.Admin.Domain.Adapters.Events;
+using MCB.Admin.Domain.Adapters.Events.Interfaces;
+using MCB.Admin.Domain.Commands.Customers;
 using MCB.Admin.Domain.Commands.Users;
 using MCB.Admin.Domain.CommanHandlers.Customers;
 using MCB.Admin.Domain.CommanHandlers.Users;
 using MCB.Admin.Domain.DomainModels;
+using MCB.Admin.Domain.Factories.DomainModels;
+using MCB.Admin.Domain.Factories.DomainModels.Interfaces;
+using MCB.Admin.Domain.Factories.Events.Customers;
+using MCB.Admin.Domain.Factories.Events.Customers.Interfaces;
 using MCB.Admin.Domain.Factories.Queries.Customers;
 using MCB.Admin.Domain.Factories.Queries.Customers.Interfaces;
 using MCB.Admin.Domain.Queries.Applications;
@@ -30,6 +36,7 @@ namespace MCB.Admin.Domain.IoC
             Core.Infra.CrossCutting.Patterns.IoC.DefaultBootstrapper.RegisterServices(services);
             Core.Domain.IoC.DefaultBootstrapper.RegisterServices(services);
 
+            RegisterAdapters(services);
             RegisterCommandHandlers(services);
             RegisterFactories(services);
             RegisterQueryHandlers(services);
@@ -37,6 +44,10 @@ namespace MCB.Admin.Domain.IoC
             RegisterValidations(services);
         }
 
+        private static void RegisterAdapters(IServiceCollection services)
+        {
+            services.AddScoped<ICustomerActivationFailEventAdapter, CustomerActivationFailEventAdapter>();
+        }
         private static void RegisterCommandHandlers(IServiceCollection services)
         {
             services.AddScoped<ICommandHandler<ActiveCustomerCommand, bool>, CustomerCommandHandler>();
@@ -51,7 +62,14 @@ namespace MCB.Admin.Domain.IoC
 
         private static void RegisterFactories(IServiceCollection services)
         {
+            // Factories - DomainModels
+            services.AddScoped<ICustomerFactory, CustomerFactory>();
+            // Factories - Events
+            services.AddScoped<ICustomerActivatedEventFactory, CustomerActivatedEventFactory>();
+            services.AddScoped<ICustomerActivationFailEventFactory, CustomerActivationFailEventFactory>();
+            // Factories - Queries
             services.AddScoped<ICheckIfEmailExistsInRepositoryQueryFactory, CheckIfEmailExistsInRepositoryQueryFactory>();
+
         }
 
         private static void RegisterQueryHandlers(IServiceCollection services)
