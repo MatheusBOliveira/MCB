@@ -20,7 +20,11 @@ namespace MCB.Core.Infra.CrossCutting.Queue.InMemory.Tests
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.BootStrapper.RegisterServices(services);
+            IoC.DefaultBootstrapper.RegisterServices(services);
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
         }
 
         [Fact]

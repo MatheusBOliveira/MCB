@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using MCB.Core.Infra.CrossCutting.Configuration.Interfaces;
 using MCB.Core.Infra.CrossCutting.Configuration;
+using System;
 
 namespace MCB.Core.Infra.CrossCutting.Cache.Redis.Tests
 {
@@ -29,7 +30,11 @@ namespace MCB.Core.Infra.CrossCutting.Cache.Redis.Tests
             config.LoadConfigurations();
 
             services.AddSingleton<IConfigurationManager>(config);
-            IoC.BootStrapper.RegisterServices(services, config);
+            IoC.DefaultBootstrapper.RegisterServices(services, config);
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
         }
 
         [Fact]

@@ -26,7 +26,11 @@ namespace MCB.Core.Infra.Data.Mongo.Tests
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.Bootstrapper.RegisterServices(services, null);
+            IoC.DefaultBootstrapper.RegisterServices(services);
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
         }
 
         private CustomerDataModel CreateNewCustomer()

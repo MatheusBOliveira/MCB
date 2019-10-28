@@ -6,7 +6,7 @@ using StackExchange.Redis;
 
 namespace MCB.Core.Infra.CrossCutting.Cache.Redis.IoC
 {
-    public static class BootStrapper
+    public static class DefaultBootstrapper
     {
         public static void RegisterServices(
             IServiceCollection services, 

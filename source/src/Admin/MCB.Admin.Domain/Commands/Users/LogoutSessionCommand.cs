@@ -13,10 +13,5 @@ namespace MCB.Admin.Domain.Commands.Users
         public Guid ApplicationId { get; set; }
         public string SessionToken { get; set; }
         public EmailValueObject Email { get; set; }
-
-        public override async Task<bool> IsValid()
-        {
-            return await Task.FromResult(true);
-        }
     }
 }

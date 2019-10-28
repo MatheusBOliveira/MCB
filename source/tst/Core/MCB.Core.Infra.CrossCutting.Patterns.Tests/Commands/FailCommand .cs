@@ -16,11 +16,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Commands
             Name = name;
             EmailAddress = emailAddress;
         }
-
-        public async override Task<bool> IsValid()
-        {
-            return await Task.FromResult(true);
-        }
     }
 }
 

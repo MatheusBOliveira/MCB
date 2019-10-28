@@ -1,6 +1,7 @@
 using MCB.Core.Infra.CrossCutting.Security.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,7 +18,11 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.BootStrapper.RegisterServices(services, null);
+            IoC.DefaultBootstrapper.RegisterServices(services);
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
         }
 
         [Fact]

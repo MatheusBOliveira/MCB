@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MCB.Core.Infra.CrossCutting.Configuration.IoC
 {
-    public static class BootStrapper
+    public static class DefaultBootstrapper
     {
         public static void RegisterServices(IServiceCollection services)
         {

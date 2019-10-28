@@ -16,9 +16,11 @@ namespace MCB.Core.Infra.CrossCutting.Tests
 
             ConfigureServices(service);
             ServiceProvider = service.BuildServiceProvider();
+            ServiceProviderGenerated(ServiceProvider);
         }
 
         protected abstract void ConfigureServices(IServiceCollection services);
+        protected abstract void ServiceProviderGenerated(IServiceProvider serviceProvider);
     }
 }
 

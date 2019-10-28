@@ -15,10 +15,5 @@ namespace MCB.Admin.Domain.Commands.Customers
         public PhoneNumberValueObject PhoneNumber { get; set; }
         public PasswordValueObject Password { get; set; }
         public string ApplicationName { get; set; }
-
-        public override async Task<bool> IsValid()
-        {
-            return await Task.FromResult(true);
-        }
     }
 }

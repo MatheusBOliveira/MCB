@@ -20,6 +20,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
         {
 
         }
+
+
+        public CommandReturn(TReturn returnObject, bool success, bool @continue)
+            : base(success, @continue)
+        {
+            ReturnObject = returnObject;
+        }
     }
 }
 

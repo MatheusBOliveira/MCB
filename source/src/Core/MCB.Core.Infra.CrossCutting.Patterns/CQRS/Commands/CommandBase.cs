@@ -16,7 +16,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
             Timestamp = DateTime.Now;
         }
 
-        public abstract Task<bool> IsValid();
+        public virtual bool IsValid()
+        {
+            return ValidationResult.IsValid;
+        }
     }
 }
 

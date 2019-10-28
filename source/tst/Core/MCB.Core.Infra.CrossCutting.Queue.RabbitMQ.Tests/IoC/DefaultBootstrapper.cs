@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MCB.Core.Infra.CrossCutting.Queue.RabbitMQ.Tests.IoC
 {
-    public static class Bootstrapper
+    public static class DefaultBootstrapper
     {
         public static void RegisterServices(
-            IServiceCollection services,
-            string clienteIdentifier = null)
+            IServiceCollection services)
         {
             var connection = new RabbitMQConnection
             {

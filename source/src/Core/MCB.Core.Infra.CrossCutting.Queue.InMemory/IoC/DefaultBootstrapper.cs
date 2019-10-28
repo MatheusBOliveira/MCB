@@ -4,11 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MCB.Core.Infra.CrossCutting.Queue.InMemory.IoC
 {
-    public static class BootStrapper
+    public static class DefaultBootstrapper
     {
         public static void RegisterServices(
-            IServiceCollection services,
-            string clienteIdentifier = null)
+            IServiceCollection services)
         {
             services.AddSingleton<InMemoryQueueManager>();
             services.AddScoped<IQueueConnection, InMemoryQueueConnection>();

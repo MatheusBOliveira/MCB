@@ -1,5 +1,6 @@
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.IO;
 using System.Text;
 using Xunit;
@@ -16,6 +17,10 @@ namespace MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests
         }
 
         protected override void ConfigureServices(IServiceCollection services)
+        {
+
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
         {
 
         }

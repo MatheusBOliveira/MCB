@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MCB.Core.Infra.CrossCutting.Gateway.IoC
 {
-    public static class BootStrapper
+    public static class DefaultBootstrapper
     {
         public static void RegisterServices(IServiceCollection services, string[] jsonFilesArray)
         {

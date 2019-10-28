@@ -39,6 +39,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
         {
             _inMemorySagaManager = new InMemorySagaManager(ServiceProvider);
         }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
+        }
 
         protected override void ConfigureServices(IServiceCollection services)
         {

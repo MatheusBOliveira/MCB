@@ -9,11 +9,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Commands
         public string Name { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-
-        public async override Task<bool> IsValid()
-        {
-            return await Task.FromResult(true);
-        }
     }
 }
 

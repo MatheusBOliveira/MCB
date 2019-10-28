@@ -11,10 +11,5 @@ namespace MCB.Admin.Domain.Commands.Customers
         : CommandBase
     {
         public EmailValueObject Email { get; set; }
-
-        public override async Task<bool> IsValid()
-        {
-            return await Task.FromResult(true);
-        }
     }
 }

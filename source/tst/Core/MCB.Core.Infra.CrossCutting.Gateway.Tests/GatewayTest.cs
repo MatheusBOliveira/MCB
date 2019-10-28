@@ -19,9 +19,13 @@ namespace MCB.Core.Infra.CrossCutting.Gateway.Tests
 
         protected override void ConfigureServices(IServiceCollection services)
         {
-            IoC.BootStrapper.RegisterServices(services, new string[] {
+            IoC.DefaultBootstrapper.RegisterServices(services, new string[] {
                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "routes.json")
             });
+        }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
         }
 
         [Fact]

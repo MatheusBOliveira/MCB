@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MCB.Core.Infra.CrossCutting.Globalization.IoC
 {
-    public static class BootStrapper
+    public static class DefaultBootstrapper
     {
-        public static void RegisterServices(IServiceCollection services, string clienteIdentifier)
+        public static void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<IGlobalizationManager>(q =>
             {

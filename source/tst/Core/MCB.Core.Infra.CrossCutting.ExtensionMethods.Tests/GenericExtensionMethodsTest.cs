@@ -34,6 +34,10 @@ namespace MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests
         {
 
         }
+        protected override void ServiceProviderGenerated(IServiceProvider serviceProvider)
+        {
+
+        }
 
         [Fact]
         [Trait("ExtensionMethods", "CloneTest")]
