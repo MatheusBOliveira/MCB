@@ -39,11 +39,20 @@ namespace MCB.Admin.Domain.Tests.Commands
         [Trait("Admin.Domain", "ActiveCustomerCommandTest")]
         public async Task ActiveCustomerCommandTest()
         {
-            var activateCustomerCommand = new ActiveCustomerCommand { 
-                Email = _emailValueObjectValue.Create("marcelo.castelo@outlook.com")
-            };
+            try
+            {
+                var activateCustomerCommand = new ActiveCustomerCommand
+                {
+                    Email = _emailValueObjectValue.Create("marcelo.castelo@outlook.com")
+                };
 
-            var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, new System.Threading.CancellationToken());
+                var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, new System.Threading.CancellationToken());
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
     }

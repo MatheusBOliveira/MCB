@@ -26,6 +26,10 @@ namespace MCB.Admin.Domain.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
+            Core.Infra.CrossCutting.Security.IoC.DefaultBootstrapper.RegisterServices(services);
+            Core.Infra.CrossCutting.Patterns.IoC.DefaultBootstrapper.RegisterServices(services);
+            Core.Domain.IoC.DefaultBootstrapper.RegisterServices(services);
+
             RegisterCommandHandlers(services);
             RegisterFactories(services);
             RegisterQueryHandlers(services);
@@ -64,13 +68,16 @@ namespace MCB.Admin.Domain.IoC
 
         private static void RegisterSpecifications(IServiceCollection services)
         {
+            // Customers
             services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustExistsInRepositorySpecification>();
+            services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustNotExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustNotExistsInRepositorySpecification>();
         }
 
         private static void RegisterValidations(IServiceCollection services)
         {
             // Customer
             services.AddScoped<Validations.Commands.Customers.Base.Interfaces.IEmailMustExistInRepositoryValidator, Validations.Commands.Customers.Base.EmailMustExistInRepositoryValidator>();
+            services.AddScoped<Validations.Commands.Customers.Base.Interfaces.IEmailMustNotExistInRepositoryValidator, Validations.Commands.Customers.Base.EmailMustNotExistInRepositoryValidator>();
             services.AddScoped<IActiveCustomerCommandValidator, ActiveCustomerCommandValidator>();
         }
     }

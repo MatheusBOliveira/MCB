@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\Admin\MCB.Admin.Domain\MCB.Admin.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\Core\MCB.Core.Infra.CrossCutting.Patterns\MCB.Core.Infra.CrossCutting.Patterns.csproj" />
     <ProjectReference Include="..\..\Core\MCB.Core.Infra.CrossCutting.Tests\MCB.Core.Infra.CrossCutting.Tests.csproj" />
   </ItemGroup>
 

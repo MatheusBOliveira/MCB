@@ -15,6 +15,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries
             ReturnObject = returnObject;
         }
 
+        public QueryReturn(bool success, bool @continue)
+            : base(success, @continue)
+        {
+
+        }
+
         public QueryReturn(bool success, bool @continue, TReturn returnObject) 
             : base(success, @continue)
         {

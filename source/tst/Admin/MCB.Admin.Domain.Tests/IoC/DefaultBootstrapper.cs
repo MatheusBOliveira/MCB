@@ -15,7 +15,6 @@ namespace MCB.Admin.Domain.Tests.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            Core.Domain.IoC.DefaultBootstrapper.RegisterServices(services);
             Domain.IoC.DefaultBootstrapper.RegisterServices(services);
         }
     }

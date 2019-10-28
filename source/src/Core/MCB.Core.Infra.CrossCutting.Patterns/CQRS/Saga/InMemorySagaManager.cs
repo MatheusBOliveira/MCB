@@ -38,7 +38,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
                 .FirstOrDefault();
             #endregion
 
-            var queryReturn = default(QueryReturn<TReturn>);
+            var queryReturn = new QueryReturn<TReturn>(false, false);
 
             #region StartWith
             if (startWithHandler != null)
@@ -160,7 +160,8 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
                     commandReturn = await handle.Handle(command, commandReturn.ReturnObject, cancellationToken);
                     if (commandReturn != null)
                     {
-                        if (commandReturn.Success == false)
+                        if (commandReturn.Success == false
+                            && failHandler != null)
                             commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, cancellationToken);
 
                         if (!commandReturn.Continue)
