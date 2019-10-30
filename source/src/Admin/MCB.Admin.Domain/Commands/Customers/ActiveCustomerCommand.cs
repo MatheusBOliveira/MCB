@@ -11,7 +11,6 @@ namespace MCB.Admin.Domain.Commands.Customers
     public class ActiveCustomerCommand
         : CommandBase
     {
-        public PersonTypeEnum PersonType { get; set; }
         public EmailValueObject Email { get; set; }
     }
 }

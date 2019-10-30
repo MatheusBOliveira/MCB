@@ -24,7 +24,8 @@ namespace MCB.Admin.Domain.Specifications.Commands.Customers.Base
             _checkIfEmailExistsInRepositoryQueryFactory = checkIfEmailExistsInRepositoryQueryFactory;
         }
 
-        public string ErrorCode => "";
+        public string ErrorCode => "MCB-ADMIN-DOMAIN-COMMANDS-1";
+        public string ErrorDefaultDescription => nameof(EmailMustExistsInRepositorySpecification);
 
         public async Task<bool> IsSatisfiedBy(string entity)
         {

@@ -44,7 +44,7 @@ namespace MCB.Admin.Domain.Tests.Commands
                 var activateCustomerCommand = new ActiveCustomerCommand
                 {
                     Username = "marcelo.castelo",
-                    Email = _emailValueObjectValue.Create("marcelo.castelo@outlook.com")
+                    Email = null
                 };
 
                 var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, new System.Threading.CancellationToken());

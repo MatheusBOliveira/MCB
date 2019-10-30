@@ -30,7 +30,7 @@ namespace MCB.Admin.Domain.Factories.DomainModels
 
         public Customer Create(ActiveCustomerCommand parameter)
         {
-            var customer = Create(parameter.PersonType);
+            var customer = Create();
 
             customer.Email = parameter.Email;
 

@@ -8,6 +8,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces
         {
             get;
         }
+        string DefaultDescription
+        {
+            get;
+        }
 
         Task<bool> Validate(TEntity entity);
     }

@@ -12,11 +12,17 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
             get;
             private set;
         }
+        public string DefaultDescription
+        {
+            get;
+            private set;
+        }
 
-        public Rule(ISpecification<TEntity> spec, string code)
+        public Rule(ISpecification<TEntity> spec, string code, string defaultDescription)
         {
             _specificationSpec = spec;
             Code = code;
+            DefaultDescription = defaultDescription;
         }
 
         public async Task<bool> Validate(TEntity entity)

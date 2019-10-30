@@ -1,4 +1,5 @@
 ﻿using MCB.Admin.Domain.Commands.Customers;
+using MCB.Admin.Domain.Specifications.Commands.Customers.ActiveCustomerCommands.Interfaces;
 using MCB.Admin.Domain.Validations.Commands.Customers.ActiveCustomerCommands.Interfaces;
 using MCB.Admin.Domain.Validations.Commands.Customers.Base.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Specification;
@@ -14,11 +15,16 @@ namespace MCB.Admin.Domain.Validations.Commands.Customers.ActiveCustomerCommands
         IActiveCustomerCommandValidator
     {
         private readonly IEmailMustExistInRepositoryValidator _emailMustExistInRepositoryValidator;
+        private readonly IEmailIsRequiredSpecification _emailIsRequiredSpecification;
 
         public ActiveCustomerCommandValidator(
-            IEmailMustExistInRepositoryValidator emailMustExistInRepositoryValidator)
+            IEmailMustExistInRepositoryValidator emailMustExistInRepositoryValidator,
+            IEmailIsRequiredSpecification emailIsRequiredSpecification)
         {
             _emailMustExistInRepositoryValidator = emailMustExistInRepositoryValidator;
+            _emailIsRequiredSpecification = emailIsRequiredSpecification;
+
+            AddSpecification(_emailIsRequiredSpecification);
         }
 
         public async override Task<ValidationResult> Validate(ActiveCustomerCommand entity)

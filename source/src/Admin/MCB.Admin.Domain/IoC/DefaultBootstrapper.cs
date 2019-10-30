@@ -89,6 +89,8 @@ namespace MCB.Admin.Domain.IoC
             // Customers
             services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustExistsInRepositorySpecification>();
             services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustNotExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustNotExistsInRepositorySpecification>();
+            services.AddScoped<Specifications.Commands.Customers.ActiveCustomerCommands.Interfaces.IEmailIsRequiredSpecification, Specifications.Commands.Customers.ActiveCustomerCommands.EmailIsRequiredSpecification>();
+
         }
 
         private static void RegisterValidations(IServiceCollection services)
