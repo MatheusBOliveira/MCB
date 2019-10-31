@@ -7,7 +7,8 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS
 
         protected MessageReturn()
         {
-
+            Success = false;
+            Continue = true;
         }
 
         protected MessageReturn(bool success, bool @continue)

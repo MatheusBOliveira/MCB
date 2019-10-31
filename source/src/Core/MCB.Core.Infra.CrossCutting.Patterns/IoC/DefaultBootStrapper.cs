@@ -1,3 +1,5 @@
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.IoC
         public static void RegisterServices(IServiceCollection services)
         {
             services.AddScoped<ISagaManager, InMemorySagaManager>();
+            services.AddScoped<IDomainNotificationHandler, DomainNotificationHandler>();
         }
     }
 }

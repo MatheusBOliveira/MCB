@@ -8,6 +8,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces
     {
         IEnumerable<DomainNotification> GetNotifications();
         bool HasNotifications();
+        bool HasErrors();
     }
 }
 

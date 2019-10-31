@@ -10,11 +10,12 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using System.Threading;
 using System.Threading.Tasks;
 using MCB.Admin.Domain.Events.Customers;
-using MCB.Admin.Domain.Validations.Commands.Customers.ActiveCustomerCommands.Interfaces;
 using MCB.Admin.Domain.Factories.DomainModels.Interfaces;
 using MCB.Admin.Domain.Factories.Events.Customers.Interfaces;
 using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Adapters.Events.Interfaces;
+using MCB.Admin.Domain.Services.Interfaces;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 
 namespace MCB.Admin.Domain.CommanHandlers.Customers
 {
@@ -26,31 +27,33 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
         ICommandHandler<RemoveCustomerCommand, bool>
     {
         private readonly ICryptography _cryptography;
-
-        private readonly IActiveCustomerCommandValidator _activeCustomerCommandValidator;
-
+        // Domain Services
+        private readonly ICustomerService _customerService;
+        // Adapters
         private readonly ICustomerActivationFailEventAdapter _customerActivationFailEventAdapter;
-
+        // Factories
         private readonly ICustomerFactory _customerFactory;
         private readonly ICustomerActivatedEventFactory _customerActivatedEventFactory;
         private readonly ICustomerActivationFailEventFactory _customerActivationFailEventFactory;
 
         public CustomerCommandHandler(
             ISagaManager sagaManager,
+            IDomainNotificationHandler domainNotificationHandler,
             ICryptography cryptography,
-            IActiveCustomerCommandValidator activeCustomerCommandValidator,
-
+            // Domain Services
+            ICustomerService customerService,
+            // Adapters
             ICustomerActivationFailEventAdapter customerActivationFailEventAdapter,
-
+            // Factories
             ICustomerFactory customerFactory,
             ICustomerActivatedEventFactory customerActivatedEventFactory,
             ICustomerActivationFailEventFactory customerActivationFailEventFactory
             ) 
-            : base(sagaManager)
+            : base(sagaManager, domainNotificationHandler)
         {
             _cryptography = cryptography;
 
-            _activeCustomerCommandValidator = activeCustomerCommandValidator;
+            _customerService = customerService;
 
             _customerActivationFailEventAdapter = customerActivationFailEventAdapter;
 
@@ -61,40 +64,33 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
         public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
         {
+            var success = false;
+
+            // Input
             var commandReturn = new CommandReturn<bool>(returnObject);
             var customer = _customerFactory.Create(message);
 
-            #region Validation
-            var isValid = await ValidateCommand(message, returnObject, _activeCustomerCommandValidator);
-            if (!isValid)
+            // Process
+            _customerService.ActiveCustomer(customer);
+
+            success = HasErrors();
+            if (success)
             {
-                // Raise failed Event
-                var customerActivationFailEvent = _customerActivationFailEventAdapter.Adapt(
-                    _customerActivationFailEventFactory.Create((customer, message.Username)),
-                    message);
-
-                await SagaManager.SendEvent(customerActivationFailEvent, cancellationToken);
-
-                return await Task.FromResult(new CommandReturn<bool>(returnObject, false, false));
+                // Notifications
+                var customerActivatedEvent = _customerActivatedEventFactory.Create((customer, message.Username));
+                await SagaManager.SendEvent(customerActivatedEvent, cancellationToken);
             }
-            #endregion
+            else
+            {
 
-            #region Business Process
-            customer.ActivableInfo.Activate(message.Username);
-            #endregion
+            }
 
-            #region Notifications
-            var customerActivatedEvent = _customerActivatedEventFactory.Create((customer, message.Username));
-            await SagaManager.SendEvent(customerActivatedEvent, cancellationToken);
-            #endregion
 
-            commandReturn.Success = true;
-            commandReturn.Continue = false;
+            // Return
+            commandReturn.Success = success;
 
             return await Task.FromResult(commandReturn);
         }
-
-
         public async Task<CommandReturn<bool>> Handle(InactiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);

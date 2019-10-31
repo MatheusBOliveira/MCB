@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 using System.Threading.Tasks;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
 {
@@ -13,7 +14,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
         : IDisposable
     {
         private readonly ISagaManager _sagaManager;
-
+        private readonly IDomainNotificationHandler _domainNotificationHandler;
         protected ISagaManager SagaManager
         {
             get
@@ -23,10 +24,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
         }
 
         protected CommandHandlerBase(
-            ISagaManager sagaManager
+            ISagaManager sagaManager,
+            IDomainNotificationHandler domainNotificationHandler
             )
         {
             _sagaManager = sagaManager;
+            _domainNotificationHandler = domainNotificationHandler;
         }
 
         protected async Task<bool> ValidateCommand<TCommand, TReturn>(TCommand message, TReturn returnObject, IValidator<TCommand> validator)
@@ -44,8 +47,17 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
         }
         protected void NotifyValidationErrors(CommandBase message)
         {
-            foreach (var error in message.ValidationResult.Errors)
-                SagaManager.SendDomainNotification(new DomainNotification(message.MessageType, error.Code), new System.Threading.CancellationToken());
+            foreach (var error in message.ValidationResult.ValidationMessageErrors)
+                SagaManager.SendDomainNotification(
+                    new DomainNotification(
+                        message.MessageType, 
+                        error.Code, 
+                        Notifications.Enums.DomainNotificationTypeEnum.Error), 
+                    new System.Threading.CancellationToken());
+        }
+        protected bool HasErrors()
+        {
+            return _domainNotificationHandler.HasErrors();
         }
 
         public void Dispose()

@@ -5,9 +5,9 @@ using System;
 namespace MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Adapters
 {
     public class MessageAdapter
-        : IAdapter<Message, ValidationError>
+        : IAdapter<Message, ValidationMessage>
     {
-        public Message Adapt(Message target, ValidationError source)
+        public Message Adapt(Message target, ValidationMessage source)
         {
             if (source == null)
                 return target;

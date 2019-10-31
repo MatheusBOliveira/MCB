@@ -16,7 +16,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
                 var rule = _validations[key];
                 if (await rule.Validate(entity) == false)
                 {
-                    validationResult.Add(new ValidationError(rule.Code, rule.DefaultDescription));
+                    validationResult.Add(new ValidationMessage(rule.Code, rule.DefaultDescription));
                 }
             }
             return await Task.FromResult(validationResult);

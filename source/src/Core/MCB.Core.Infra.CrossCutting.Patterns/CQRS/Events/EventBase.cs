@@ -15,7 +15,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
 
         protected void AddValidationResult(ValidationResult validationResult)
         {
-            foreach (var error in validationResult.Errors)
+            foreach (var error in validationResult.ValidationMessageErrors)
                 ValidationResult.Add(error);
         }
     }

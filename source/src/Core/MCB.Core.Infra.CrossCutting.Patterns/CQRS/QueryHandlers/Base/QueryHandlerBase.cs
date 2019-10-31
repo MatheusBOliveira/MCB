@@ -29,8 +29,8 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Base
 
         protected void NotifyValidationErrors(QueryBase message)
         {
-            foreach (var error in message.ValidationResult.Errors)
-                SagaManager.SendDomainNotification(new DomainNotification(message.MessageType, error.Code), new System.Threading.CancellationToken());
+            foreach (var error in message.ValidationResult.ValidationMessageErrors)
+                SagaManager.SendDomainNotification(new DomainNotification(message.MessageType, error.Code, Notifications.Enums.DomainNotificationTypeEnum.Error), new System.Threading.CancellationToken());
         }
 
         public void Dispose()

@@ -5,52 +5,50 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
 {
     public class ValidationResult
     {
-        private readonly List<ValidationError> _errors = new List<ValidationError>();
+        private readonly List<ValidationMessage> _validationMessages = new List<ValidationMessage>();
 
-        public string Message
-        {
-            get;
-            set;
-        }
-
+        public string SummaryMessage { get; set; }
         public bool IsValid
         {
             get
             {
-                return _errors.Count == 0;
+                return !ValidationMessageErrors.Any();
             }
         }
 
-        public IEnumerable<ValidationError> Errors
+        public IEnumerable<ValidationMessage> Messages
         {
             get
             {
-                return _errors;
+                return _validationMessages;
             }
         }
-
-        public void Add(ValidationError error)
+        public IEnumerable<ValidationMessage> ValidationMessageErrors
         {
-            _errors.Add(error);
-        }
-
-        public void Remove(ValidationError error)
-        {
-            if (_errors.Contains(error))
+            get
             {
-                _errors.Remove(error);
+                return _validationMessages.Where(q => q.ValidationMessageType == Enums.ValidationMessageTypeEnum.Error);
             }
         }
 
+        public void Add(ValidationMessage validationMessage)
+        {
+            _validationMessages.Add(validationMessage);
+        }
+        public void Remove(ValidationMessage validationMessage)
+        {
+            _validationMessages.RemoveAll(q => q.Code.Equals(validationMessage.Code));
+        }
         public void Add(params ValidationResult[] validationResults)
         {
             if (validationResults != null)
             {
-                foreach (var item in from result in validationResults
-                                     where result != null
-                                     select result)
+                foreach (var item in
+                        from result in validationResults
+                        where result != null
+                        select result)
                 {
-                    _errors.AddRange(item.Errors);
+                    _validationMessages.AddRange(item.Messages);
                 }
             }
         }

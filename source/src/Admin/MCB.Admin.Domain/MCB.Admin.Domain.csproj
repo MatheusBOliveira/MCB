@@ -9,8 +9,4 @@
     <ProjectReference Include="..\..\Core\MCB.Core.Infra.CrossCutting.Security\MCB.Core.Infra.CrossCutting.Security.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Specifications\Commands\Customers\InactiveCustomerCommands\Interfaces\" />
-  </ItemGroup>
-
 </Project>

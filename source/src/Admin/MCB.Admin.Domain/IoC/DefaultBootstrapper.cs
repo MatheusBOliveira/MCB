@@ -17,8 +17,8 @@ using MCB.Admin.Domain.Queries.Users;
 using MCB.Admin.Domain.QueryHandlers.Applications;
 using MCB.Admin.Domain.QueryHandlers.Customers;
 using MCB.Admin.Domain.QueryHandlers.Users;
-using MCB.Admin.Domain.Validations.Commands.Customers.ActiveCustomerCommands;
-using MCB.Admin.Domain.Validations.Commands.Customers.ActiveCustomerCommands.Interfaces;
+using MCB.Admin.Domain.Services;
+using MCB.Admin.Domain.Services.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +42,7 @@ namespace MCB.Admin.Domain.IoC
             RegisterQueryHandlers(services);
             RegisterSpecifications(services);
             RegisterValidations(services);
+            RegisterDomainServices(services);
         }
 
         private static void RegisterAdapters(IServiceCollection services)
@@ -86,19 +87,17 @@ namespace MCB.Admin.Domain.IoC
 
         private static void RegisterSpecifications(IServiceCollection services)
         {
-            // Customers
-            services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustExistsInRepositorySpecification>();
-            services.AddScoped<Specifications.Commands.Customers.Base.Interfaces.IEmailMustNotExistsInRepositorySpecification, Specifications.Commands.Customers.Base.EmailMustNotExistsInRepositorySpecification>();
-            services.AddScoped<Specifications.Commands.Customers.ActiveCustomerCommands.Interfaces.IEmailIsRequiredSpecification, Specifications.Commands.Customers.ActiveCustomerCommands.EmailIsRequiredSpecification>();
 
         }
 
         private static void RegisterValidations(IServiceCollection services)
         {
-            // Customer
-            services.AddScoped<Validations.Commands.Customers.Base.Interfaces.IEmailMustExistInRepositoryValidator, Validations.Commands.Customers.Base.EmailMustExistInRepositoryValidator>();
-            services.AddScoped<Validations.Commands.Customers.Base.Interfaces.IEmailMustNotExistInRepositoryValidator, Validations.Commands.Customers.Base.EmailMustNotExistInRepositoryValidator>();
-            services.AddScoped<IActiveCustomerCommandValidator, ActiveCustomerCommandValidator>();
+
+        }
+
+        private static void RegisterDomainServices(IServiceCollection services)
+        {
+            services.AddSingleton<ICustomerService, CustomerService>();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace MCB.Core.Domain.IoC
 
         private static void RegisterFactories(IServiceCollection services)
         {
+            Core.Infra.CrossCutting.Patterns.IoC.DefaultBootstrapper.RegisterServices(services);
             services.AddScoped<IEmailValueObjectFactory, EmailValueObjectFactory>();
         }
     }

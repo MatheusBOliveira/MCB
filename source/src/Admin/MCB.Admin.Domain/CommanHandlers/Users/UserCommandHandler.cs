@@ -2,6 +2,7 @@
 using MCB.Admin.Domain.DomainModels;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
@@ -18,8 +19,11 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
         ICommandHandler<LogoutAllSessionsCommand, bool>,
         ICommandHandler<LogoutSessionCommand, bool>
     {
-        public UserCommandHandler(ISagaManager sagaManager) 
-            : base(sagaManager)
+        public UserCommandHandler(
+            ISagaManager sagaManager,
+            IDomainNotificationHandler domainNotificationHandler
+            ) 
+            : base(sagaManager, domainNotificationHandler)
         {
         }
 

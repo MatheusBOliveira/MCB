@@ -1,4 +1,6 @@
+using MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Enums;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications.Enums;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications
 {
@@ -6,11 +8,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications
         : EventBase
     {
         public string Code { get; set; }
+        public DomainNotificationTypeEnum NotificationType { get; set; }
         public string Message { get; set; }
 
-        public DomainNotification(string code, string message)
+        public DomainNotification(string code, string message, DomainNotificationTypeEnum notificationType)
         {
             Code = code;
+            NotificationType = notificationType;
             Message = message;
         }
     }
