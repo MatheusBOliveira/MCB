@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
 {
@@ -9,6 +10,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
         public DateTime TimeStamp => DateTime.UtcNow;
         public string MessageType => GetType().FullName;
         public Guid ApplicationId { get; set; }
+        public CultureInfo CultureInfo { get; set; }
         public string Username { get; set; }
     }
 }

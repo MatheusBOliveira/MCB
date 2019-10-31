@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Text;
 
 namespace MCB.Core.Infra.CrossCutting.ExtensionMethods
 {
@@ -32,6 +33,16 @@ namespace MCB.Core.Infra.CrossCutting.ExtensionMethods
                 return false;
 
             return str.Length >= min && str.Length <= max;
+        }
+        public static string GetOnlyNumericDigits(this string str)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var character in str)
+                if (char.IsDigit(character))
+                    sb.Append(character);
+
+            return sb.ToString();
         }
     }
 }

@@ -14,9 +14,9 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Tests.Queries;
 using MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers;
 using MCB.Core.Infra.CrossCutting.Patterns.Tests.Models;
-using MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.DomainNotificationHandler;
 using Xunit.Abstractions;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
 {

@@ -11,7 +11,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications
         public DomainNotificationTypeEnum NotificationType { get; set; }
         public string Message { get; set; }
 
-        public DomainNotification(string code, string message, DomainNotificationTypeEnum notificationType)
+        public DomainNotification(string code, string message, DomainNotificationTypeEnum notificationType = DomainNotificationTypeEnum.Error)
         {
             Code = code;
             NotificationType = notificationType;

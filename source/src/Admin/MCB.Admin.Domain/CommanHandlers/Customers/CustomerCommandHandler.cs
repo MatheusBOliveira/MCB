@@ -68,7 +68,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             // Input
             var commandReturn = new CommandReturn<bool>(returnObject);
-            var customer = _customerFactory.Create(message);
+            var customer = _customerFactory.Create(message.CultureInfo, message);
 
             // Process
             _customerService.ActiveCustomer(customer);
@@ -77,7 +77,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             if (success)
             {
                 // Notifications
-                var customerActivatedEvent = _customerActivatedEventFactory.Create((customer, message.Username));
+                var customerActivatedEvent = _customerActivatedEventFactory.Create(message.CultureInfo, (customer, message.Username));
                 await SagaManager.SendEvent(customerActivatedEvent, cancellationToken);
             }
             else

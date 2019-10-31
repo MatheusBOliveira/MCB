@@ -4,6 +4,7 @@ using MCB.Admin.Domain.Factories.Events.Customers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MCB.Admin.Domain.Factories.Events.Customers
@@ -12,14 +13,14 @@ namespace MCB.Admin.Domain.Factories.Events.Customers
         : FactoryBase<CustomerActivationFailEvent>,
         ICustomerActivationFailEventFactory
     {
-        public override CustomerActivationFailEvent Create()
+        public override CustomerActivationFailEvent Create(CultureInfo cultureInfo)
         {
             return new CustomerActivationFailEvent();
         }
 
-        public CustomerActivationFailEvent Create((Customer customer, string username) parameter)
+        public CustomerActivationFailEvent Create(CultureInfo cultureInfo, (Customer customer, string username) parameter)
         {
-            var @event = Create();
+            var @event = Create(cultureInfo);
 
             @event.Customer = parameter.customer;
             @event.Username = parameter.username;

@@ -3,6 +3,7 @@ using MCB.Core.Domain.ValueObjects;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MCB.Core.Domain.Factories.ValueObjects
@@ -11,14 +12,14 @@ namespace MCB.Core.Domain.Factories.ValueObjects
         : FactoryBase<EmailValueObject>,
         IEmailValueObjectFactory
     {
-        public override EmailValueObject Create()
+        public override EmailValueObject Create(CultureInfo cultureInfo)
         {
             return new EmailValueObject();
         }
 
-        public EmailValueObject Create(string parameter)
+        public EmailValueObject Create(CultureInfo cultureInfo, string parameter)
         {
-            var returnObject = Create();
+            var returnObject = Create(cultureInfo);
 
             returnObject.EmailAddress = parameter;
 

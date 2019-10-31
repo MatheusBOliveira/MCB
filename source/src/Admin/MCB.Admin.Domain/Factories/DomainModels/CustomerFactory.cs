@@ -2,9 +2,11 @@
 using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Factories.DomainModels.Interfaces;
 using MCB.Core.Domain.DomainModels.Enums;
+using MCB.Core.Domain.ValueObjects.Localization;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MCB.Admin.Domain.Factories.DomainModels
@@ -13,24 +15,28 @@ namespace MCB.Admin.Domain.Factories.DomainModels
         : FactoryBase<Customer>,
         ICustomerFactory
     {
-        public override Customer Create()
+        public override Customer Create(CultureInfo cultureInfo)
         {
-            return new LegalCustomer();
+            return new LegalCustomer() {
+                GovernamentalDocument = new CPFValueObject()
+            };
         }
 
-        public Customer Create(PersonTypeEnum parameter)
+        public Customer Create(CultureInfo cultureInfo, PersonTypeEnum parameter)
         {
             return parameter switch
             {
-                PersonTypeEnum.Natural => new NaturalCustomer(),
-                PersonTypeEnum.Legal => new LegalCustomer(),
+            PersonTypeEnum.Natural => Create(cultureInfo),
+            PersonTypeEnum.Legal => new LegalCustomer() {
+                GovernamentalDocument = new CNPJValueObject()
+                },
                 _ => default,
             };
         }
 
-        public Customer Create(ActiveCustomerCommand parameter)
+        public Customer Create(CultureInfo cultureInfo, ActiveCustomerCommand parameter)
         {
-            var customer = Create();
+            var customer = Create(cultureInfo);
 
             customer.Email = parameter.Email;
 

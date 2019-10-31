@@ -15,7 +15,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
 
         public Task<bool> IsSatisfiedBy(Customer entity)
         {
-            return Task.FromResult(!string.IsNullOrWhiteSpace(entity.GovernamentalDocumentNumber));
+            return Task.FromResult(!string.IsNullOrWhiteSpace(entity?.GovernamentalDocument?.DocumentNumber));
         }
     }
 }

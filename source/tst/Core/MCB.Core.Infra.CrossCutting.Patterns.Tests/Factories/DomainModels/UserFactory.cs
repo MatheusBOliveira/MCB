@@ -2,6 +2,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Tests.Commands;
 using MCB.Core.Infra.CrossCutting.Patterns.Tests.DomainModels;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
 {
@@ -10,14 +11,14 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
         IFactoryWithParameter<User, RegisterNewCustomerCommand>,
         IFactory<User>
     {
-        public override User Create()
+        public override User Create(CultureInfo cultureInfo)
         {
             return new User();
         }
 
-        public User Create(RegisterNewCustomerCommand parameter)
+        public User Create(CultureInfo cultureInfo, RegisterNewCustomerCommand parameter)
         {
-            var user = Create();
+            var user = Create(cultureInfo);
             user.Username = parameter.Email;
             user.Password = parameter.Password;
 

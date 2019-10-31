@@ -5,6 +5,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MCB.Admin.Domain.Factories.Queries.Customers
@@ -20,16 +21,16 @@ namespace MCB.Admin.Domain.Factories.Queries.Customers
             _emailValueObjectFactory = emailValueObjectFactory;
         }
 
-        public override CheckIfEmailExistsInRepositoryQuery Create()
+        public override CheckIfEmailExistsInRepositoryQuery Create(CultureInfo cultureInfo)
         {
             return new CheckIfEmailExistsInRepositoryQuery();
         }
 
-        public CheckIfEmailExistsInRepositoryQuery Create(string parameter)
+        public CheckIfEmailExistsInRepositoryQuery Create(CultureInfo cultureInfo, string parameter)
         {
-            var query = Create();
+            var query = Create(cultureInfo);
 
-            query.Email = _emailValueObjectFactory.Create(parameter);
+            query.Email = _emailValueObjectFactory.Create(cultureInfo, parameter);
 
             return query;
         }

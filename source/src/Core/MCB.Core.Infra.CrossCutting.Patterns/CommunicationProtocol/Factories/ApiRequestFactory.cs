@@ -1,11 +1,12 @@
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Factories
 {
     public class ApiRequestFactory
         : FactoryBase<ApiRequest>
     {
-        public override ApiRequest Create()
+        public override ApiRequest Create(CultureInfo cultureInfo)
         {
             return new ApiRequest();
         }

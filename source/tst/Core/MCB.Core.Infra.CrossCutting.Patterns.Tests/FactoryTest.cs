@@ -3,6 +3,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels;
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -37,10 +38,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             };
 
             var customer = new CustomerFactory().
-                Create(registerNewCustomerCommand);
+                Create(CultureInfo, registerNewCustomerCommand);
 
             var user = new UserFactory().
-                Create(registerNewCustomerCommand);
+                Create(CultureInfo, registerNewCustomerCommand);
 
             Assert.True(
                customer.Name == registerNewCustomerCommand.Name
