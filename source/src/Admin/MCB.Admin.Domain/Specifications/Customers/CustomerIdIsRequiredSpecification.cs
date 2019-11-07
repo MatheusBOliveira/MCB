@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace MCB.Admin.Domain.Specifications.Customers
 {
-    public class CustomerEmailIsRequiredSpecification
+    public class CustomerIdIsRequiredSpecification
         : SpecificationBase<Customer>,
-        ICustomerEmailIsRequiredSpecification
+        ICustomerIdIsRequiredSpecification
     {
-        public CustomerEmailIsRequiredSpecification()
+        public CustomerIdIsRequiredSpecification()
             : base()
         {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-1";
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-5";
         }
 
         public override Task<bool> IsSatisfiedBy(Customer entity)
         {
-            return Task.FromResult(!string.IsNullOrEmpty(entity?.Email?.EmailAddress));
+            return Task.FromResult((entity?.DomainModel?.Id ?? Guid.Empty) != Guid.Empty);
         }
     }
 }

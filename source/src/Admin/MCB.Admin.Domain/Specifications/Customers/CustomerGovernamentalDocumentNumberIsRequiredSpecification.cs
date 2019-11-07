@@ -1,5 +1,6 @@
 ﻿using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Specifications.Customers.Interfaces;
+using MCB.Core.Infra.CrossCutting.Patterns.Specification.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,12 +9,16 @@ using System.Threading.Tasks;
 namespace MCB.Admin.Domain.Specifications.Customers
 {
     public class CustomerGovernamentalDocumentNumberIsRequiredSpecification
-        : ICustomerGovernamentalDocumentNumberIsRequiredSpecification
+        : SpecificationBase<Customer>,
+        ICustomerGovernamentalDocumentNumberIsRequiredSpecification
     {
-        public string ErrorCode => "MCB-ADMIN-DOMAIN-CUSTOMERS-2";
-        public string ErrorDefaultDescription => nameof(CustomerGovernamentalDocumentNumberIsRequiredSpecification);
+        public CustomerGovernamentalDocumentNumberIsRequiredSpecification()
+            : base()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-2";
+        }
 
-        public Task<bool> IsSatisfiedBy(Customer entity)
+        public override Task<bool> IsSatisfiedBy(Customer entity)
         {
             return Task.FromResult(!string.IsNullOrWhiteSpace(entity?.GovernamentalDocument?.DocumentNumber));
         }

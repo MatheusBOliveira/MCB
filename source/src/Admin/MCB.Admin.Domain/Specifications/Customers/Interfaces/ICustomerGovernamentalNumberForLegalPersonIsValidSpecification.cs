@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MCB.Admin.Domain.Specifications.Customers.Interfaces
 {
-    public interface ICustomerGovernamentalNumberForJuridicalPersonIsValidSpecification
+    public interface ICustomerGovernamentalNumberForLegalPersonIsValidSpecification
         : ISpecification<Customer>
     {
     }

@@ -6,6 +6,11 @@ namespace MCB.Core.Domain.ValueObjects
         : ValueObjectBase
     {
         public string EmailAddress { get; set; }
+
+        public override void Validate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

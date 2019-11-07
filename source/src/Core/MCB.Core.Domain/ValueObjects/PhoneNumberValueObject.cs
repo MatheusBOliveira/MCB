@@ -22,6 +22,11 @@ namespace MCB.Core.Domain.ValueObjects
             AreaCode = areaCode;
             Number = number;
         }
+
+        public override void Validate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

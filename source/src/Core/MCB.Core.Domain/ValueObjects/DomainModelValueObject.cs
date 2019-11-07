@@ -43,6 +43,11 @@ namespace MCB.Core.Domain.ValueObjects
         {
             return $"{GetType().Name} [Id='{Id}']";
         }
+
+        public override void Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

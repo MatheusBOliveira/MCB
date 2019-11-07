@@ -1,4 +1,5 @@
-﻿using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
+﻿using MCB.Admin.Domain.Queries.Users.Interfaces;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,13 +8,14 @@ using System.Threading.Tasks;
 namespace MCB.Admin.Domain.Queries.Users
 {
     public class GetApplicationUserAccessesInApplicationQuery
-        : QueryBase
+        : QueryBase,
+        IGetApplicationUserAccessesInApplicationQuery
     {
         public string CustomerEmailAddress { get; set; }
 
-        public override async Task<bool> IsValid()
+        public override void Validate()
         {
-            return await Task.FromResult(true);
+            ValidationResult = new Core.Infra.CrossCutting.Patterns.Specification.ValidationResult();
         }
     }
 }

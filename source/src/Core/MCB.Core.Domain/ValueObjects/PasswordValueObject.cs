@@ -51,6 +51,11 @@ namespace MCB.Core.Domain.ValueObjects
                 value?.ToList().ForEach(q => _securePassword.AppendChar(q));
             }
         }
+
+        public override void Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

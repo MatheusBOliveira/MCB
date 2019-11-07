@@ -8,6 +8,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces
         }
 
         bool IsValid();
+        void Validate();
     }
 }
 
