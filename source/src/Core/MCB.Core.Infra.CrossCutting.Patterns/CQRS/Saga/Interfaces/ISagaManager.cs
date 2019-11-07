@@ -11,12 +11,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces
 {
     public interface ISagaManager
     {
-        Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken)
+        Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
             where TQuery : QueryBase;
-        Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken)
+        Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
             where TCommand : CommandBase;
-        Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken)
+        Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
             where TEvent : EventBase;
-        Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken);
+        Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default);
     }
 }

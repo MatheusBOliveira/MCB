@@ -13,28 +13,28 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.EventHandlers
         IEndWithEventHandler<SuccessEvent>,
         ISuccessEventHandler<SuccessEvent>
     {
-        public async Task<EventReturn> HandleStartWith(SuccessEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleStartWith(SuccessEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventSuccessMessageList.Add("HandleStartWith");
 
             return await Task.FromResult(
                 new EventReturn(true, true));
         }
-        public async Task<EventReturn> Handle(SuccessEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> Handle(SuccessEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventSuccessMessageList.Add("Handle");
 
             return await Task.FromResult(
                 new EventReturn(true, true));
         }
-        public async Task<EventReturn> HandleEndWith(SuccessEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleEndWith(SuccessEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventSuccessMessageList.Add("HandleEndWith");
 
             return await Task.FromResult(
                 new EventReturn(true, true));
         }
-        public async Task<EventReturn> HandleSuccess(SuccessEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleSuccess(SuccessEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventSuccessMessageList.Add("HandleSuccess");
 

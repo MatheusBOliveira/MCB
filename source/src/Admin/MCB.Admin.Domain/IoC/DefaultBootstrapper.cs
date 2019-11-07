@@ -70,7 +70,7 @@ namespace MCB.Admin.Domain.IoC
             services.AddScoped<ICustomerActivationFailEventFactory, CustomerActivationFailEventFactory>();
             // Factories - Queries
             services.AddScoped<ICheckIfEmailExistsInRepositoryQueryFactory, CheckIfEmailExistsInRepositoryQueryFactory>();
-
+            services.AddScoped<IGetCustomerByIdQueryFactory, GetCustomerByIdQueryFactory>();
         }
 
         private static void RegisterQueryHandlers(IServiceCollection services)

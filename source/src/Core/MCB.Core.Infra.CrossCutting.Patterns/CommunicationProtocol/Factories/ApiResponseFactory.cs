@@ -14,7 +14,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Factories
             return new ApiResponse();
         }
 
-        public ApiResponse Create(CultureInfo cultureInfo, ApiRequest parameter)
+        public ApiResponse Create(ApiRequest parameter, CultureInfo cultureInfo)
         {
             var apiResponse = Create(cultureInfo);
 

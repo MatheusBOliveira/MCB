@@ -133,13 +133,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
                 ServiceProvider.GetServices(typeof(IEventHandler<TEvent>));
         }
 
-        public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken)
+        public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
             where TEvent : EventBase;
-        public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken)
+        public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
             where TQuery : QueryBase;
-        public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken)
+        public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
             where TCommand : CommandBase;
-        public abstract Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken);
+        public abstract Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default);
 
 
     }

@@ -9,7 +9,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces
         : IDisposable
         where TCommand : CommandBase
     {
-        Task<CommandReturn<TReturn>> HandleEndWith(TCommand message, TReturn returnObject, CancellationToken cancellationToken);
+        Task<CommandReturn<TReturn>> HandleEndWith(TCommand message, TReturn returnObject, CancellationToken cancellationToken = default);
     }
 }
 

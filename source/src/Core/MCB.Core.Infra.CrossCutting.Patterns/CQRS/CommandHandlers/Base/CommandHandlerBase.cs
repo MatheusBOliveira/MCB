@@ -7,6 +7,7 @@ using System.Text;
 using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 using System.Threading.Tasks;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
 {
@@ -32,10 +33,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
             _domainNotificationHandler = domainNotificationHandler;
         }
 
-        protected async Task<bool> ValidateCommand<TCommand, TReturn>(TCommand message, TReturn returnObject, IValidator<TCommand> validator)
+        protected async Task<bool> ValidateCommand<TCommand, TReturn>(TCommand message, TReturn returnObject, IValidator<TCommand> validator, CultureInfo cultureInfo)
             where TCommand : CommandBase
         {
-            message.ValidationResult = await validator.Validate(message);
+            message.ValidationResult = await validator.Validate(message, cultureInfo);
 
             if (!message.IsValid())
             {

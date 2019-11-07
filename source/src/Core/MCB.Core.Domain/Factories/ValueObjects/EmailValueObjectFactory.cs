@@ -17,7 +17,7 @@ namespace MCB.Core.Domain.Factories.ValueObjects
             return new EmailValueObject();
         }
 
-        public EmailValueObject Create(CultureInfo cultureInfo, string parameter)
+        public EmailValueObject Create(string parameter, CultureInfo cultureInfo)
         {
             var returnObject = Create(cultureInfo);
 

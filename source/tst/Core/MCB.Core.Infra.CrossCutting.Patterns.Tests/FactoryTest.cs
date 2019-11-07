@@ -38,10 +38,10 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             };
 
             var customer = new CustomerFactory().
-                Create(CultureInfo, registerNewCustomerCommand);
+                Create(registerNewCustomerCommand, CultureInfo);
 
             var user = new UserFactory().
-                Create(CultureInfo, registerNewCustomerCommand);
+                Create(registerNewCustomerCommand, CultureInfo);
 
             Assert.True(
                customer.Name == registerNewCustomerCommand.Name

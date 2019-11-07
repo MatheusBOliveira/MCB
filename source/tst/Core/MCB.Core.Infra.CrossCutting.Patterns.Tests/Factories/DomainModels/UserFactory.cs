@@ -16,7 +16,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
             return new User();
         }
 
-        public User Create(CultureInfo cultureInfo, RegisterNewCustomerCommand parameter)
+        public User Create(RegisterNewCustomerCommand parameter, CultureInfo cultureInfo)
         {
             var user = Create(cultureInfo);
             user.Username = parameter.Email;

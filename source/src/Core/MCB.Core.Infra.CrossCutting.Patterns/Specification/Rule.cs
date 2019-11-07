@@ -1,4 +1,5 @@
 using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
@@ -25,9 +26,9 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
             DefaultDescription = defaultDescription;
         }
 
-        public async Task<bool> Validate(TEntity entity)
+        public async Task<bool> Validate(TEntity entity, CultureInfo cultureInfo)
         {
-            return await _specificationSpec.IsSatisfiedBy(entity);
+            return await _specificationSpec.IsSatisfiedBy(entity, cultureInfo);
         }
     }
 }

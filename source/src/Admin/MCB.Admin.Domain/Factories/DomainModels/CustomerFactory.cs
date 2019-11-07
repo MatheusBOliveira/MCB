@@ -22,7 +22,7 @@ namespace MCB.Admin.Domain.Factories.DomainModels
             };
         }
 
-        public Customer Create(CultureInfo cultureInfo, PersonTypeEnum parameter)
+        public Customer Create(PersonTypeEnum parameter, CultureInfo cultureInfo)
         {
             return parameter switch
             {
@@ -34,7 +34,7 @@ namespace MCB.Admin.Domain.Factories.DomainModels
             };
         }
 
-        public Customer Create(CultureInfo cultureInfo, ActiveCustomerCommand parameter)
+        public Customer Create(ActiveCustomerCommand parameter, CultureInfo cultureInfo)
         {
             var customer = Create(cultureInfo);
 

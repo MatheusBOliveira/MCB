@@ -7,7 +7,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces
     public interface IFailCommandHandler<TCommand, TReturn>
         where TCommand : CommandBase
     {
-        Task<CommandReturn<TReturn>> HandleFailWith(TCommand message, TReturn returnObject, CancellationToken cancellationToken);
+        Task<CommandReturn<TReturn>> HandleFailWith(TCommand message, TReturn returnObject, CancellationToken cancellationToken = default);
     }
 }
 

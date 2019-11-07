@@ -14,7 +14,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.CommandHandlers
         IEndWithCommandHandler<SuccessCommand, SuccessEvent>,
         ISuccessCommandHandler<SuccessCommand, SuccessEvent>
     {
-        public async Task<CommandReturn<SuccessEvent>> HandleStartWith(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<SuccessEvent>> HandleStartWith(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken = default)
         {
             var newId = Guid.NewGuid();
 
@@ -30,7 +30,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.CommandHandlers
                     }
                 });
         }
-        public async Task<CommandReturn<SuccessEvent>> Handle(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<SuccessEvent>> Handle(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken = default)
         {
             returnObject.Name = message.Name;
             returnObject.EmailAddress = "New email to be replaced";
@@ -41,7 +41,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.CommandHandlers
                     ReturnObject = returnObject
                 });
         }
-        public async Task<CommandReturn<SuccessEvent>> HandleEndWith(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<SuccessEvent>> HandleEndWith(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken = default)
         {
             returnObject.EmailAddress = message.EmailAddress;
 
@@ -51,7 +51,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.CommandHandlers
                     ReturnObject = returnObject
                 });
         }
-        public async Task<CommandReturn<SuccessEvent>> HandleSuccess(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<SuccessEvent>> HandleSuccess(SuccessCommand message, SuccessEvent returnObject, CancellationToken cancellationToken = default)
         {
             returnObject.Roles.Add("admin");
 

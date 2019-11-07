@@ -18,7 +18,7 @@ namespace MCB.Admin.Domain.Factories.Events.Customers
             return new CustomerActivatedEvent();
         }
 
-        public CustomerActivatedEvent Create(CultureInfo cultureInfo, (Customer customer, string username) parameter)
+        public CustomerActivatedEvent Create((Customer customer, string username) parameter, CultureInfo cultureInfo)
         {
             var @event = Create(cultureInfo);
 

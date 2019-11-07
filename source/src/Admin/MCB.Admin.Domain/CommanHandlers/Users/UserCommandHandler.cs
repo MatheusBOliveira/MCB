@@ -27,7 +27,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
         {
         }
 
-        public async Task<CommandReturn<ApplicationUserSession>> Handle(LoginCommand message, ApplicationUserSession returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<ApplicationUserSession>> Handle(LoginCommand message, ApplicationUserSession returnObject, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<ApplicationUserSession>(returnObject);
 
@@ -35,7 +35,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
 
             return await Task.FromResult(comandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(LogoutAllSessionsCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(LogoutAllSessionsCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<bool>(returnObject);
 
@@ -43,7 +43,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
 
             return await Task.FromResult(comandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(LogoutSessionCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(LogoutSessionCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<bool>(returnObject);
 

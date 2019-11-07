@@ -8,7 +8,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces
     public interface IQueryHandler<TQuery, TReturn>
         where TQuery : QueryBase
     {
-        Task<QueryReturn<TReturn>> Handle(TQuery message, TReturn queryReturn, CancellationToken cancellationToken);
+        Task<QueryReturn<TReturn>> Handle(TQuery message, TReturn queryReturn, CancellationToken cancellationToken = default);
     }
 }
 

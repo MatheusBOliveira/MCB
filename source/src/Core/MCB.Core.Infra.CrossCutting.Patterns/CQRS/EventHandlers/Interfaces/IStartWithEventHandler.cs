@@ -9,7 +9,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces
         : IDisposable
         where TEvent : EventBase
     {
-        Task<EventReturn> HandleStartWith(TEvent message, CancellationToken cancellationToken);
+        Task<EventReturn> HandleStartWith(TEvent message, CancellationToken cancellationToken = default);
     }
 }
 

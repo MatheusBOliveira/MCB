@@ -34,7 +34,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers
             return GetNotifications().Any(q => q.NotificationType == Notifications.Enums.DomainNotificationTypeEnum.Error);
         }
 
-        public async Task<EventReturn> Handle(DomainNotification message, CancellationToken cancellationToken)
+        public async Task<EventReturn> Handle(DomainNotification message, CancellationToken cancellationToken = default)
         {
             _notifications.Add(message);
 

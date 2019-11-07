@@ -26,11 +26,11 @@ namespace MCB.Admin.Domain.Factories.Queries.Customers
             return new CheckIfEmailExistsInRepositoryQuery();
         }
 
-        public CheckIfEmailExistsInRepositoryQuery Create(CultureInfo cultureInfo, string parameter)
+        public CheckIfEmailExistsInRepositoryQuery Create(string parameter, CultureInfo cultureInfo)
         {
             var query = Create(cultureInfo);
 
-            query.Email = _emailValueObjectFactory.Create(cultureInfo, parameter);
+            query.Email = _emailValueObjectFactory.Create(parameter, cultureInfo);
 
             return query;
         }

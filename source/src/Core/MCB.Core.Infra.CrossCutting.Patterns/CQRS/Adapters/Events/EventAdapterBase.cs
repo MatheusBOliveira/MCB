@@ -13,7 +13,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Adapters.Events
 
         public virtual TEvent Adapt(TEvent target, CommandBase source)
         {
-            target.ApplicationId = source.ApplicationId;
             target.ValidationResult.Add(source.ValidationResult);
 
             return target;

@@ -22,7 +22,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Applications
 
         }
 
-        public async Task<QueryReturn<List<Application>>> Handle(GetApplicationsByCustomerEmailAddressQuery message, List<Application> queryReturn, CancellationToken cancellationToken)
+        public async Task<QueryReturn<List<Application>>> Handle(GetApplicationsByCustomerEmailAddressQuery message, List<Application> queryReturn, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<Application>>();
 

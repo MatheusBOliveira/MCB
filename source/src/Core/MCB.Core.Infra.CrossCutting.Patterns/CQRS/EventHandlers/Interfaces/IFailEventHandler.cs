@@ -7,7 +7,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces
     public interface IFailEventHandler<TEvent>
         where TEvent : EventBase
     {
-        Task<EventReturn> HandleFailWith(TEvent message, CancellationToken cancellationToken);
+        Task<EventReturn> HandleFailWith(TEvent message, CancellationToken cancellationToken = default);
     }
 }
 

@@ -22,7 +22,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Users
         {
         }
 
-        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUserAccessesInApplicationQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken)
+        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUserAccessesInApplicationQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<ApplicationUser>>();
 
@@ -31,7 +31,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Users
             return await Task.FromResult(query);
         }
 
-        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUsersByAppTokenQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken)
+        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUsersByAppTokenQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<ApplicationUser>>();
 

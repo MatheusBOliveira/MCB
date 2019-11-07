@@ -18,7 +18,7 @@ namespace MCB.Admin.Domain.Factories.Events.Customers
             return new CustomerActivationFailEvent();
         }
 
-        public CustomerActivationFailEvent Create(CultureInfo cultureInfo, (Customer customer, string username) parameter)
+        public CustomerActivationFailEvent Create((Customer customer, string username) parameter, CultureInfo cultureInfo)
         {
             var @event = Create(cultureInfo);
 

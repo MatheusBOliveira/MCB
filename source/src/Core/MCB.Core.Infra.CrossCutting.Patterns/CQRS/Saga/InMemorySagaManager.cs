@@ -18,7 +18,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
         }
 
-        public override async Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken)
+        public override async Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -110,7 +110,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(queryReturn);
         }
-        public override async Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken)
+        public override async Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -209,7 +209,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(commandReturn);
         }
-        public override async Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken)
+        public override async Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -232,7 +232,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(new EventReturn(true, true));
         }
-        public override async Task<EventReturn> SendEvent<TEvent>(TEvent Event, CancellationToken cancellationToken)
+        public override async Task<EventReturn> SendEvent<TEvent>(TEvent Event, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 

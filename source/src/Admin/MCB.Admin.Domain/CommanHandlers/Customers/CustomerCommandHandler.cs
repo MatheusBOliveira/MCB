@@ -62,13 +62,13 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             _customerActivationFailEventFactory = customerActivationFailEventFactory;
         }
 
-        public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var success = false;
 
             // Input
             var commandReturn = new CommandReturn<bool>(returnObject);
-            var customer = _customerFactory.Create(message.CultureInfo, message);
+            var customer = _customerFactory.Create(message, message.CultureInfo);
 
             // Process
             _customerService.ActiveCustomer(customer);
@@ -77,7 +77,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             if (success)
             {
                 // Notifications
-                var customerActivatedEvent = _customerActivatedEventFactory.Create(message.CultureInfo, (customer, message.Username));
+                var customerActivatedEvent = _customerActivatedEventFactory.Create((customer, message.Username), message.CultureInfo);
                 await SagaManager.SendEvent(customerActivatedEvent, cancellationToken);
             }
             else
@@ -91,7 +91,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(InactiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(InactiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
 
@@ -99,7 +99,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(RegisterNewCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(RegisterNewCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
 
@@ -107,7 +107,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(RemoveCustomerCommand message, bool returnObject, CancellationToken cancellationToken)
+        public async Task<CommandReturn<bool>> Handle(RemoveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
 

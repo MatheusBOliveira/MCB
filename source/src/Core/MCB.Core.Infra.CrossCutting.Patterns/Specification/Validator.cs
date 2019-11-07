@@ -1,5 +1,6 @@
 using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
@@ -8,13 +9,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
     {
         private readonly Dictionary<string, IRule<TEntity>> _validations = new Dictionary<string, IRule<TEntity>>();
 
-        public virtual async Task<ValidationResult> Validate(TEntity entity)
+        public virtual async Task<ValidationResult> Validate(TEntity entity, CultureInfo cultureInfo)
         {
             var validationResult = new ValidationResult();
             foreach (var key in _validations.Keys)
             {
                 var rule = _validations[key];
-                if (await rule.Validate(entity) == false)
+                if (await rule.Validate(entity, cultureInfo) == false)
                 {
                     validationResult.Add(new ValidationMessage(rule.Code, rule.DefaultDescription));
                 }

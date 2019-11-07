@@ -13,28 +13,28 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.EventHandlers
         IEndWithEventHandler<FailEvent>,
         IFailEventHandler<FailEvent>
     {
-        public async Task<EventReturn> HandleStartWith(FailEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleStartWith(FailEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventFailMessageList.Add("HandleStartWith");
 
             return await Task.FromResult(
                 new EventReturn(true, true));
         }
-        public async Task<EventReturn> Handle(FailEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> Handle(FailEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventFailMessageList.Add("Handle");
 
             return await Task.FromResult(
                 new EventReturn(false, false));
         }
-        public async Task<EventReturn> HandleEndWith(FailEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleEndWith(FailEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventFailMessageList.Add("HandleEndWith");
 
             return await Task.FromResult(
                 new EventReturn(true, true));
         }
-        public async Task<EventReturn> HandleFailWith(FailEvent message, CancellationToken cancellationToken)
+        public async Task<EventReturn> HandleFailWith(FailEvent message, CancellationToken cancellationToken = default)
         {
             InMemorySagaManagerTest.EventFailMessageList.Add("HandleFailWith");
 
