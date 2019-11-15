@@ -12,30 +12,29 @@ using System.Threading.Tasks;
 
 namespace MCB.Admin.Domain.Specifications.Customers
 {
-    public class CustomerEmailMustBeUniqueInRepositorySpecification
+    public class CustomerMustExistsInRepositorySpecification
         : SpecificationBase<Customer>,
-        ICustomerEmailMustBeUniqueInRepositorySpecification
+        ICustomerMustExistsInRepositorySpecification
     {
         private readonly ISagaManager _sagaManager;
-        private readonly IGetCustomerByEmailAddressQueryFactory _getCustomerByEmailAddressQueryFactory;
+        private readonly IGetCustomerByIdQueryFactory _getCustomerByIdQueryFactory;
 
-        public CustomerEmailMustBeUniqueInRepositorySpecification(
+        public CustomerMustExistsInRepositorySpecification(
             ISagaManager sagaManager,
-            IGetCustomerByEmailAddressQueryFactory getCustomerByEmailAddressQueryFactory
+            IGetCustomerByIdQueryFactory getCustomerByIdQueryFactory
             )
+            : base()
         {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-2";
-
             _sagaManager = sagaManager;
-            _getCustomerByEmailAddressQueryFactory = getCustomerByEmailAddressQueryFactory;
+            _getCustomerByIdQueryFactory = getCustomerByIdQueryFactory;
         }
 
         public override async Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
         {
-            var getCustomerByEmailAddressQuery = _getCustomerByEmailAddressQueryFactory.Create(entity, cultureInfo);
-            var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByEmailAddressQuery, Customer>(getCustomerByEmailAddressQuery);
+            var getCustomerByIdQuery = _getCustomerByIdQueryFactory.Create(entity, cultureInfo);
+            var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByIdQuery, Customer>(getCustomerByIdQuery);
 
-            return localizedCustomer == null;
+            return localizedCustomer != null;
         }
     }
 }

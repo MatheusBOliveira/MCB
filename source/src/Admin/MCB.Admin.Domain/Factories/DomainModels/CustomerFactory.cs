@@ -2,6 +2,7 @@
 using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Factories.DomainModels.Interfaces;
 using MCB.Core.Domain.DomainModels.Enums;
+using MCB.Core.Domain.ValueObjects;
 using MCB.Core.Domain.ValueObjects.Localization;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
 using System;
@@ -17,21 +18,46 @@ namespace MCB.Admin.Domain.Factories.DomainModels
     {
         public override Customer Create(CultureInfo cultureInfo)
         {
-            return new LegalCustomer() {
-                GovernamentalDocument = new CPFValueObject()
+            GovernamentalNumberValueObject governamentalNumber;
+
+            switch (cultureInfo.Name)
+            {
+                case "pt-BR":
+                    governamentalNumber = new CPFValueObject();
+                    break;
+                default:
+                    governamentalNumber = new CPFValueObject();
+                    break;
+            }
+
+            return new LegalCustomer()
+            {
+                GovernamentalDocument = governamentalNumber
             };
         }
 
         public Customer Create(PersonTypeEnum parameter, CultureInfo cultureInfo)
         {
-            return parameter switch
+            var customer = Create(cultureInfo);
+
+            if (parameter == PersonTypeEnum.Natural)
+                return customer;
+
+            GovernamentalNumberValueObject governamentalNumber;
+
+            switch (cultureInfo.Name)
             {
-            PersonTypeEnum.Natural => Create(cultureInfo),
-            PersonTypeEnum.Legal => new LegalCustomer() {
-                GovernamentalDocument = new CNPJValueObject()
-                },
-                _ => default,
-            };
+                case "pt-BR":
+                    governamentalNumber = new CNPJValueObject();
+                    break;
+                default:
+                    governamentalNumber = new CNPJValueObject();
+                    break;
+            }
+
+            customer.GovernamentalDocument = governamentalNumber;
+
+            return customer;
         }
 
         public Customer Create(ActiveCustomerCommand parameter, CultureInfo cultureInfo)

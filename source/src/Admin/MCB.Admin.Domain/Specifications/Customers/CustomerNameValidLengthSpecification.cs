@@ -6,22 +6,20 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
+using MCB.Core.Infra.CrossCutting.ExtensionMethods;
 
 namespace MCB.Admin.Domain.Specifications.Customers
 {
-    public class CustomerIdIsRequiredSpecification
+    public class CustomerNameValidLengthSpecification
         : SpecificationBase<Customer>,
-        ICustomerIdIsRequiredSpecification
+        ICustomerNameValidLengthSpecification
     {
-        public CustomerIdIsRequiredSpecification()
-            : base()
-        {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-6";
-        }
-
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
         {
-            return Task.FromResult((entity?.DomainModel?.Id ?? Guid.Empty) != Guid.Empty);
+            if (string.IsNullOrWhiteSpace(entity?.Name))
+                return Task.FromResult(true);
+
+            return Task.FromResult(entity.Name.LengthIsBetween(1, 50));
         }
     }
 }

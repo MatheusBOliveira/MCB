@@ -17,7 +17,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         public CustomerGovernamentalNumberForLegalPersonIsValidSpecification()
             : base()
         {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-3";
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-4";
         }
 
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)

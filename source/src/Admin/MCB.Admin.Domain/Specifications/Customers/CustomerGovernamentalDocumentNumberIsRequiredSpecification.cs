@@ -16,7 +16,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         public CustomerGovernamentalDocumentNumberIsRequiredSpecification()
             : base()
         {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-2";
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-3";
         }
 
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)

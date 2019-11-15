@@ -9,19 +9,13 @@ using System.Threading.Tasks;
 
 namespace MCB.Admin.Domain.Specifications.Customers
 {
-    public class CustomerIdIsRequiredSpecification
+    public class CustomerNameIsRequiredSpecification
         : SpecificationBase<Customer>,
-        ICustomerIdIsRequiredSpecification
+        ICustomerNameIsRequiredSpecification
     {
-        public CustomerIdIsRequiredSpecification()
-            : base()
-        {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-6";
-        }
-
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
         {
-            return Task.FromResult((entity?.DomainModel?.Id ?? Guid.Empty) != Guid.Empty);
+            return Task.FromResult(!string.IsNullOrEmpty(entity?.Name));
         }
     }
 }
