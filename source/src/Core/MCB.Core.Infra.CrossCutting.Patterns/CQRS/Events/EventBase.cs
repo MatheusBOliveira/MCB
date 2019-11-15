@@ -1,10 +1,12 @@
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Specification;
 using System.Linq;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events
 {
-    public abstract class EventBase 
-        : MessageBase
+    public abstract class EventBase
+        : MessageBase, 
+        IEvent
     {
         public ValidationResult ValidationResult { get; set; }
 

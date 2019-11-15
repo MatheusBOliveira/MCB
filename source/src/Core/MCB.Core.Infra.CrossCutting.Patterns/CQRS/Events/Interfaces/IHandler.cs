@@ -1,7 +1,7 @@
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events.Interfaces
 {
     public interface IHandler<in TMessage>
-        where TMessage : MessageBase
+        where TMessage : IMessage
     {
         void Handle(TMessage message);
     }

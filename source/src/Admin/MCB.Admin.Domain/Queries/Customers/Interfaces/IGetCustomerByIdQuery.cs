@@ -8,5 +8,6 @@ namespace MCB.Admin.Domain.Queries.Customers.Interfaces
     public interface IGetCustomerByIdQuery
         : IQuery
     {
+        Guid CustomerId { get; set; }
     }
 }

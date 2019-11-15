@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MCB.Admin.Domain.Specifications.Customers.Interfaces
 {
-    public interface ICustomerMustBeActiveSpecification
+    public interface ICustomerEmailMustBeUniqueInRepositorySpecification
         : ISpecification<Customer>
     {
     }

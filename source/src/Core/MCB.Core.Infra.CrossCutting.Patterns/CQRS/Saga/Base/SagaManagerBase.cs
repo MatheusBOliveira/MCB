@@ -3,6 +3,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,31 +57,31 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
         }
 
         protected IEnumerable<IStartWithQueryHandler<TQuery, TReturn>> GetStartWithQueryHandlers<TQuery, TReturn>()
-            where TQuery : QueryBase
+            where TQuery : IQuery
         {
             return (IEnumerable<IStartWithQueryHandler<TQuery, TReturn>>)
                 ServiceProvider.GetServices(typeof(IStartWithQueryHandler<TQuery, TReturn>));
         }
         protected IEnumerable<IEndWithQueryHandler<TQuery, TReturn>> GetEndWithQueryHandlers<TQuery, TReturn>()
-            where TQuery : QueryBase
+            where TQuery : IQuery
         {
             return (IEnumerable<IEndWithQueryHandler<TQuery, TReturn>>)
                 ServiceProvider.GetServices(typeof(IEndWithQueryHandler<TQuery, TReturn>));
         }
         protected IEnumerable<ISuccessQueryHandler<TQuery, TReturn>> GetSuccessQueryHandlers<TQuery, TReturn>()
-            where TQuery : QueryBase
+            where TQuery : IQuery
         {
             return (IEnumerable<ISuccessQueryHandler<TQuery, TReturn>>)
                 ServiceProvider.GetServices(typeof(ISuccessQueryHandler<TQuery, TReturn>));
         }
         protected IEnumerable<IFailQueryHandler<TQuery, TReturn>> GetFailQueryHandlers<TQuery, TReturn>()
-            where TQuery : QueryBase
+            where TQuery : IQuery
         {
             return (IEnumerable<IFailQueryHandler<TQuery, TReturn>>)
                 ServiceProvider.GetServices(typeof(IFailQueryHandler<TQuery, TReturn>));
         }
         protected IEnumerable<IQueryHandler<TQuery, TReturn>> GetQueryHandlers<TQuery, TReturn>()
-            where TQuery : QueryBase
+            where TQuery : IQuery
         {
             return (IEnumerable<IQueryHandler<TQuery, TReturn>>)
                 ServiceProvider.GetServices(typeof(IQueryHandler<TQuery, TReturn>));
@@ -136,7 +137,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
         public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
             where TEvent : EventBase;
         public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
-            where TQuery : QueryBase;
+            where TQuery : IQuery;
         public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
             where TCommand : CommandBase;
         public abstract Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default);
