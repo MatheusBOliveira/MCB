@@ -115,16 +115,15 @@ namespace MCB.Core.Infra.CrossCutting.Cache.Redis.Tests
 
             var value1 = "Value_1";
             var value2 = "Value_2";
-
-            var retrivied1 = string.Empty;
-            var retrivied2 = string.Empty;
-
             _cache.AddOrUpdate(key1, value1);
             _cache.AddOrUpdate(key2, value2);
 
             var allEntries = await _cache.GetAllAsync();
 
+
+            string retrivied1;
             allEntries.TryGetValue(key1, out retrivied1);
+            string retrivied2;
             allEntries.TryGetValue(key2, out retrivied2);
 
             Assert.True(

@@ -64,7 +64,6 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
         public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
         {
-            var success = false;
 
             // Input
             var commandReturn = new CommandReturn<bool>(returnObject);
@@ -73,7 +72,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             // Process
             _customerService.ActiveCustomer(customer);
 
-            success = HasErrors();
+            var success = HasErrors();
             if (success)
             {
                 // Notifications

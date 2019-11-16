@@ -94,7 +94,6 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests
             var success = false;
 
             var customerId =  await AddTest();
-            var alteredCustomer = default(CustomerDataModel);
             var newName = "Updated name";
 
             using (var context = new TestContext(_configration))
@@ -114,7 +113,7 @@ namespace MCB.Core.Infra.Data.EFCore.Postgres.Tests
                     if (!success)
                         Assert.True(false);
 
-                    alteredCustomer = await customerDataModelRepository.GetByIdAsync(customerId);
+                    var alteredCustomer = await customerDataModelRepository.GetByIdAsync(customerId);
 
                     success = alteredCustomer.Id == customerId
                         && alteredCustomer.Name.Equals(newName);
