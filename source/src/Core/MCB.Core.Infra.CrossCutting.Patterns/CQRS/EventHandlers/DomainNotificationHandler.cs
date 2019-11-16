@@ -4,6 +4,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers
             return GetNotifications().Any(q => q.NotificationType == Notifications.Enums.DomainNotificationTypeEnum.Error);
         }
 
-        public async Task<EventReturn> Handle(DomainNotification message, CancellationToken cancellationToken = default)
+        public async Task<EventReturn> Handle(DomainNotification message, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             _notifications.Add(message);
 

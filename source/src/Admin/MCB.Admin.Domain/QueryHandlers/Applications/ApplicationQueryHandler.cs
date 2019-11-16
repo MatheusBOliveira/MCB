@@ -6,6 +6,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Applications
 
         }
 
-        public async Task<QueryReturn<List<Application>>> Handle(GetApplicationsByCustomerEmailAddressQuery message, List<Application> queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<List<Application>>> Handle(GetApplicationsByCustomerEmailAddressQuery message, List<Application> queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<Application>>();
 

@@ -9,6 +9,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -134,14 +135,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
                 ServiceProvider.GetServices(typeof(IEventHandler<TEvent>));
         }
 
-        public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CancellationToken cancellationToken = default)
+        public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CultureInfo culture, CancellationToken cancellationToken = default)
             where TEvent : EventBase;
-        public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
+        public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CultureInfo culture, CancellationToken cancellationToken = default)
             where TQuery : IQuery;
-        public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
+        public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CultureInfo culture, CancellationToken cancellationToken = default)
             where TCommand : CommandBase;
-        public abstract Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default);
-
+        public abstract Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CultureInfo culture, CancellationToken cancellationToken = default);
 
     }
 }

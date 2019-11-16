@@ -6,6 +6,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Customers
 
         }
 
-        public async Task<QueryReturn<List<Customer>>> Handle(GetAllCustomersQuery message, List<Customer> queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<List<Customer>>> Handle(GetAllCustomersQuery message, List<Customer> queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<Customer>>(queryReturn);
 
@@ -33,7 +34,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Customers
             return await Task.FromResult(query);
         }
 
-        public async Task<QueryReturn<Customer>> Handle(GetCustomerByEmailAddressQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> Handle(GetCustomerByEmailAddressQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<Customer>(queryReturn);
 
@@ -42,7 +43,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Customers
             return await Task.FromResult(query);
         }
 
-        public async Task<QueryReturn<List<Customer>>> Handle(GetCustomersByNameQuery message, List<Customer> queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<List<Customer>>> Handle(GetCustomersByNameQuery message, List<Customer> queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<Customer>>(queryReturn);
 

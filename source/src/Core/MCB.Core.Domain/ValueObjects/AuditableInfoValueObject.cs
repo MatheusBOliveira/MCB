@@ -16,11 +16,6 @@ namespace MCB.Core.Domain.ValueObjects
         {
             RegistryVersion = BitConverter.GetBytes(DateTime.UtcNow.Ticks);
         }
-
-        public override void Validate()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

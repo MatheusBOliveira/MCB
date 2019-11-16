@@ -89,6 +89,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             var commandReturn = await _inMemorySagaManager
                 .SendCommand<SuccessCommand, SuccessEvent>(
                     successCommand,
+                    CultureInfo,
                     new System.Threading.CancellationToken());
 
             if (
@@ -115,6 +116,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             var commandReturn = await _inMemorySagaManager
                 .SendCommand<FailCommand, SuccessEvent>(
                     failCommand,
+                    CultureInfo,
                     new System.Threading.CancellationToken());
 
             if (
@@ -140,6 +142,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
 
             var eventReturn = await _inMemorySagaManager.SendEvent(
                 successEvent,
+                CultureInfo,
                 new System.Threading.CancellationToken());
 
             if (eventReturn == null
@@ -162,6 +165,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
 
             var eventReturn = await _inMemorySagaManager.SendEvent(
                 failEvent,
+                CultureInfo,
                 new System.Threading.CancellationToken());
 
             if (eventReturn == null
@@ -190,6 +194,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             var queryReturn = await _inMemorySagaManager
                 .GetQuery<SuccessQuery, Customer>(
                     successQuery,
+                    CultureInfo,
                     new System.Threading.CancellationToken());
 
             if (
@@ -220,6 +225,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
             var queryReturn = await _inMemorySagaManager
                 .GetQuery<FailQuery, Customer>(
                     failQuery,
+                    CultureInfo,
                     new System.Threading.CancellationToken());
 
             if (
@@ -246,10 +252,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
 
             await _inMemorySagaManager.SendDomainNotification(
                 new Patterns.CQRS.Notifications.DomainNotification("key1", "value1"),
+                CultureInfo,
                 new System.Threading.CancellationToken());
 
             await _inMemorySagaManager.SendDomainNotification(
                 new Patterns.CQRS.Notifications.DomainNotification("key2", "value2"),
+                CultureInfo,
                 new System.Threading.CancellationToken());
 
             var messages = domainNotificationHandler.GetNotifications();

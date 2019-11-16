@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
 {
@@ -15,7 +16,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
         IEndWithQueryHandler<SuccessQuery, Customer>,
         ISuccessQueryHandler<SuccessQuery, Customer>
     {
-        public async Task<QueryReturn<Customer>> HandleStartWith(SuccessQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleStartWith(SuccessQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var newId = Guid.NewGuid();
 
@@ -32,7 +33,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> Handle(SuccessQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> Handle(SuccessQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             queryReturn.EmailAddress = "marcelo.castelo@outlook.com";
 
@@ -44,7 +45,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> HandleEndWith(SuccessQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleEndWith(SuccessQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             queryReturn.Roles.Add("admin");
 
@@ -56,7 +57,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> HandleSuccess(SuccessQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleSuccess(SuccessQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var returnObject = new QueryReturn<Customer>(
                 true,

@@ -47,7 +47,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
 
         //    return await Task.FromResult(true);
         //}
-        protected void NotifyValidationErrors(ValidationResult validationResult)
+        protected void NotifyValidationErrors(ValidationResult validationResult, CultureInfo culture)
         {
             foreach (var error in validationResult.ValidationMessageErrors)
                 SagaManager.SendDomainNotification(
@@ -55,6 +55,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
                         error.Code,
                         error.DefaultDescription, 
                         Notifications.Enums.DomainNotificationTypeEnum.Error), 
+                    culture,
                     new System.Threading.CancellationToken());
         }
         protected bool HasErrors()

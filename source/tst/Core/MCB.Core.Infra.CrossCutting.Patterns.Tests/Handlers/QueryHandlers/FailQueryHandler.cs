@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
+using System.Globalization;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
 {
@@ -15,7 +16,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
         IEndWithQueryHandler<FailQuery, Customer>,
         IFailQueryHandler<FailQuery, Customer>
     {
-        public async Task<QueryReturn<Customer>> HandleStartWith(FailQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleStartWith(FailQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var newId = Guid.NewGuid();
 
@@ -32,7 +33,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> Handle(FailQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> Handle(FailQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             queryReturn.Name = "Marcelo Castelo Branco";
             queryReturn.EmailAddress = "marcelo.castelo@outlook.com";
@@ -45,7 +46,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> HandleEndWith(FailQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleEndWith(FailQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             queryReturn.Name = string.Empty;
             queryReturn.EmailAddress = string.Empty;
@@ -58,7 +59,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Handlers.QueryHandlers
             return await Task.FromResult(returnObject);
         }
 
-        public async Task<QueryReturn<Customer>> HandleFail(FailQuery message, Customer queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<Customer>> HandleFail(FailQuery message, Customer queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             queryReturn.Roles.Clear();
 

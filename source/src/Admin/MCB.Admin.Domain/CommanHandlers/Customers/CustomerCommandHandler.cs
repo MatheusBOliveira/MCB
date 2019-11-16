@@ -98,7 +98,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             {
                 // Notifications
                 var customerActivatedEvent = _customerActivatedEventFactory.Create((customer, message.Username), message.CultureInfo);
-                await SagaManager.SendEvent(customerActivatedEvent, cancellationToken);
+                await SagaManager.SendEvent(customerActivatedEvent, culture, cancellationToken);
             }
             else
             {
@@ -134,21 +134,21 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             if (!customer.DomainModel.IsValid())
             {
                 isValid = false;
-                NotifyValidationErrors(customer.DomainModel.ValidationResult);
+                NotifyValidationErrors(customer.DomainModel.ValidationResult, culture);
             }
             // Validate User
             user.DomainModel.ValidationResult = await _userIsValidForRegistrationValidation.Validate(user, culture);
             if (!user.DomainModel.IsValid())
             {
                 isValid = false;
-                NotifyValidationErrors(user.DomainModel.ValidationResult);
+                NotifyValidationErrors(user.DomainModel.ValidationResult, culture);
             }
             // Validate Application
             application.DomainModel.ValidationResult = await _applicationIsValidForRegistrationValidation.Validate(application, culture);
             if (!application.DomainModel.IsValid())
             {
                 isValid = false;
-                NotifyValidationErrors(application.DomainModel.ValidationResult);
+                NotifyValidationErrors(application.DomainModel.ValidationResult, culture);
             }
 
             if (!isValid)

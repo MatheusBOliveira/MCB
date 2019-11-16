@@ -8,11 +8,12 @@ using System.Text;
 namespace MCB.Core.Domain.ValueObjects
 {
     public class GovernamentalNumberValueObject
-        : ValueObjectBase
+        : ValueObjectBase,
+        ISelfValidator
     {
         public string DocumentNumber { get; set; }
 
-        public override void Validate()
+        public void Validate()
         {
             throw new NotImplementedException();
         }

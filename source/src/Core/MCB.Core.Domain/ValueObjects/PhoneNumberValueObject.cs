@@ -1,10 +1,12 @@
 using MCB.Core.Domain.ValueObjects.Base;
 using MCB.Core.Domain.ValueObjects.Enums;
+using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 
 namespace MCB.Core.Domain.ValueObjects
 {
     public class PhoneNumberValueObject
-        : ValueObjectBase
+        : ValueObjectBase,
+        ISelfValidator
     {
         public PhoneNumberTypeEnum PhoneNumberType { get; set; }
         public string CountryCode { get; set; }
@@ -23,7 +25,7 @@ namespace MCB.Core.Domain.ValueObjects
             Number = number;
         }
 
-        public override void Validate()
+        public void Validate()
         {
             throw new System.NotImplementedException();
         }

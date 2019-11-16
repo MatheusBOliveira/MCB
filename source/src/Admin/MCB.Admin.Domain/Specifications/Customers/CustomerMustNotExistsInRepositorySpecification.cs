@@ -32,7 +32,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         public override async Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             var getCustomerByIdQuery = _getCustomerByIdQueryFactory.Create(entity, culture);
-            var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByIdQuery, Customer>(getCustomerByIdQuery);
+            var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByIdQuery, Customer>(getCustomerByIdQuery, culture);
 
             return localizedCustomer == null;
         }

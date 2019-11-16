@@ -47,7 +47,7 @@ namespace MCB.Admin.Domain.Tests.Commands
                     Email = null
                 };
 
-                var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, new System.Threading.CancellationToken());
+                var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, CultureInfo, new System.Threading.CancellationToken());
             }
             catch (Exception ex)
             {

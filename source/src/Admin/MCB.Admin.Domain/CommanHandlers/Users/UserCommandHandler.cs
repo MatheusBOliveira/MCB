@@ -7,6 +7,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
         {
         }
 
-        public async Task<CommandReturn<ApplicationUserSession>> Handle(LoginCommand message, ApplicationUserSession returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<ApplicationUserSession>> Handle(LoginCommand message, ApplicationUserSession returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<ApplicationUserSession>(returnObject);
 
@@ -35,7 +36,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
 
             return await Task.FromResult(comandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(LogoutAllSessionsCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(LogoutAllSessionsCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<bool>(returnObject);
 
@@ -43,7 +44,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Users
 
             return await Task.FromResult(comandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(LogoutSessionCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(LogoutSessionCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var comandReturn = new CommandReturn<bool>(returnObject);
 

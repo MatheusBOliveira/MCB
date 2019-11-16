@@ -6,6 +6,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Users
         {
         }
 
-        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUserAccessesInApplicationQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUserAccessesInApplicationQuery message, List<ApplicationUser> queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<ApplicationUser>>();
 
@@ -31,7 +32,7 @@ namespace MCB.Admin.Domain.QueryHandlers.Users
             return await Task.FromResult(query);
         }
 
-        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUsersByAppTokenQuery message, List<ApplicationUser> queryReturn, CancellationToken cancellationToken = default)
+        public async Task<QueryReturn<List<ApplicationUser>>> Handle(GetApplicationUsersByAppTokenQuery message, List<ApplicationUser> queryReturn, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var query = new QueryReturn<List<ApplicationUser>>();
 

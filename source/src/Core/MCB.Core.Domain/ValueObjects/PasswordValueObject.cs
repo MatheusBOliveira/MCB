@@ -1,4 +1,5 @@
 using MCB.Core.Domain.ValueObjects.Base;
+using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -7,7 +8,8 @@ using System.Security;
 namespace MCB.Core.Domain.ValueObjects
 {
     public class PasswordValueObject
-        : ValueObjectBase
+        : ValueObjectBase,
+        ISelfValidator
     {
         private SecureString _securePassword;
 
@@ -52,9 +54,9 @@ namespace MCB.Core.Domain.ValueObjects
             }
         }
 
-        public override void Validate()
+        public void Validate()
         {
-            throw new NotImplementedException();
+
         }
     }
 }

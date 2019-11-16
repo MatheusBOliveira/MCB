@@ -39,11 +39,6 @@ namespace MCB.Core.Domain.ValueObjects
             for (var i = 0; i < activableDomainModelCollection.Length; i++)
                 activableDomainModelCollection[i].ActivableInfo = this;
         }
-
-        public override void Validate()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

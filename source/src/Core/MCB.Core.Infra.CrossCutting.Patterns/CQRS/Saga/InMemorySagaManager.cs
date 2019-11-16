@@ -3,6 +3,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
         }
 
-        public override async Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CancellationToken cancellationToken = default)
+        public override async Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -45,11 +46,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                queryReturn = await startWithHandler?.HandleStartWith(query, default, cancellationToken);
+                queryReturn = await startWithHandler?.HandleStartWith(query, default, culture, cancellationToken);
                 if (queryReturn != null)
                 {
                     if (queryReturn.Success == false)
-                        queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, cancellationToken);
+                        queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, culture, cancellationToken);
 
                     if (!queryReturn.Continue)
                         return await Task.FromResult(queryReturn);
@@ -64,11 +65,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
                 foreach (var handle in handlers)
                 {
-                    queryReturn = await handle.Handle(query, queryReturn.ReturnObject, cancellationToken);
+                    queryReturn = await handle.Handle(query, queryReturn.ReturnObject, culture, cancellationToken);
                     if (queryReturn != null)
                     {
                         if (queryReturn.Success == false)
-                            queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, cancellationToken);
+                            queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, culture, cancellationToken);
 
                         if (!queryReturn.Continue)
                             return await Task.FromResult(queryReturn);
@@ -82,11 +83,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                queryReturn = await endWithHandler.HandleEndWith(query, queryReturn.ReturnObject, cancellationToken);
+                queryReturn = await endWithHandler.HandleEndWith(query, queryReturn.ReturnObject, culture, cancellationToken);
                 if (queryReturn != null)
                 {
                     if (queryReturn.Success == false)
-                        queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, cancellationToken);
+                        queryReturn = await failHandler?.HandleFail(query, queryReturn.ReturnObject, culture, cancellationToken);
 
                     if (!queryReturn.Continue)
                         return await Task.FromResult(queryReturn);
@@ -99,7 +100,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                queryReturn = await successHandler?.HandleSuccess(query, queryReturn.ReturnObject, cancellationToken);
+                queryReturn = await successHandler?.HandleSuccess(query, queryReturn.ReturnObject, culture, cancellationToken);
                 if (queryReturn != null)
                     return await Task.FromResult(queryReturn);
             }
@@ -110,7 +111,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(queryReturn);
         }
-        public override async Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CancellationToken cancellationToken = default)
+        public override async Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -137,11 +138,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                commandReturn = await startWithHandler?.HandleStartWith(command, commandReturn.ReturnObject, cancellationToken);
+                commandReturn = await startWithHandler?.HandleStartWith(command, commandReturn.ReturnObject, culture, cancellationToken);
                 if (commandReturn != null)
                 {
                     if (commandReturn.Success == false)
-                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, cancellationToken);
+                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, culture, cancellationToken);
 
                     if (!commandReturn.Continue)
                         return await Task.FromResult(commandReturn);
@@ -157,12 +158,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
                 foreach (var handle in handlers)
                 {
-                    commandReturn = await handle.Handle(command, commandReturn.ReturnObject, cancellationToken);
+                    commandReturn = await handle.Handle(command, commandReturn.ReturnObject, culture, cancellationToken);
                     if (commandReturn != null)
                     {
                         if (commandReturn.Success == false
                             && failHandler != null)
-                            commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, cancellationToken);
+                            commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, culture, cancellationToken);
 
                         if (!commandReturn.Continue)
                             return await Task.FromResult(commandReturn);
@@ -176,11 +177,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                commandReturn = await endWithHandler?.HandleEndWith(command, commandReturn.ReturnObject, cancellationToken);
+                commandReturn = await endWithHandler?.HandleEndWith(command, commandReturn.ReturnObject, culture, cancellationToken);
                 if (commandReturn != null)
                 {
                     if (commandReturn.Success == false)
-                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, cancellationToken);
+                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, culture, cancellationToken);
 
                     if (!commandReturn.Continue)
                         return await Task.FromResult(commandReturn);
@@ -193,11 +194,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                commandReturn = await successHandler?.HandleSuccess(command, commandReturn.ReturnObject, cancellationToken);
+                commandReturn = await successHandler?.HandleSuccess(command, commandReturn.ReturnObject, culture, cancellationToken);
                 if (commandReturn != null)
                 {
                     if (commandReturn.Success == false)
-                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, cancellationToken);
+                        commandReturn = await failHandler?.HandleFailWith(command, commandReturn.ReturnObject, culture, cancellationToken);
 
                     return await Task.FromResult(commandReturn);
                 }
@@ -209,7 +210,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(commandReturn);
         }
-        public override async Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CancellationToken cancellationToken = default)
+        public override async Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -220,7 +221,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
                 foreach (var domainNotificationHandler in domainNotificationHandlerCollection)
                 {
-                    var eventReturn = await domainNotificationHandler.Handle(domainNotification, cancellationToken);
+                    var eventReturn = await domainNotificationHandler.Handle(domainNotification, culture, cancellationToken);
                     
                     if (!eventReturn.Continue)
                         return await Task.FromResult(eventReturn);
@@ -232,7 +233,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
             return await Task.FromResult(new EventReturn(true, true));
         }
-        public override async Task<EventReturn> SendEvent<TEvent>(TEvent Event, CancellationToken cancellationToken = default)
+        public override async Task<EventReturn> SendEvent<TEvent>(TEvent Event, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var hasHandle = false;
 
@@ -257,11 +258,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                var startWithEventReturn = await startWithHandler?.HandleStartWith(Event, cancellationToken);
+                var startWithEventReturn = await startWithHandler?.HandleStartWith(Event, culture, cancellationToken);
                 if (startWithEventReturn != null)
                 {
                     if (startWithEventReturn.Success == false)
-                        failHandler?.HandleFailWith(Event, cancellationToken);
+                        failHandler?.HandleFailWith(Event, culture, cancellationToken);
 
                     if (!startWithEventReturn.Continue)
                         return await Task.FromResult(startWithEventReturn);
@@ -276,11 +277,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
 
                 foreach (var handle in handlers)
                 {
-                    var handleEventReturn = await handle.Handle(Event, cancellationToken);
+                    var handleEventReturn = await handle.Handle(Event, culture, cancellationToken);
                     if (handleEventReturn != null)
                     {
                         if (handleEventReturn.Success == false)
-                            failHandler?.HandleFailWith(Event, cancellationToken);
+                            failHandler?.HandleFailWith(Event, culture, cancellationToken);
 
                         if (!handleEventReturn.Continue)
                             return await Task.FromResult(handleEventReturn);
@@ -294,11 +295,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                var endWithEventReturn = await endWithHandler?.HandleEndWith(Event, cancellationToken);
+                var endWithEventReturn = await endWithHandler?.HandleEndWith(Event, culture, cancellationToken);
                 if (endWithEventReturn != null)
                 {
                     if (endWithEventReturn.Success == false)
-                        failHandler?.HandleFailWith(Event, cancellationToken);
+                        failHandler?.HandleFailWith(Event, culture, cancellationToken);
 
                     if (!endWithEventReturn.Continue)
                         return await Task.FromResult(endWithEventReturn);
@@ -311,11 +312,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga
             {
                 hasHandle = true;
 
-                var successEventReturn = await successHandler?.HandleSuccess(Event, cancellationToken);
+                var successEventReturn = await successHandler?.HandleSuccess(Event, culture, cancellationToken);
                 if (successEventReturn != null)
                 {
                     if (successEventReturn.Success == false)
-                        failHandler?.HandleFailWith(Event, cancellationToken);
+                        failHandler?.HandleFailWith(Event, culture, cancellationToken);
 
                     return await Task.FromResult(successEventReturn);
                 }
