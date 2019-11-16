@@ -144,7 +144,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
                 NotifyValidationErrors(user.DomainModel.ValidationResult);
             }
             // Validate Application
-            application.DomainModel.ValidationResult = await _userIsValidForRegistrationValidation.Validate(application, culture);
+            application.DomainModel.ValidationResult = await _applicationIsValidForRegistrationValidation.Validate(application, culture);
             if (!application.DomainModel.IsValid())
             {
                 isValid = false;
