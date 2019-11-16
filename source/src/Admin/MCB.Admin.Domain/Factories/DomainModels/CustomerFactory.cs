@@ -16,11 +16,11 @@ namespace MCB.Admin.Domain.Factories.DomainModels
         : FactoryBase<Customer>,
         ICustomerFactory
     {
-        public override Customer Create(CultureInfo cultureInfo)
+        public override Customer Create(CultureInfo culture)
         {
             GovernamentalNumberValueObject governamentalNumber;
 
-            switch (cultureInfo.Name)
+            switch (culture.Name)
             {
                 case "pt-BR":
                     governamentalNumber = new CPFValueObject();
@@ -32,20 +32,20 @@ namespace MCB.Admin.Domain.Factories.DomainModels
 
             return new LegalCustomer()
             {
-                GovernamentalDocument = governamentalNumber
+                GovernamentalNumber = governamentalNumber
             };
         }
 
-        public Customer Create(PersonTypeEnum parameter, CultureInfo cultureInfo)
+        public Customer Create(PersonTypeEnum parameter, CultureInfo culture)
         {
-            var customer = Create(cultureInfo);
+            var customer = Create(culture);
 
             if (parameter == PersonTypeEnum.Natural)
                 return customer;
 
             GovernamentalNumberValueObject governamentalNumber;
 
-            switch (cultureInfo.Name)
+            switch (culture.Name)
             {
                 case "pt-BR":
                     governamentalNumber = new CNPJValueObject();
@@ -55,16 +55,28 @@ namespace MCB.Admin.Domain.Factories.DomainModels
                     break;
             }
 
-            customer.GovernamentalDocument = governamentalNumber;
+            customer.GovernamentalNumber = governamentalNumber;
 
             return customer;
         }
 
-        public Customer Create(ActiveCustomerCommand parameter, CultureInfo cultureInfo)
+        public Customer Create(ActiveCustomerCommand parameter, CultureInfo culture)
         {
-            var customer = Create(cultureInfo);
+            var customer = Create(culture);
 
             customer.Email = parameter.Email;
+
+            return customer;
+        }
+
+        public Customer Create(RegisterNewCustomerCommand parameter, CultureInfo culture)
+        {
+            var customer = Create(culture);
+
+            customer.Email = parameter.Email;
+            customer.Name = parameter.Name;
+            customer.PhoneNumber = parameter.PhoneNumber;
+            customer.GovernamentalNumber = parameter.GovernamentalNumber;
 
             return customer;
         }

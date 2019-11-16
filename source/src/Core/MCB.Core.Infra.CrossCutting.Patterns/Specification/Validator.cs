@@ -9,13 +9,13 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
     {
         private readonly Dictionary<string, IRule<TEntity>> _validations = new Dictionary<string, IRule<TEntity>>();
 
-        public virtual async Task<ValidationResult> Validate(TEntity entity, CultureInfo cultureInfo)
+        public virtual async Task<ValidationResult> Validate(TEntity entity, CultureInfo culture)
         {
             var validationResult = new ValidationResult();
             foreach (var key in _validations.Keys)
             {
                 var rule = _validations[key];
-                if (await rule.Validate(entity, cultureInfo) == false)
+                if (await rule.Validate(entity, culture) == false)
                 {
                     validationResult.Add(new ValidationMessage(rule.Code, rule.DefaultDescription));
                 }

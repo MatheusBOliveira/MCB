@@ -21,16 +21,16 @@ namespace MCB.Admin.Domain.Factories.Queries.Customers
             _emailValueObjectFactory = emailValueObjectFactory;
         }
 
-        public override CheckIfEmailExistsInRepositoryQuery Create(CultureInfo cultureInfo)
+        public override CheckIfEmailExistsInRepositoryQuery Create(CultureInfo culture)
         {
             return new CheckIfEmailExistsInRepositoryQuery();
         }
 
-        public CheckIfEmailExistsInRepositoryQuery Create(string parameter, CultureInfo cultureInfo)
+        public CheckIfEmailExistsInRepositoryQuery Create(string parameter, CultureInfo culture)
         {
-            var query = Create(cultureInfo);
+            var query = Create(culture);
 
-            query.Email = _emailValueObjectFactory.Create(parameter, cultureInfo);
+            query.Email = _emailValueObjectFactory.Create(parameter, culture);
 
             return query;
         }

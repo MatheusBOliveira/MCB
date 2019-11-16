@@ -30,9 +30,9 @@ namespace MCB.Admin.Domain.Specifications.Customers
             _getCustomerByEmailAddressQueryFactory = getCustomerByEmailAddressQueryFactory;
         }
 
-        public override async Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override async Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
-            var getCustomerByEmailAddressQuery = _getCustomerByEmailAddressQueryFactory.Create(entity, cultureInfo);
+            var getCustomerByEmailAddressQuery = _getCustomerByEmailAddressQueryFactory.Create(entity, culture);
             var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByEmailAddressQuery, Customer>(getCustomerByEmailAddressQuery);
 
             return localizedCustomer == null;

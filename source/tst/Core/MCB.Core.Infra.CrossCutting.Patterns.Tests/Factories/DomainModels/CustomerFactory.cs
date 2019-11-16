@@ -11,14 +11,14 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
         IFactoryWithParameter<Customer, RegisterNewCustomerCommand>,
         IFactory<Customer>
     {
-        public override Customer Create(CultureInfo cultureInfo)
+        public override Customer Create(CultureInfo culture)
         {
             return new Customer();
         }
 
-        public Customer Create(RegisterNewCustomerCommand parameter, CultureInfo cultureInfo)
+        public Customer Create(RegisterNewCustomerCommand parameter, CultureInfo culture)
         {
-            var customer = Create(cultureInfo);
+            var customer = Create(culture);
             customer.Name = parameter.Name;
             customer.Email = parameter.Email;
 

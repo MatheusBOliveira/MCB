@@ -12,6 +12,6 @@ namespace MCB.Core.Domain.DomainModels.Interfaces
     {
         string Name { get; set; }
         PersonTypeEnum PersonType { get; set; }
-        GovernamentalNumberValueObject GovernamentalDocument { get; set; }
+        GovernamentalNumberValueObject GovernamentalNumber { get; set; }
     }
 }

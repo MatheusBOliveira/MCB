@@ -13,7 +13,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerPhoneNumberIsRequiredSpecification
     {
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.PhoneNumber != null);
         }

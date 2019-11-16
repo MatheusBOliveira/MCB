@@ -8,7 +8,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces
         string ErrorCode { get; }
         string ErrorDefaultDescription { get; }
 
-        Task<bool> IsSatisfiedBy(T entity, CultureInfo cultureInfo);
+        Task<bool> IsSatisfiedBy(T entity, CultureInfo culture);
     }
 }
 

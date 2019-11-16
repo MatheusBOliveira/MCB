@@ -13,14 +13,14 @@ namespace MCB.Admin.Domain.Factories.Events.Customers
         : FactoryBase<CustomerActivationFailEvent>,
         ICustomerActivationFailEventFactory
     {
-        public override CustomerActivationFailEvent Create(CultureInfo cultureInfo)
+        public override CustomerActivationFailEvent Create(CultureInfo culture)
         {
             return new CustomerActivationFailEvent();
         }
 
-        public CustomerActivationFailEvent Create((Customer customer, string username) parameter, CultureInfo cultureInfo)
+        public CustomerActivationFailEvent Create((Customer customer, string username) parameter, CultureInfo culture)
         {
-            var @event = Create(cultureInfo);
+            var @event = Create(culture);
 
             @event.Customer = parameter.customer;
             @event.Username = parameter.username;

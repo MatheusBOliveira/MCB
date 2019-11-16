@@ -5,8 +5,7 @@ using System;
 namespace MCB.Core.Domain.ValueObjects.Base
 {
     public abstract class ValueObjectBase
-        : ISelfValidator,
-        IDisposable
+        : IDisposable
     {
         public ValidationResult ValidationResult { get; set; }
 
@@ -19,8 +18,6 @@ namespace MCB.Core.Domain.ValueObjects.Base
         {
             GC.SuppressFinalize(this);
         }
-
-        public abstract void Validate();
     }
 }
 

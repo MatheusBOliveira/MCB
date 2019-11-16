@@ -32,7 +32,12 @@ namespace MCB.Admin.Domain.Services
         }
         public Customer RegisterNewCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            // Validations
+
+            // Business Process
+
+            // Return
+            return customer;
         }
         public Customer RemoveCustomer(Customer customer)
         {

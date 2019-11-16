@@ -6,7 +6,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Factories
     public class ApiRequestFactory
         : FactoryBase<ApiRequest>
     {
-        public override ApiRequest Create(CultureInfo cultureInfo)
+        public override ApiRequest Create(CultureInfo culture)
         {
             return new ApiRequest();
         }

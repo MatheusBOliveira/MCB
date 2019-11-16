@@ -1,15 +1,17 @@
+﻿using MCB.Admin.Domain.Commands.Customers;
+using MCB.Admin.Domain.DomainModels;
+using MCB.Admin.Domain.Factories.DomainModels.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.Factory;
-using MCB.Core.Infra.CrossCutting.Patterns.Factory.Interfaces;
-using MCB.Core.Infra.CrossCutting.Patterns.Tests.Commands;
-using MCB.Core.Infra.CrossCutting.Patterns.Tests.DomainModels;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
-namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
+namespace MCB.Admin.Domain.Factories.DomainModels
 {
     public class UserFactory
         : FactoryBase<User>,
-        IFactoryWithParameter<User, RegisterNewCustomerCommand>,
-        IFactory<User>
+        IUserFactory
     {
         public override User Create(CultureInfo culture)
         {
@@ -19,12 +21,12 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests.Factories.DomainModels
         public User Create(RegisterNewCustomerCommand parameter, CultureInfo culture)
         {
             var user = Create(culture);
-            user.Username = parameter.Email;
+
+            user.Username = parameter.Username;
             user.Password = parameter.Password;
+            user.Email = parameter.Email;
 
             return user;
         }
     }
 }
-
-

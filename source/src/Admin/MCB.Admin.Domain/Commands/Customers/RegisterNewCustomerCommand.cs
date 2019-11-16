@@ -12,6 +12,7 @@ namespace MCB.Admin.Domain.Commands.Customers
     {
         public string Name { get; set; }
         public EmailValueObject Email { get; set; }
+        public GovernamentalNumberValueObject GovernamentalNumber { get; set; }
         public PhoneNumberValueObject PhoneNumber { get; set; }
         public PasswordValueObject Password { get; set; }
         public string ApplicationName { get; set; }

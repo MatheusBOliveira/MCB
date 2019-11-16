@@ -13,7 +13,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerMustBeActiveSpecification
     {
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.ActivableInfo?.IsActive == true);
         }

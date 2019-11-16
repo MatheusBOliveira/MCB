@@ -16,6 +16,10 @@ using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Adapters.Events.Interfaces;
 using MCB.Admin.Domain.Services.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
+using MCB.Admin.Domain.Validations.Customers.Interfaces;
+using System.Globalization;
+using MCB.Admin.Domain.Validations.Users.Interfaces;
+using MCB.Admin.Domain.Validations.Applications.Interfaces;
 
 namespace MCB.Admin.Domain.CommanHandlers.Customers
 {
@@ -33,8 +37,14 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
         private readonly ICustomerActivationFailEventAdapter _customerActivationFailEventAdapter;
         // Factories
         private readonly ICustomerFactory _customerFactory;
+        private readonly IUserFactory _userFactory;
+        private readonly IApplicationFactory _applicationFactory;
         private readonly ICustomerActivatedEventFactory _customerActivatedEventFactory;
         private readonly ICustomerActivationFailEventFactory _customerActivationFailEventFactory;
+        // Validations
+        private readonly ICustomerIsValidForRegistrationValidation _customerIsValidForRegistrationValidation;
+        private readonly IUserIsValidForRegistrationValidation _userIsValidForRegistrationValidation;
+        private readonly IApplicationIsValidForRegistrationValidation _applicationIsValidForRegistrationValidation;
 
         public CustomerCommandHandler(
             ISagaManager sagaManager,
@@ -46,25 +56,36 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             ICustomerActivationFailEventAdapter customerActivationFailEventAdapter,
             // Factories
             ICustomerFactory customerFactory,
+            IUserFactory userFactory,
+            IApplicationFactory applicationFactory,
             ICustomerActivatedEventFactory customerActivatedEventFactory,
-            ICustomerActivationFailEventFactory customerActivationFailEventFactory
+            ICustomerActivationFailEventFactory customerActivationFailEventFactory,
+            // Validations
+            ICustomerIsValidForRegistrationValidation customerIsValidForRegistrationValidation,
+            IUserIsValidForRegistrationValidation userIsValidForRegistrationValidation,
+            IApplicationIsValidForRegistrationValidation applicationIsValidForRegistrationValidation
             ) 
             : base(sagaManager, domainNotificationHandler)
         {
             _cryptography = cryptography;
 
             _customerService = customerService;
+            _userFactory = userFactory;
+            _applicationFactory = applicationFactory;
 
             _customerActivationFailEventAdapter = customerActivationFailEventAdapter;
 
             _customerFactory = customerFactory;
             _customerActivatedEventFactory = customerActivatedEventFactory;
             _customerActivationFailEventFactory = customerActivationFailEventFactory;
+
+            _customerIsValidForRegistrationValidation = customerIsValidForRegistrationValidation;
+            _userIsValidForRegistrationValidation = userIsValidForRegistrationValidation;
+            _applicationIsValidForRegistrationValidation = applicationIsValidForRegistrationValidation;
         }
 
-        public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
-
             // Input
             var commandReturn = new CommandReturn<bool>(returnObject);
             var customer = _customerFactory.Create(message, message.CultureInfo);
@@ -90,7 +111,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(InactiveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(InactiveCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
 
@@ -98,15 +119,52 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(RegisterNewCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(RegisterNewCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
+            var isValid = true;
 
+            var customer = _customerFactory.Create(message, message.CultureInfo);
+            var user = _userFactory.Create(message, message.CultureInfo);
+            var application = _applicationFactory.Create(message, message.CultureInfo);
 
+            #region Validations
+            // Validate Customer
+            customer.DomainModel.ValidationResult = await _customerIsValidForRegistrationValidation.Validate(customer, culture);
+            if (!customer.DomainModel.IsValid())
+            {
+                isValid = false;
+                NotifyValidationErrors(customer.DomainModel.ValidationResult);
+            }
+            // Validate User
+            user.DomainModel.ValidationResult = await _userIsValidForRegistrationValidation.Validate(user, culture);
+            if (!user.DomainModel.IsValid())
+            {
+                isValid = false;
+                NotifyValidationErrors(user.DomainModel.ValidationResult);
+            }
+            // Validate Application
+            application.DomainModel.ValidationResult = await _userIsValidForRegistrationValidation.Validate(application, culture);
+            if (!application.DomainModel.IsValid())
+            {
+                isValid = false;
+                NotifyValidationErrors(application.DomainModel.ValidationResult);
+            }
+
+            if (!isValid)
+            {
+                commandReturn.Success = false;
+                return await Task.FromResult(commandReturn);
+            }
+            #endregion
+
+            #region Business Process
+
+            #endregion
 
             return await Task.FromResult(commandReturn);
         }
-        public async Task<CommandReturn<bool>> Handle(RemoveCustomerCommand message, bool returnObject, CancellationToken cancellationToken = default)
+        public async Task<CommandReturn<bool>> Handle(RemoveCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
         {
             var commandReturn = new CommandReturn<bool>(returnObject);
 

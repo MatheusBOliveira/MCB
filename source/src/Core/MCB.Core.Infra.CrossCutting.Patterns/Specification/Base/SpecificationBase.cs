@@ -18,6 +18,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Base
             ErrorCode = ErrorDefaultDescription = nameof(T);
         }
 
-        public abstract Task<bool> IsSatisfiedBy(T entity, CultureInfo cultureInfo);
+        public abstract Task<bool> IsSatisfiedBy(T entity, CultureInfo culture);
     }
 }

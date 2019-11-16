@@ -14,7 +14,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerNameValidLengthSpecification
     {
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             if (string.IsNullOrWhiteSpace(entity?.Name))
                 return Task.FromResult(true);

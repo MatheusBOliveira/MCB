@@ -26,9 +26,9 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
             DefaultDescription = defaultDescription;
         }
 
-        public async Task<bool> Validate(TEntity entity, CultureInfo cultureInfo)
+        public async Task<bool> Validate(TEntity entity, CultureInfo culture)
         {
-            return await _specificationSpec.IsSatisfiedBy(entity, cultureInfo);
+            return await _specificationSpec.IsSatisfiedBy(entity, culture);
         }
     }
 }

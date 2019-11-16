@@ -19,9 +19,9 @@ namespace MCB.Admin.Domain.Specifications.Customers
             ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-3";
         }
 
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
-            return Task.FromResult(!string.IsNullOrWhiteSpace(entity?.GovernamentalDocument?.DocumentNumber));
+            return Task.FromResult(!string.IsNullOrWhiteSpace(entity?.GovernamentalNumber?.DocumentNumber));
         }
     }
 }

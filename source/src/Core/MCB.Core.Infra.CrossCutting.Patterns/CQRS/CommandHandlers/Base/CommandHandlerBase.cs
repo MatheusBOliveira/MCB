@@ -8,6 +8,7 @@ using MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces;
 using System.Threading.Tasks;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 using System.Globalization;
+using MCB.Core.Infra.CrossCutting.Patterns.Specification;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
 {
@@ -33,26 +34,26 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Base
             _domainNotificationHandler = domainNotificationHandler;
         }
 
-        protected async Task<bool> ValidateCommand<TCommand, TReturn>(TCommand message, TReturn returnObject, IValidator<TCommand> validator, CultureInfo cultureInfo)
-            where TCommand : CommandBase
-        {
-            message.ValidationResult = await validator.Validate(message, cultureInfo);
+        //protected async Task<bool> ValidateCommand<TCommand, TReturn>(TCommand message, TReturn returnObject, IValidator<TCommand> validator, CultureInfo culture)
+        //    where TCommand : CommandBase
+        //{
+        //    message.ValidationResult = await validator.Validate(message, culture);
 
-            if (!message.IsValid())
-            {
-                NotifyValidationErrors(message);
-                return await Task.FromResult(false);
-            }
+        //    if (!message.IsValid())
+        //    {
+        //        NotifyValidationErrors(message);
+        //        return await Task.FromResult(false);
+        //    }
 
-            return await Task.FromResult(true);
-        }
-        protected void NotifyValidationErrors(CommandBase message)
+        //    return await Task.FromResult(true);
+        //}
+        protected void NotifyValidationErrors(ValidationResult validationResult)
         {
-            foreach (var error in message.ValidationResult.ValidationMessageErrors)
+            foreach (var error in validationResult.ValidationMessageErrors)
                 SagaManager.SendDomainNotification(
                     new DomainNotification(
-                        message.MessageType, 
-                        error.Code, 
+                        error.Code,
+                        error.DefaultDescription, 
                         Notifications.Enums.DomainNotificationTypeEnum.Error), 
                     new System.Threading.CancellationToken());
         }

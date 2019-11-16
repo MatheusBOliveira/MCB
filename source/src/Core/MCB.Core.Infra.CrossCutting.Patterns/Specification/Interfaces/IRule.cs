@@ -14,7 +14,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Interfaces
             get;
         }
 
-        Task<bool> Validate(TEntity entity, CultureInfo cultureInfo);
+        Task<bool> Validate(TEntity entity, CultureInfo culture);
     }
 }
 

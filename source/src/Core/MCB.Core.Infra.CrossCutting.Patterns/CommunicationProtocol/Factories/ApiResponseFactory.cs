@@ -9,14 +9,14 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CommunicationProtocol.Factories
         : FactoryBase<ApiResponse>,
         IFactoryWithParameter<ApiResponse, ApiRequest>
     {
-        public override ApiResponse Create(CultureInfo cultureInfo)
+        public override ApiResponse Create(CultureInfo culture)
         {
             return new ApiResponse();
         }
 
-        public ApiResponse Create(ApiRequest parameter, CultureInfo cultureInfo)
+        public ApiResponse Create(ApiRequest parameter, CultureInfo culture)
         {
-            var apiResponse = Create(cultureInfo);
+            var apiResponse = Create(culture);
 
             apiResponse.Header = parameter.Header.Clone();
 

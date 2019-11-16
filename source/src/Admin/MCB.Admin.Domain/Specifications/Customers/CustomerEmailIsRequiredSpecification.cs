@@ -19,7 +19,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
             ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-1";
         }
 
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(!string.IsNullOrEmpty(entity?.Email?.EmailAddress));
         }

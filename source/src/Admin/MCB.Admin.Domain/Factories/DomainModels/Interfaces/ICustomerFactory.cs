@@ -11,7 +11,8 @@ namespace MCB.Admin.Domain.Factories.DomainModels.Interfaces
     public interface ICustomerFactory
         : IFactory<Customer>,
         IFactoryWithParameter<Customer, PersonTypeEnum>,
-        IFactoryWithParameter<Customer, ActiveCustomerCommand>
+        IFactoryWithParameter<Customer, ActiveCustomerCommand>,
+        IFactoryWithParameter<Customer, RegisterNewCustomerCommand>
     {
     }
 }

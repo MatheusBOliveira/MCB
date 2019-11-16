@@ -12,6 +12,8 @@ namespace MCB.Admin.Domain.DomainModels
         IUser
     {
         // Properties
+        public string Username { get; set; }
+        public PasswordValueObject Password { get; set; }
         public EmailValueObject Email { get; set; }
         public ActivableInfoValueObject ActivableInfo { get; set; }
 

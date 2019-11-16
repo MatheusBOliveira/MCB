@@ -20,11 +20,14 @@ namespace MCB.Admin.Domain.Specifications.Customers
             ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-5";
         }
 
-        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo cultureInfo)
+        public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
+            if (entity?.PersonType != PersonTypeEnum.Natural)
+                return Task.FromResult(true);
+
             return Task.FromResult(
                 entity?.PersonType == PersonTypeEnum.Natural
-                && entity?.GovernamentalDocument?.IsValid() == true
+                && entity?.GovernamentalNumber?.IsValid() == true
                 );
         }
     }

@@ -12,14 +12,14 @@ namespace MCB.Core.Domain.Factories.ValueObjects
         : FactoryBase<EmailValueObject>,
         IEmailValueObjectFactory
     {
-        public override EmailValueObject Create(CultureInfo cultureInfo)
+        public override EmailValueObject Create(CultureInfo culture)
         {
             return new EmailValueObject();
         }
 
-        public EmailValueObject Create(string parameter, CultureInfo cultureInfo)
+        public EmailValueObject Create(string parameter, CultureInfo culture)
         {
-            var returnObject = Create(cultureInfo);
+            var returnObject = Create(culture);
 
             returnObject.EmailAddress = parameter;
 
