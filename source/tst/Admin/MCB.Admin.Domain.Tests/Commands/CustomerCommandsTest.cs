@@ -1,5 +1,8 @@
 ﻿using MCB.Admin.Domain.Commands.Customers;
 using MCB.Core.Domain.Factories.ValueObjects.Interfaces;
+using MCB.Core.Domain.ValueObjects;
+using MCB.Core.Domain.ValueObjects.Enums;
+using MCB.Core.Domain.ValueObjects.Localization;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using MCB.Core.Infra.CrossCutting.Tests;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,18 +39,24 @@ namespace MCB.Admin.Domain.Tests.Commands
         }
 
         [Fact]
-        [Trait("Admin.Domain", "ActiveCustomerCommandTest")]
-        public async Task ActiveCustomerCommandTest()
+        [Trait("Admin.Domain", "RegisterNewCustomerCommandTest")]
+        public async Task RegisterNewCustomerCommandTest()
         {
             try
             {
-                var activateCustomerCommand = new ActiveCustomerCommand
+                var registerNewCustomerCommand = new RegisterNewCustomerCommand
                 {
-                    Username = "marcelo.castelo",
-                    Email = null
+                    ApplicationName = "MCB Scheduler",
+                    CultureInfo = CultureInfo,
+                    Email = new EmailValueObject { EmailAddress = "marcelo.castelo@outlook.com" },
+                    GovernamentalNumber = new CPFValueObject() { DocumentNumber = "740.154.950-63" },
+                    Name = "Marcelo Castelo Branco",
+                    Password = new PasswordValueObject("trocar@123"),
+                    Username = "MarceloCas",
+                    PhoneNumber = new PhoneNumberValueObject(PhoneNumberTypeEnum.Principal, "+55", "15", "981902276")
                 };
 
-                var result = await _sagaManager.SendCommand<ActiveCustomerCommand, bool>(activateCustomerCommand, CultureInfo, new System.Threading.CancellationToken());
+                var result = await _sagaManager.SendCommand<RegisterNewCustomerCommand, bool>(registerNewCustomerCommand, CultureInfo, new System.Threading.CancellationToken());
             }
             catch (Exception ex)
             {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MCB.Core.Domain.Services.Interfaces.Base
 {
-    public interface IServiceBase
+    public interface IService
         : IDisposable
     {
     }

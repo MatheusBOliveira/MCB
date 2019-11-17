@@ -3,6 +3,7 @@ using MCB.Core.Domain.DomainModels.Interfaces;
 using MCB.Core.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MCB.Admin.Domain.DomainModels
@@ -29,7 +30,7 @@ namespace MCB.Admin.Domain.DomainModels
             ApplicationUserCollection = new List<ApplicationUser>();
         }
 
-        public void Register(Customer customer, string registrationUsername)
+        public User RegisterNewUser(Customer customer, string registrationUsername, CultureInfo culture)
         {
             DomainModel.Id = Guid.NewGuid();
 
@@ -37,8 +38,16 @@ namespace MCB.Admin.Domain.DomainModels
             customer.AdminUser = this;
             customer.UserCollection.Add(this);
 
+            AuditableInfo = new AuditableInfoValueObject
+            {
+                CreatedUser = registrationUsername,
+                CreatedDate = DateTime.UtcNow
+            };
+
             ActivableInfo = new ActivableInfoValueObject();
             ActivableInfo.Activate(registrationUsername);
+
+            return this;
         }
     }
 }

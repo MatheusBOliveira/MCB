@@ -31,12 +31,19 @@ namespace MCB.Admin.Domain.DomainModels
             ApplicationCollection = new List<Application>();
         }
 
-        public void Register(string registrationUsername)
+        public Customer RegisterNewCustomer(string registrationUsername)
         {
             DomainModel.Id = Guid.NewGuid();
+            AuditableInfo = new AuditableInfoValueObject
+            {
+                CreatedUser = registrationUsername,
+                CreatedDate = DateTime.UtcNow
+            };
 
             ActivableInfo = new ActivableInfoValueObject();
             ActivableInfo.Activate(registrationUsername);
+
+            return this;
         }
     }
 }

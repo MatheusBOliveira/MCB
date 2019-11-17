@@ -19,6 +19,14 @@ using MCB.Admin.Domain.QueryHandlers.Customers;
 using MCB.Admin.Domain.QueryHandlers.Users;
 using MCB.Admin.Domain.Services;
 using MCB.Admin.Domain.Services.Interfaces;
+using MCB.Admin.Domain.Specifications.Customers;
+using MCB.Admin.Domain.Specifications.Customers.Interfaces;
+using MCB.Admin.Domain.Validations.Applications;
+using MCB.Admin.Domain.Validations.Applications.Interfaces;
+using MCB.Admin.Domain.Validations.Customers;
+using MCB.Admin.Domain.Validations.Customers.Interfaces;
+using MCB.Admin.Domain.Validations.Users;
+using MCB.Admin.Domain.Validations.Users.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.QueryHandlers.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,12 +72,18 @@ namespace MCB.Admin.Domain.IoC
         private static void RegisterFactories(IServiceCollection services)
         {
             // Factories - DomainModels
+            services.AddScoped<IApplicationFactory, ApplicationFactory>();
+            services.AddScoped<IApplicationFunctionFactory, ApplicationFunctionFactory>();
+            services.AddScoped<IApplicationRoleFactory, ApplicationRoleFactory>();
+            services.AddScoped<IApplicationUserFactory, ApplicationUserFactory>();
             services.AddScoped<ICustomerFactory, CustomerFactory>();
+            services.AddScoped<IUserFactory, UserFactory>();
             // Factories - Events
             services.AddScoped<ICustomerActivatedEventFactory, CustomerActivatedEventFactory>();
             services.AddScoped<ICustomerActivationFailEventFactory, CustomerActivationFailEventFactory>();
             // Factories - Queries
             services.AddScoped<ICheckIfEmailExistsInRepositoryQueryFactory, CheckIfEmailExistsInRepositoryQueryFactory>();
+            services.AddScoped<IGetCustomerByEmailAddressQueryFactory, GetCustomerByEmailAddressQueryFactory>();
             services.AddScoped<IGetCustomerByIdQueryFactory, GetCustomerByIdQueryFactory>();
         }
 
@@ -87,17 +101,38 @@ namespace MCB.Admin.Domain.IoC
 
         private static void RegisterSpecifications(IServiceCollection services)
         {
+            services.AddScoped<ICustomerEmailIsRequiredSpecification, CustomerEmailIsRequiredSpecification>();
+            services.AddScoped<ICustomerEmailMustBeUniqueInRepositorySpecification, CustomerEmailMustBeUniqueInRepositorySpecification>();
+            services.AddScoped<ICustomerGovernamentalDocumentNumberIsRequiredSpecification, CustomerGovernamentalDocumentNumberIsRequiredSpecification>();
+            services.AddScoped<ICustomerGovernamentalNumberForLegalPersonIsValidSpecification, CustomerGovernamentalNumberForLegalPersonIsValidSpecification>();
+            services.AddScoped<ICustomerGovernamentalNumberForNaturalPersonIsValidSpecification, CustomerGovernamentalNumberForNaturalPersonIsValidSpecification>();
+            services.AddScoped<ICustomerIdIsRequiredSpecification, CustomerIdIsRequiredSpecification>();
+            services.AddScoped<ICustomerMustBeActiveInRepositorySpecification, CustomerMustBeActiveInRepositorySpecification>();
+            services.AddScoped<ICustomerMustBeActiveSpecification, CustomerMustBeActiveSpecification>();
+            services.AddScoped<ICustomerMustBeInactiveInRepositorySpecification, CustomerMustBeInactiveInRepositorySpecification>();
+            services.AddScoped<ICustomerMustBeInactiveSpecification, CustomerMustBeInactiveSpecification>();
+            services.AddScoped<ICustomerMustBeLegalPersonSpecification, CustomerMustBeLegalPersonSpecification>();
+            services.AddScoped<ICustomerMustBeNaturalPersonSpecification, CustomerMustBeNaturalPersonSpecification>();
+            services.AddScoped<ICustomerMustExistsInRepositorySpecification, CustomerMustExistsInRepositorySpecification>();
+            services.AddScoped<ICustomerMustNotExistsInRepositorySpecification, CustomerMustNotExistsInRepositorySpecification>();
+            services.AddScoped<ICustomerNameIsRequiredSpecification, CustomerNameIsRequiredSpecification>();
+            services.AddScoped<ICustomerNameValidLengthSpecification, CustomerNameValidLengthSpecification>();
+            services.AddScoped<ICustomerPhoneNumberIsRequiredSpecification, CustomerPhoneNumberIsRequiredSpecification>();
 
         }
 
         private static void RegisterValidations(IServiceCollection services)
         {
-
+            services.AddScoped<IApplicationIsValidForRegistrationValidation, ApplicationIsValidForRegistrationValidation>();
+            services.AddScoped<ICustomerIsValidForRegistrationValidation, CustomerIsValidForRegistrationValidation>();
+            services.AddScoped<IUserIsValidForRegistrationValidation, UserIsValidForRegistrationValidation>();
         }
 
         private static void RegisterDomainServices(IServiceCollection services)
         {
+            services.AddSingleton<IApplicationService, ApplicationService>();
             services.AddSingleton<ICustomerService, CustomerService>();
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 }

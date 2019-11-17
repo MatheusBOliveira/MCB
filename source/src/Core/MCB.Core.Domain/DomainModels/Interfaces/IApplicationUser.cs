@@ -6,7 +6,8 @@ using System.Text;
 namespace MCB.Core.Domain.DomainModels.Interfaces
 {
     public interface IApplicationUser
-        : IAuditableDomainModel
+        : IAuditableDomainModel,
+        IActivableDomainModel
     {
 
     }

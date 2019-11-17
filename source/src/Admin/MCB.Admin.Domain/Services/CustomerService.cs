@@ -1,10 +1,13 @@
 ﻿using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Services.Interfaces;
+using MCB.Admin.Domain.Validations.Customers;
 using MCB.Core.Domain.Services.Base;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MCB.Admin.Domain.Services
 {
@@ -12,10 +15,15 @@ namespace MCB.Admin.Domain.Services
         : ServiceBase,
         ICustomerService
     {
-        public CustomerService(ISagaManager sagaManager) 
+        private readonly CustomerIsValidForRegistrationValidation _customerIsValidForRegistrationValidation;
+
+        public CustomerService(
+            ISagaManager sagaManager,
+            CustomerIsValidForRegistrationValidation customerIsValidForRegistrationValidation
+            ) 
             : base(sagaManager)
         {
-
+            _customerIsValidForRegistrationValidation = customerIsValidForRegistrationValidation;
         }
         public Customer ActiveCustomer(Customer customer)
         {
@@ -30,14 +38,18 @@ namespace MCB.Admin.Domain.Services
         {
             throw new NotImplementedException();
         }
-        public Customer RegisterNewCustomer(Customer customer)
+        public async Task<Customer> RegisterNewCustomer(Customer customer, string registrationUsername, CultureInfo culture)
         {
-            // Validations
+            customer.DomainModel.ValidationResult = await _customerIsValidForRegistrationValidation.Validate(customer, culture);
+            if (!customer.DomainModel.IsValid())
+            {
+                NotifyValidationErrors(customer.DomainModel.ValidationResult, culture);
+                return await Task.FromResult(customer);
+            }
 
-            // Business Process
+            customer.RegisterNewCustomer(registrationUsername);
 
-            // Return
-            return customer;
+            return await Task.FromResult(customer);
         }
         public Customer RemoveCustomer(Customer customer)
         {
