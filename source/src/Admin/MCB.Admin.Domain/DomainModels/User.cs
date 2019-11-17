@@ -28,5 +28,17 @@ namespace MCB.Admin.Domain.DomainModels
 
             ApplicationUserCollection = new List<ApplicationUser>();
         }
+
+        public void Register(Customer customer, string registrationUsername)
+        {
+            DomainModel.Id = Guid.NewGuid();
+
+            Customer = customer;
+            customer.AdminUser = this;
+            customer.UserCollection.Add(this);
+
+            ActivableInfo = new ActivableInfoValueObject();
+            ActivableInfo.Activate(registrationUsername);
+        }
     }
 }

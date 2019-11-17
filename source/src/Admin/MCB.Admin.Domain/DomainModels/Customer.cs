@@ -16,6 +16,7 @@ namespace MCB.Admin.Domain.DomainModels
         public PhoneNumberValueObject PhoneNumber { get; set; }
 
         // Navigation Properties
+        public User AdminUser { get; set; }
         public ICollection<User> UserCollection { get; set; }
         public ICollection<Application> ApplicationCollection { get; set; }
 
@@ -25,8 +26,17 @@ namespace MCB.Admin.Domain.DomainModels
             Email = new EmailValueObject();
             PhoneNumber = new PhoneNumberValueObject();
 
+            AdminUser = new User();
             UserCollection = new List<User>();
             ApplicationCollection = new List<Application>();
+        }
+
+        public void Register(string registrationUsername)
+        {
+            DomainModel.Id = Guid.NewGuid();
+
+            ActivableInfo = new ActivableInfoValueObject();
+            ActivableInfo.Activate(registrationUsername);
         }
     }
 }

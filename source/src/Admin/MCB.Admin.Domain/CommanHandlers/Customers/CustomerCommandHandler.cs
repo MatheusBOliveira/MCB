@@ -159,7 +159,9 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             #endregion
 
             #region Business Process
-
+            customer.Register(message.Username);
+            user.Register(customer, message.Username);
+            application.Register(customer, user, message.Username);
             #endregion
 
             return await Task.FromResult(commandReturn);
