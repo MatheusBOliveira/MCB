@@ -97,11 +97,17 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
                 || !user.DomainModel.IsValid()
                 || !application.DomainModel.IsValid())
             {
+                // Create and send fail event
+
                 commandReturn.Success = false;
+                commandReturn.ReturnObject = false;
                 return await Task.FromResult(commandReturn);
             }
 
+            // Create event success event
+
             commandReturn.Success = true;
+            commandReturn.ReturnObject = true;
             return await Task.FromResult(commandReturn);
         }
         public async Task<CommandReturn<bool>> Handle(RemoveCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
