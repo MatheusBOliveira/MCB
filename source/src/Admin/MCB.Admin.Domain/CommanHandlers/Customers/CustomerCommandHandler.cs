@@ -41,6 +41,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
         private readonly IApplicationFactory _applicationFactory;
         private readonly ICustomerActivatedEventFactory _customerActivatedEventFactory;
         private readonly ICustomerActivationFailEventFactory _customerActivationFailEventFactory;
+        private readonly IApplicationUserFactory _applicationUserFactory;
         // Validations
         private readonly ICustomerIsValidForRegistrationValidation _customerIsValidForRegistrationValidation;
         private readonly IUserIsValidForRegistrationValidation _userIsValidForRegistrationValidation;
@@ -60,6 +61,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             IApplicationFactory applicationFactory,
             ICustomerActivatedEventFactory customerActivatedEventFactory,
             ICustomerActivationFailEventFactory customerActivationFailEventFactory,
+            IApplicationUserFactory applicationUserFactory,
             // Validations
             ICustomerIsValidForRegistrationValidation customerIsValidForRegistrationValidation,
             IUserIsValidForRegistrationValidation userIsValidForRegistrationValidation,
@@ -72,6 +74,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             _customerService = customerService;
             _userFactory = userFactory;
             _applicationFactory = applicationFactory;
+            _applicationUserFactory = applicationUserFactory;
 
             _customerActivationFailEventAdapter = customerActivationFailEventAdapter;
 
@@ -161,7 +164,7 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             #region Business Process
             customer.Register(message.Username);
             user.Register(customer, message.Username);
-            application.Register(customer, user, message.Username);
+            application.Register(customer, user, message.Username, _applicationUserFactory, message.CultureInfo);
             #endregion
 
             return await Task.FromResult(commandReturn);
