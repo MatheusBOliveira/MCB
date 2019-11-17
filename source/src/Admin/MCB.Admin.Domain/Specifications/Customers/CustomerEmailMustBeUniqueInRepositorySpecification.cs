@@ -35,7 +35,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
             var getCustomerByEmailAddressQuery = _getCustomerByEmailAddressQueryFactory.Create(entity, culture);
             var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByEmailAddressQuery, Customer>(getCustomerByEmailAddressQuery,culture);
 
-            return localizedCustomer == null;
+            return localizedCustomer.ReturnObject == null;
         }
     }
 }

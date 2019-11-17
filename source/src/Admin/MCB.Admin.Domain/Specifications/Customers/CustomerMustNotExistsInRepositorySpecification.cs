@@ -36,7 +36,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
             var getCustomerByIdQuery = _getCustomerByIdQueryFactory.Create(entity, culture);
             var localizedCustomer = await _sagaManager.GetQuery<IGetCustomerByIdQuery, Customer>(getCustomerByIdQuery, culture);
 
-            return localizedCustomer == null;
+            return localizedCustomer?.ReturnObject == null;
         }
     }
 }

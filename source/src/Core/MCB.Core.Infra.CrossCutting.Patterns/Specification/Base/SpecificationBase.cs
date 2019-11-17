@@ -15,7 +15,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification.Base
 
         protected SpecificationBase()
         {
-            ErrorCode = ErrorDefaultDescription = nameof(T);
+            ErrorCode = ErrorDefaultDescription = this.GetType().Name;
         }
 
         public abstract Task<bool> IsSatisfiedBy(T entity, CultureInfo culture);
