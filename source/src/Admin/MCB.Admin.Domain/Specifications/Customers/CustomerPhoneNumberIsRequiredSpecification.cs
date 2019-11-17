@@ -13,6 +13,11 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerPhoneNumberIsRequiredSpecification
     {
+        public CustomerPhoneNumberIsRequiredSpecification()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-17";
+        }
+
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.PhoneNumber != null);

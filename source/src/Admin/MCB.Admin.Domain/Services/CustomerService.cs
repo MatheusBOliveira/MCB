@@ -1,6 +1,7 @@
 ﻿using MCB.Admin.Domain.DomainModels;
 using MCB.Admin.Domain.Services.Interfaces;
 using MCB.Admin.Domain.Validations.Customers;
+using MCB.Admin.Domain.Validations.Customers.Interfaces;
 using MCB.Core.Domain.Services.Base;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces;
 using System;
@@ -15,11 +16,11 @@ namespace MCB.Admin.Domain.Services
         : ServiceBase,
         ICustomerService
     {
-        private readonly CustomerIsValidForRegistrationValidation _customerIsValidForRegistrationValidation;
+        private readonly ICustomerIsValidForRegistrationValidation _customerIsValidForRegistrationValidation;
 
         public CustomerService(
             ISagaManager sagaManager,
-            CustomerIsValidForRegistrationValidation customerIsValidForRegistrationValidation
+            ICustomerIsValidForRegistrationValidation customerIsValidForRegistrationValidation
             ) 
             : base(sagaManager)
         {

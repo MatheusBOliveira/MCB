@@ -13,6 +13,10 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerMustBeActiveSpecification
     {
+        public CustomerMustBeActiveSpecification()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-8";
+        }
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.ActivableInfo?.IsActive == true);

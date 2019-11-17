@@ -14,6 +14,11 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerMustBeNaturalPersonSpecification
     {
+        public CustomerMustBeNaturalPersonSpecification()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-12";
+        }
+
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.PersonType == PersonTypeEnum.Natural);

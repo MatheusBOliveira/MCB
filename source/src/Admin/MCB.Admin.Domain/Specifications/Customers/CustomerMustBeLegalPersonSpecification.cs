@@ -14,6 +14,11 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerMustBeLegalPersonSpecification
     {
+        public CustomerMustBeLegalPersonSpecification()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-11";
+        }
+
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             return Task.FromResult(entity?.PersonType == PersonTypeEnum.Legal);

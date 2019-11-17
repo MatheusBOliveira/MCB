@@ -24,7 +24,7 @@ namespace MCB.Admin.Domain.Specifications.Customers
             ISagaManager sagaManager,
             IGetCustomerByIdQueryFactory getCustomerByIdQueryFactory)
         {
-            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-8";
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-9";
 
             _sagaManager = sagaManager;
             _getCustomerByIdQueryFactory = getCustomerByIdQueryFactory;

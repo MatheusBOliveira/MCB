@@ -14,6 +14,11 @@ namespace MCB.Admin.Domain.Specifications.Customers
         : SpecificationBase<Customer>,
         ICustomerNameValidLengthSpecification
     {
+        public CustomerNameValidLengthSpecification()
+        {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-16";
+        }
+
         public override Task<bool> IsSatisfiedBy(Customer entity, CultureInfo culture)
         {
             if (string.IsNullOrWhiteSpace(entity?.Name))

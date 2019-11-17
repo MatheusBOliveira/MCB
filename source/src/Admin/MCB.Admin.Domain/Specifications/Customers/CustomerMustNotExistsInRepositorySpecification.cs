@@ -25,6 +25,8 @@ namespace MCB.Admin.Domain.Specifications.Customers
             )
             : base()
         {
+            ErrorCode = "MCB-ADMIN-DOMAIN-CUSTOMERS-14";
+
             _sagaManager = sagaManager;
             _getCustomerByIdQueryFactory = getCustomerByIdQueryFactory;
         }
