@@ -20,6 +20,8 @@ using MCB.Admin.Domain.Validations.Customers.Interfaces;
 using System.Globalization;
 using MCB.Admin.Domain.Validations.Users.Interfaces;
 using MCB.Admin.Domain.Validations.Applications.Interfaces;
+using MCB.Core.Infra.CrossCutting.Patterns.Specification;
+using MCB.Admin.Domain.Events.Customers.Interfaces;
 
 namespace MCB.Admin.Domain.CommanHandlers.Customers
 {
@@ -38,6 +40,8 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
         private readonly ICustomerFactory _customerFactory;
         private readonly IUserFactory _userFactory;
         private readonly IApplicationFactory _applicationFactory;
+        private readonly ICustomerRegistrationSuccessfulEventFactory _customerRegistrationSuccessfulEventFactory;
+        private readonly ICustomerRegistrationFailEventFactory _customerRegistrationFailEventFactory;
 
         public CustomerCommandHandler(
             ISagaManager sagaManager,
@@ -49,7 +53,9 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             // Factories
             ICustomerFactory customerFactory,
             IUserFactory userFactory,
-            IApplicationFactory applicationFactory
+            IApplicationFactory applicationFactory,
+            ICustomerRegistrationSuccessfulEventFactory customerRegistrationSuccessfulEventFactory,
+            ICustomerRegistrationFailEventFactory customerRegistrationFailEventFactory
             )
             : base(sagaManager, domainNotificationHandler)
         {
@@ -60,6 +66,8 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             _customerFactory = customerFactory;
             _userFactory = userFactory;
             _applicationFactory = applicationFactory;
+            _customerRegistrationSuccessfulEventFactory = customerRegistrationSuccessfulEventFactory;
+            _customerRegistrationFailEventFactory = customerRegistrationFailEventFactory;
         }
 
         public async Task<CommandReturn<bool>> Handle(ActiveCustomerCommand message, bool returnObject, CultureInfo culture, CancellationToken cancellationToken = default)
@@ -93,11 +101,16 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             application = await _applicationService.RegisterNewApplication(application, customer, user, message.Username, culture);
 
             // Check Validations
-            if (!customer.DomainModel.IsValid()
-                || !user.DomainModel.IsValid()
-                || !application.DomainModel.IsValid())
+            var validationResult = new ValidationResult();
+            validationResult.AddFromAnotherValidationResult(customer.DomainModel.ValidationResult);
+            validationResult.AddFromAnotherValidationResult(user.DomainModel.ValidationResult);
+            validationResult.AddFromAnotherValidationResult(application.DomainModel.ValidationResult);
+
+            if (!validationResult.IsValid)
             {
                 // Create and send fail event
+                var customerRegistrationFailEvent = _customerRegistrationFailEventFactory.Create((customer, message.Username), culture);
+                customerRegistrationFailEvent.ValidationResult = validationResult;
 
                 commandReturn.Success = false;
                 commandReturn.ReturnObject = false;
@@ -105,6 +118,11 @@ namespace MCB.Admin.Domain.CommanHandlers.Customers
             }
 
             // Create event success event
+            var customerRegistrationSuccessfulEvent = _customerRegistrationSuccessfulEventFactory.Create(customer, culture);
+            customerRegistrationSuccessfulEvent.ValidationResult = validationResult;
+
+            // Send successful event
+            _ = SagaManager.SendEvent(customerRegistrationSuccessfulEvent, culture);
 
             commandReturn.Success = true;
             commandReturn.ReturnObject = true;

@@ -31,6 +31,11 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Specification
             }
         }
 
+        public void AddFromAnotherValidationResult(ValidationResult validationResult)
+        {
+            foreach (var message in validationResult.Messages)
+                Add(message);
+        }
         public void Add(ValidationMessage validationMessage)
         {
             _validationMessages.Add(validationMessage);

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace MCB.Admin.Domain.Events.Customers
 {
-    public class CustomerRegisteredEvent
+    public class CustomerRegistrationSuccessfulEvent
         : EventBase, 
-        ICustomerRegisteredEvent
+        ICustomerRegistrationSuccessfulEvent
     {
         public Customer RegisteredCustomer { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿using MCB.Core.Infra.CrossCutting.Patterns.CQRS.CommandHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.EventHandlers.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries.Interfaces;
@@ -89,7 +90,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
         }
 
         protected IEnumerable<IEventHandler<TEvent>> GetNotificationEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<IEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(IEventHandler<TEvent>));
@@ -105,38 +106,38 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Base
         }
 
         protected IEnumerable<IStartWithEventHandler<TEvent>> GetStartWithEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<IStartWithEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(IStartWithEventHandler<TEvent>));
         }
         protected IEnumerable<IEndWithEventHandler<TEvent>> GetEndWithEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<IEndWithEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(IEndWithEventHandler<TEvent>));
         }
         protected IEnumerable<ISuccessEventHandler<TEvent>> GetSuccessEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<ISuccessEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(ISuccessEventHandler<TEvent>));
         }
         protected IEnumerable<IFailEventHandler<TEvent>> GetFailEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<IFailEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(IFailEventHandler<TEvent>));
         }
         protected IEnumerable<IEventHandler<TEvent>> GetEventHandlers<TEvent>()
-            where TEvent : EventBase
+            where TEvent : IEvent
         {
             return (IEnumerable<IEventHandler<TEvent>>)
                 ServiceProvider.GetServices(typeof(IEventHandler<TEvent>));
         }
 
         public abstract Task<EventReturn> SendEvent<TEvent>(TEvent @event, CultureInfo culture, CancellationToken cancellationToken = default)
-            where TEvent : EventBase;
+            where TEvent : IEvent;
         public abstract Task<QueryReturn<TReturn>> GetQuery<TQuery, TReturn>(TQuery query, CultureInfo culture, CancellationToken cancellationToken = default)
             where TQuery : IQuery;
         public abstract Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CultureInfo culture, CancellationToken cancellationToken = default)

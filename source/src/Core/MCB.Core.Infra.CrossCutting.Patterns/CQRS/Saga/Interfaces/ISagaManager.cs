@@ -1,4 +1,5 @@
 ﻿using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events;
+using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Events.Interfaces;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Notifications;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries;
 using MCB.Core.Infra.CrossCutting.Patterns.CQRS.Queries.Interfaces;
@@ -18,7 +19,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.CQRS.Saga.Interfaces
         Task<CommandReturn<TReturn>> SendCommand<TCommand, TReturn>(TCommand command, CultureInfo culture, CancellationToken cancellationToken = default)
             where TCommand : CommandBase;
         Task<EventReturn> SendEvent<TEvent>(TEvent @event, CultureInfo culture, CancellationToken cancellationToken = default)
-            where TEvent : EventBase;
+            where TEvent : IEvent;
         Task<EventReturn> SendDomainNotification(DomainNotification domainNotification, CultureInfo culture, CancellationToken cancellationToken = default);
     }
 }
