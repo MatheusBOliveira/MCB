@@ -81,6 +81,8 @@ namespace MCB.Admin.Domain.IoC
             // Factories - Events
             services.AddScoped<ICustomerActivatedEventFactory, CustomerActivatedEventFactory>();
             services.AddScoped<ICustomerActivationFailEventFactory, CustomerActivationFailEventFactory>();
+            services.AddScoped<ICustomerRegistrationFailEventFactory, CustomerRegistrationFailEventFactory>();
+            services.AddScoped<ICustomerRegistrationSuccessfulEventFactory, CustomerRegistrationSuccessfulEventFactory>();
             // Factories - Queries
             services.AddScoped<ICheckIfEmailExistsInRepositoryQueryFactory, CheckIfEmailExistsInRepositoryQueryFactory>();
             services.AddScoped<IGetCustomerByEmailAddressQueryFactory, GetCustomerByEmailAddressQueryFactory>();

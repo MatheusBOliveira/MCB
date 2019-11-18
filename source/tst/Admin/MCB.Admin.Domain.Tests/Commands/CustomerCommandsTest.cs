@@ -57,6 +57,8 @@ namespace MCB.Admin.Domain.Tests.Commands
                 };
 
                 var result = await _sagaManager.SendCommand<RegisterNewCustomerCommand, bool>(registerNewCustomerCommand, CultureInfo, new System.Threading.CancellationToken());
+
+                Assert.True(result.Success);
             }
             catch (Exception ex)
             {
