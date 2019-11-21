@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MCB.Admin.Domain.DomainModels.Application" Collapsed="true">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIAAACAgIAAAAAAAAAQAAAAAAAACAQIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Application.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationRole">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAgIAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationRole.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Application" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ApplicationFunctionCollection" />
+      <Property Name="ApplicationUserCollection" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUser">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAABAAAAADAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Application" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ApplicationRoleCollection" />
+      <Property Name="ApplicationUserSessionCollection" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationFunction">
+    <Position X="0.75" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAgAAAAAAAAAAQCAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationFunction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Application" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="ApplicationRoleCollection" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUserSession">
+    <Position X="8.25" Y="8.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAQAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationUserSession.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ApplicationUser" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -2,10 +2,11 @@
 {
     public interface ICryptography
     {
-        string Key { get; set; }
+        byte[] Key { get; set; }
+        byte[] SubKey { get; set; }
 
-        string Decrypt(string input);
-        string Encrypt(string input);
-        string EncryptWithHash(string input);
+        string Decrypt(byte[] input);
+        (byte[] hashByte, string hashString) Encrypt(string input);
+        (byte[] hashByte, string hashString) EncryptWithHash(string input, string key = null);
     }
 }

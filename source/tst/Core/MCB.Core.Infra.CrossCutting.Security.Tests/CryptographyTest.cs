@@ -33,9 +33,9 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
 
             var name = "Marcelo Castelo Branco";
             var encryptedName = crypto.Encrypt(name);
-            var decryptedName = crypto.Decrypt(encryptedName);
+            var decryptedNameFromByte = crypto.Decrypt(encryptedName.hashByte);
 
-            Assert.Equal(name, decryptedName);
+            Assert.Equal(name, decryptedNameFromByte);
         }
 
         [Fact]
@@ -44,11 +44,34 @@ namespace MCB.Core.Infra.CrossCutting.Security.Tests
         {
             var crypto = ServiceProvider.GetService<ICryptography>();
 
-            var name = "Marcelo Castelo Branco";
-            var hashValue1 = crypto.EncryptWithHash(name); 
+            var hashValue1 = crypto.EncryptWithHash("Marcelo Castelo Branco");
             var hashValue2 = crypto.EncryptWithHash("Marcelo Castelo Branco");
 
-            Assert.Equal(hashValue1, hashValue2);
+            Assert.Equal(hashValue1.hashString, hashValue2.hashString);
+        }
+
+        [Fact]
+        [Trait("Cryptography", "EncryptHashTest")]
+        public void EncryptHashWithKeySuccessTest()
+        {
+            var crypto = ServiceProvider.GetService<ICryptography>();
+
+            var hashValue1 = crypto.EncryptWithHash("Marcelo Castelo Branco", "marcelo.castelo");
+            var hashValue2 = crypto.EncryptWithHash("Marcelo Castelo Branco", "marcelo.castelo");
+
+            Assert.Equal(hashValue1.hashString, hashValue2.hashString);
+        }
+
+        [Fact]
+        [Trait("Cryptography", "EncryptHashTest")]
+        public void EncryptHashWithKeyFailTest()
+        {
+            var crypto = ServiceProvider.GetService<ICryptography>();
+
+            var hashValue1 = crypto.EncryptWithHash("Marcelo Castelo Branco", "marcelo.castelo");
+            var hashValue2 = crypto.EncryptWithHash("Marcelo Castelo Branco");
+
+            Assert.NotEqual(hashValue1.hashString, hashValue2.hashString);
         }
     }
 }

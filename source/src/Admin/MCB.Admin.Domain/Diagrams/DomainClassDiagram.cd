@@ -1,68 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MCB.Admin.Domain.DomainModels.Customer" Collapsed="true">
-    <Position X="3" Y="2.25" Width="1.5" />
+  <Class Name="MCB.Admin.Domain.DomainModels.Application" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAAAAAACAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAIAAACAgIAAAAAAAAAQAAAAAAAACAQIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\Application.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationFunction" Collapsed="true">
+    <Position X="9.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAgAAAAAAAAAAQCAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationRole" Collapsed="true">
+    <Position X="11" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAgIAAAAAAAAAQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAADAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUserSession" Collapsed="true">
+    <Position X="9.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAQAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\ApplicationUserSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.Customer" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACAEAAAAAAACQAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>DomainModels\Customer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="MCB.Admin.Domain.DomainModels.User" Collapsed="true">
-    <Position X="5.5" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAACAAAAAAAAAAAAAAAAAAABAAAQAAAAAAAAA=</HashCode>
-      <FileName>DomainModels\User.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Customer" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="MCB.Admin.Domain.DomainModels.Person" Collapsed="true">
-    <Position X="0.75" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAEAA=</HashCode>
-      <FileName>DomainModels\Person.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="MCB.Admin.Domain.DomainModels.ApplicationUser" Collapsed="true">
-    <Position X="8" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABAAAAABAAAAAAAQAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DomainModels\ApplicationUser.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="User" />
-      <Property Name="Application" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="MCB.Admin.Domain.DomainModels.Application" Collapsed="true">
-    <Position X="5.5" Y="1" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAEAAAAAACAAAAAAAAAAAAQAAAAAABAAAQAAAAAAAAA=</HashCode>
-      <FileName>DomainModels\Application.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Customer" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="MCB.Admin.Domain.DomainModels.LegalCustomer" Collapsed="true">
-    <Position X="1.75" Y="3.75" Width="1.5" />
+    <Position X="5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DomainModels\LegalCustomer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MCB.Admin.Domain.DomainModels.NaturalCustomer" Collapsed="true">
-    <Position X="4.25" Y="3.75" Width="1.5" />
+    <Position X="2.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DomainModels\NaturalCustomer.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.Person" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>DomainModels\Person.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MCB.Admin.Domain.DomainModels.User" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEQAAAAACAAAAAAAQAAAAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <FileName>DomainModels\User.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="MCB.Admin.Domain.DomainModels.Enums.ApplicationFunctionTypeEnum" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAI=</HashCode>
+      <FileName>DomainModels\Enums\ApplicationFunctionTypeEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCB.Core.Infra.CrossCutting.ExtensionMethods\MCB.Core.Infra.CrossCutting.ExtensionMethods.csproj" />
+  </ItemGroup>
+
 </Project>

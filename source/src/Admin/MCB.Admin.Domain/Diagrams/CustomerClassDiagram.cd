@@ -7,7 +7,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAACAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>DomainModels\Person.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,7 +19,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>CAAAAAAAACAAAAAAAAACQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>CAAAAAAAACAEAAAAAAACQAAAAAAAAAAAAAABAAAAAAA=</HashCode>
       <FileName>DomainModels\Customer.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

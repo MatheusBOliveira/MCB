@@ -44,6 +44,13 @@ namespace MCB.Core.Infra.CrossCutting.ExtensionMethods
 
             return sb.ToString();
         }
+        public static byte[] GetByteArray(this string str, Encoding encoding = null)
+        {
+            if (encoding == null)
+                encoding = Encoding.UTF8;
+
+            return encoding.GetBytes(str);
+        }
     }
 }
 

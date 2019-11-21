@@ -1,6 +1,6 @@
 [
   {
-    "description": "descrição rota A",
+    "description": "descriï¿½ï¿½o rota A",
     "relativePath": "/api/v1.0/login",
     "acceptedVerbs": [
       "GET",
@@ -14,7 +14,7 @@
     }
   },
   {
-    "description": "descrição rota B",
+    "description": "descriï¿½ï¿½o rota B",
     "relativePath": "/api/v1.0/logout",
     "acceptedVerbs": [
       "GET",
