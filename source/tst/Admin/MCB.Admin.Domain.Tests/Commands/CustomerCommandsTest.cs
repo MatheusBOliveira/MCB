@@ -60,7 +60,7 @@ namespace MCB.Admin.Domain.Tests.Commands
 
                 Assert.True(result.Success);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
