@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -14,4 +14,5 @@ jobs:
       with:
         dotnet-version: 3.0.101
     - name: Build with dotnet
+      working-directory: ./source
       run: dotnet build --configuration Release
