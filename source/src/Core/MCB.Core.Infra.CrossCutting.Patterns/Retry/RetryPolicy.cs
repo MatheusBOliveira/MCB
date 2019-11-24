@@ -1,6 +1,12 @@
-﻿using System;
+﻿using MCB.Core.Infra.CrossCutting.Patterns.Retry.Base;
+using MCB.Core.Infra.CrossCutting.Patterns.Retry.Enums;
+using MCB.Core.Infra.CrossCutting.Patterns.Retry.Factories;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
 {
@@ -12,14 +18,17 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
     /// </remarks>
     public class RetryPolicy
     {
-        private readonly TimeSpan _timeout;
+        private readonly int _millisecondsTimeout;
         private readonly int _maxAttempts;
+        private readonly Func<bool> _executionFunction;
+        private readonly BackoffAlgorithmTypeEnum _backoffAlgorithmType;
+        private readonly BackoffAlgorithmBase _backoffAlgorithmBase;
 
-        public TimeSpan Timeout
+        public int MillisecondsTimeout
         {
             get
             {
-                return _timeout;
+                return _millisecondsTimeout;
             }
         }
         public int MaxAttempts
@@ -30,9 +39,48 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
             }
         }
 
-        public RetryPolicy()
+        public RetryPolicy(
+            Func<bool> executionFunction,
+            CultureInfo culture,
+            int maxAttempts = 3,
+            int millisecondsTimeout = 1000,
+            BackoffAlgorithmTypeEnum backoffAlgorithmType = BackoffAlgorithmTypeEnum.Decorr)
         {
+            _millisecondsTimeout = millisecondsTimeout;
+            _maxAttempts = maxAttempts;
+            _executionFunction = executionFunction;
+            _backoffAlgorithmType = backoffAlgorithmType;
 
+            _backoffAlgorithmBase = new BackoffAlgorithmFactory().Create(_backoffAlgorithmType, culture);
+        }
+
+        public async Task<bool> Execute(CancellationToken cancellationToken)
+        {
+            var attempt = 1;
+
+            var resultString = string.Empty;
+
+            while (true)
+            {
+                if (cancellationToken.IsCancellationRequested)
+                    return await Task.FromResult(false);
+
+                // Try execution
+                if(_executionFunction.Invoke())
+                    return await Task.FromResult(true);
+
+                // Check Max Attempts
+                if(attempt > MaxAttempts)
+                    return await Task.FromResult(false);
+
+                // Get retry timeout
+                var retryTimeout = _backoffAlgorithmBase.GetRetryTimeout(attempt, this, cancellationToken);
+                resultString += $"{retryTimeout}{Environment.NewLine}";
+
+                //Thread.Sleep(retryTimeout);
+
+                attempt++;
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry.Enums
     {
         Decorr = 1,
         EqualJitter = 2,
-        FullJitter = 3,
-        None = 4
+        FullJitter = 3
     }
 }
