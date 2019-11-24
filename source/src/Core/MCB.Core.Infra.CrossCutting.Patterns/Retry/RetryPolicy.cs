@@ -68,7 +68,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
                     return await Task.FromResult(true);
 
                 // Check Max Attempts
-                if(attempt > MaxAttempts)
+                if(attempt >= MaxAttempts)
                     return await Task.FromResult(false);
 
                 // Get retry timeout

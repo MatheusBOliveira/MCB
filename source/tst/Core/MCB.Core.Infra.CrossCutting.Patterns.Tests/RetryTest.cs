@@ -28,28 +28,54 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
         }
 
         [Fact]
-        [Trait("Patterns", "RetryTest")]
-        public async System.Threading.Tasks.Task RetryDecorrJitterTestAsync()
+        [Trait("Patterns", "RetrySuccessTest")]
+        public async System.Threading.Tasks.Task RetrySuccessTest()
         {
             var attempt = 0;
+            var maxAttemps = 3;
 
             var testFunction = new Func<bool>(() => {
                 
                 attempt++;
 
-                return attempt == 10;
+                return attempt == maxAttemps;
 
             });
 
             var retryPolicy = new RetryPolicy(
                 testFunction, 
                 CultureInfo,
-                maxAttempts: 10,
+                maxAttempts: maxAttemps,
                 backoffAlgorithmType: Retry.BackoffAlgorithm.Enums.BackoffAlgorithmTypeEnum.None);
 
             var executionResult = await retryPolicy.Execute(new System.Threading.CancellationToken());
 
-            Assert.True(executionResult);
+            Assert.True(executionResult && attempt == maxAttemps);
+        }
+
+        [Fact]
+        [Trait("Patterns", "RetryFailTest")]
+        public async System.Threading.Tasks.Task RetryFailTest()
+        {
+            var attempt = 0;
+            var maxAttemps = 3;
+
+            var testFunction = new Func<bool>(() => {
+
+                attempt++;
+
+                return false;
+            });
+
+            var retryPolicy = new RetryPolicy(
+                testFunction,
+                CultureInfo,
+                maxAttempts: maxAttemps,
+                backoffAlgorithmType: Retry.BackoffAlgorithm.Enums.BackoffAlgorithmTypeEnum.None);
+
+            var executionResult = await retryPolicy.Execute(new System.Threading.CancellationToken());
+
+            Assert.True(!executionResult && attempt == maxAttemps);
         }
     }
 }
