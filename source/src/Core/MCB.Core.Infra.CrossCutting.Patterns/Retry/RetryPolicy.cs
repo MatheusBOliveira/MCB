@@ -1,6 +1,6 @@
-﻿using MCB.Core.Infra.CrossCutting.Patterns.Retry.Base;
-using MCB.Core.Infra.CrossCutting.Patterns.Retry.Enums;
-using MCB.Core.Infra.CrossCutting.Patterns.Retry.Factories;
+﻿using MCB.Core.Infra.CrossCutting.Patterns.Retry.BackoffAlgorithm.Base;
+using MCB.Core.Infra.CrossCutting.Patterns.Retry.BackoffAlgorithm.Enums;
+using MCB.Core.Infra.CrossCutting.Patterns.Retry.BackoffAlgorithm.Factories;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -44,7 +44,7 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
             CultureInfo culture,
             int maxAttempts = 3,
             int millisecondsTimeout = 1000,
-            BackoffAlgorithmTypeEnum backoffAlgorithmType = BackoffAlgorithmTypeEnum.Decorr)
+            BackoffAlgorithmTypeEnum backoffAlgorithmType = BackoffAlgorithmTypeEnum.None)
         {
             _millisecondsTimeout = millisecondsTimeout;
             _maxAttempts = maxAttempts;
@@ -57,8 +57,6 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
         public async Task<bool> Execute(CancellationToken cancellationToken)
         {
             var attempt = 1;
-
-            var resultString = string.Empty;
 
             while (true)
             {
@@ -75,9 +73,8 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
 
                 // Get retry timeout
                 var retryTimeout = _backoffAlgorithmBase.GetRetryTimeout(attempt, this, cancellationToken);
-                resultString += $"{retryTimeout}{Environment.NewLine}";
 
-                //Thread.Sleep(retryTimeout);
+                Thread.Sleep(retryTimeout);
 
                 attempt++;
             }

@@ -31,15 +31,21 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Tests
         [Trait("Patterns", "RetryTest")]
         public async System.Threading.Tasks.Task RetryDecorrJitterTestAsync()
         {
+            var attempt = 0;
+
             var testFunction = new Func<bool>(() => {
-                return false;
+                
+                attempt++;
+
+                return attempt == 10;
+
             });
 
             var retryPolicy = new RetryPolicy(
                 testFunction, 
                 CultureInfo,
                 maxAttempts: 10,
-                backoffAlgorithmType: Retry.Enums.BackoffAlgorithmTypeEnum.EqualJitter);
+                backoffAlgorithmType: Retry.BackoffAlgorithm.Enums.BackoffAlgorithmTypeEnum.None);
 
             var executionResult = await retryPolicy.Execute(new System.Threading.CancellationToken());
 
