@@ -34,9 +34,6 @@ jobs:
     - name: Run MCB.Core.Infra.CrossCutting.Patterns.Tests
       working-directory: ./source/tst
       run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Patterns.Tests/MCB.Core.Infra.CrossCutting.Patterns.Tests.csproj
-    - name: Run MCB.Core.Infra.CrossCutting.Queue.InMemory.Tests
-      working-directory: ./source/tst
-      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Queue.InMemory.Tests/MCB.Core.Infra.CrossCutting.Queue.InMemory.Tests.csproj
     - name: Run MCB.Core.Infra.CrossCutting.Security.Tests
       working-directory: ./source/tst
       run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Security.Tests/MCB.Core.Infra.CrossCutting.Security.Tests.csproj
