@@ -16,3 +16,28 @@ jobs:
     - name: Build with dotnet
       working-directory: ./source
       run: dotnet build --configuration Release
+    - name: Run MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests/MCB.Core.Infra.CrossCutting.Cache.InMemory.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.Configuration.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Configuration.Tests/MCB.Core.Infra.CrossCutting.Configuration.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests/MCB.Core.Infra.CrossCutting.ExtensionMethods.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.Gateway.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Gateway.Tests/MCB.Core.Infra.CrossCutting.Gateway.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.Globalization.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Globalization.Tests/MCB.Core.Infra.CrossCutting.Globalization.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.Patterns.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Patterns.Tests/MCB.Core.Infra.CrossCutting.Patterns.Tests.csproj
+    - name: Run MCB.Core.Infra.CrossCutting.Security.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Core/MCB.Core.Infra.CrossCutting.Security.Tests/MCB.Core.Infra.CrossCutting.Security.Tests.csproj
+    - name: Run MCB.Admin.Domain.Tests
+      working-directory: ./source/tst
+      run: dotnet test ./Admin/MCB.Admin.Domain.Tests/MCB.Admin.Domain.Tests.csproj
+       
