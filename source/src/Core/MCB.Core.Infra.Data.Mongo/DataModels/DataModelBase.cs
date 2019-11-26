@@ -17,6 +17,7 @@ namespace MCB.Core.Infra.Data.Mongo.DataModels
     {
         private readonly Stack<string> _propertyChangedStack;
 
+#pragma warning disable CS0067
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected DataModelBase()

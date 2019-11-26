@@ -127,7 +127,7 @@ namespace MCB.Core.Infra.CrossCutting.Security
 
                 return (encrypted, BitConverter.ToString(encrypted));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return (null, null);
             }
