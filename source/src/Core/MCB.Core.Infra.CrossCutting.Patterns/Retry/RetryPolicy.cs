@@ -38,6 +38,33 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
                 return _maxAttempts;
             }
         }
+        public Func<bool> ExecutionFunction
+        {
+            get
+            {
+                return _executionFunction;
+            }
+        }
+        public BackoffAlgorithmTypeEnum BackoffAlgorithmType
+        {
+            get
+            {
+                return _backoffAlgorithmType;
+            }
+        }
+        public BackoffAlgorithmBase BackoffAlgorithmBase
+        {
+            get
+            {
+                return _backoffAlgorithmBase;
+            }
+        }
+
+        public delegate void ExecutionFailedHandler(RetryPolicy retryPolicy, int attempt, Exception ex);
+        public delegate void MaxAttemptsExceededHandler(RetryPolicy retryPolicy);
+
+        public event ExecutionFailedHandler ExecutionFailedEvent;
+        public event MaxAttemptsExceededHandler MaxAttemptsExceededEvent;
 
         public RetryPolicy(
             Func<bool> executionFunction,
@@ -64,15 +91,32 @@ namespace MCB.Core.Infra.CrossCutting.Patterns.Retry
                     return await Task.FromResult(false);
 
                 // Try execution
-                if(_executionFunction.Invoke())
-                    return await Task.FromResult(true);
+                var executionReturn = false;
+
+                try
+                {
+                    executionReturn = ExecutionFunction.Invoke();
+
+                    if (executionReturn)
+                        return await Task.FromResult(true);
+
+                    ExecutionFailedEvent?.Invoke(this, attempt, null);
+                }
+                catch (Exception ex)
+                {
+                    executionReturn = false;
+                    ExecutionFailedEvent?.Invoke(this, attempt, ex);
+                }
+
 
                 // Check Max Attempts
-                if(attempt >= MaxAttempts)
+                if (attempt >= MaxAttempts)
+                {
+                    MaxAttemptsExceededEvent?.Invoke(this);
                     return await Task.FromResult(false);
-
+                }
                 // Get retry timeout
-                var retryTimeout = _backoffAlgorithmBase.GetRetryTimeout(attempt, this, cancellationToken);
+                var retryTimeout = BackoffAlgorithmBase.GetRetryTimeout(attempt, this, cancellationToken);
 
                 Thread.Sleep(retryTimeout);
 
